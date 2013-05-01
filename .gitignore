@@ -1,0 +1,15 @@
+*.aux
+*.log
+*.make
+*.temp
+*.bbl
+*.bcf
+*.d
+*.blg
+*.fls
+*.lof
+*.out
+*.pdf
+*.run.xml
+*.tdo
+*.toc

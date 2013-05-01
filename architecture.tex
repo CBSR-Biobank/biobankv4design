@@ -1,5 +1,7 @@
 \chapter{Architecture}
 
+\section{External Architecture}
+
 The Biobank application uses a hexagonal architecture to interface to internal
 and external clients, external services, and for data storage. Figure
 \ref{fig:hex-architecture} shows the how the ports are configured. Web browser
@@ -16,12 +18,15 @@ are accessed via dedicated ports.
 \label{fig:hex-architecture}
 \end{figure}
 
-The client ports shown above are managed by client adapters. These client
-adapters then interface to the rest of the system via \emph{Command Handlers}
-and the \emph{Query Interface}. Figure \ref{fig:cqrs-architecture} shows a more
-detailed view of the application. It is the architecture recommended by the
-Axon Framwork\footnote{The figure and the material that follows is borrowed
-  from the Axon Framwork Reference Guide \cite{AxonOnline}}.
+\section{Interal Architecture}
+
+The client ports shown in Figure \ref{fig:hex-architecture} are managed by
+client adapters. These client adapters then interface to the rest of the system
+via \emph{Command Handlers} and the \emph{Query Interface}. Figure
+\ref{fig:cqrs-architecture} shows a more detailed view of the application. It
+is the architecture recommended by the Axon Framework\footnote{The figure and
+  the material that follows is borrowed from the Axon Framework Reference Guide
+  \cite{AxonOnline}}.
 
 \begin{figure}[h]
 \includegraphics[width=0.95\textwidth]{images/cqrs-architecture}
@@ -86,7 +91,14 @@ complex business transactions.
 
 The thin data layer in between the client adapters and the data sources
 provides a clearly defined interface to the actual query implementation
-used. This data layer typically returns read-only DTO objects containing query
-results. The contents of these DTO's are typically driven by the needs of the
-client adapters. In most cases, they map directly to a specific view in the UI
-(also referred to as table-per-view).
+used. This data layer typically returns read-only Data Transfer Objects (DTOs)
+containing query results. The contents of these DTOs are typically driven by
+the needs of the client adapters. In most cases, they map directly to a
+specific view in the UI (also referred to as table-per-view).
+
+\subsection{Axon Framework Modules}
+
+The Axon Framework provides a number of different modules that target specific
+problem areas of CQRS. This section describes which modules were chosen.
+
+\todo[size=\small]{complete this section}

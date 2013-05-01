@@ -13,15 +13,11 @@
 
 % Font Settings
 \usepackage{avant} % Use the Avantgarde font for headings
-%\usepackage{times} % Use the Times font for headings
-%\usepackage{mathptmx} % Use the Adobe Times Roman as the default text font together with math symbols from the Sym­bol, Chancery and Com­puter Modern fonts
 
 \usepackage{bookman}
-%\linespread{1.05}         % Palatino needs more leading (space between lines)
 
 \usepackage{microtype} % Slightly tweak font spacing for aesthetics
 \usepackage[utf8]{inputenc} % Required for including letters with accents
-\usepackage{tabularx}
 
 % Bibliography
 \usepackage[
@@ -59,7 +55,12 @@
 %----------------------------------------------------------------------------------------
 
 \definecolor{Blue}{rgb}{.204,.353,.541}
-\definecolor{LightBlue}{rgb}{.31,.506,.741}
+%\definecolor{LightBlue}{rgb}{.31,.506,.741}
+
+\definecolor{LightBlue}{RGB}{76,129,188}
+\definecolor{Green}{RGB}{155,186,87}
+\definecolor{Orange}{RGB}{248,150,71}
+\definecolor{Purple}{RGB}{129,99,162}
 
 \definecolor{gray75}{gray}{0.75}
 \newcommand{\hsp}{\hspace{20pt}}
@@ -75,17 +76,25 @@
 \raggedleft % Right-align all text
 \vspace*{\baselineskip} % Whitespace at the top of the page
 
-{\Large Nelson Loyola}\\[0.167\textheight] % Author name
+{\Large\bfseries\sffamily Author: Nelson Loyola}\\[0.167\textheight] % Author name
 
-{\LARGE\bfseries Biobank V4}\\[\baselineskip] % First part of the title
+{\LARGE\bfseries\sffamily Biobank V4}\\[\baselineskip] % First part of the title
 
-{\textcolor{Red}{\Huge Design Document}}\\[\baselineskip] % Main title which draws the focus of the reader
+{\textcolor{Blue}{\Huge\bfseries\sffamily Design Document}}\\[\baselineskip] % Main title which draws the focus of the reader
 
-%{\Large \textit{A predictable tagline}}\par % Tagline or further description
+{\large\bfseries\sffamily \textit{Draft 0.1}}\par
 
 \vfill % Whitespace between the title block and the publisher
 
-{\large Alberta Innovates Center for Mathine Learning }\par % Publisher and logo
+{\large\bfseries\sffamily Prepared for the Canadian BioSample Repository \\
+by the Alberta Innovates Center for Mathine Learning\\ }\par % Publisher and logo
+{\textcolor{LightBlue}{
+    \small\bfseries\sffamily University of Alberta\\
+    Department of Computing Science\\
+    2-21 Athabasca Hall\\
+    Edmonton, Alberta\\
+    \href{mailto:info@aicml.ca}{\nolinkurl{info@aicml.ca}}
+}}
 
 \vspace*{3\baselineskip} % Whitespace at the bottom of the page
 \endgroup}

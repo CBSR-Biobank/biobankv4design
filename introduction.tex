@@ -18,38 +18,42 @@ with 2D barcodes.
 This version of Biobank uses the following open source tools / software packages:
 
 % table with no indentation
-\noindent\begin{tabularx}{\textwidth}{@{} >{\bfseries}p{3.5cm} X}
+\begin{description}
 
-  Jetty Http Server & The Embedded Jetty Server provides access to the
-  application. \\[3px]
+  \item[Jetty Http Server] \hfill \\ The Embedded Jetty Server provides web
+    browser with access to the application.
 
-  MongoDB & A document database used to store the command model. \\[3px]
+  \item[MongoDB ] \hfill \\ A document based NoSQL database and provides an
+    event store implementation that stores event streams in a MongoDB database.
 
-  MySQL database & Used to store the query model. \\[3px]
+  \item[MySQL database ] \hfill \\ A SQL relational database management sytem
+    used to store the query model.
 
-  Axon Framework & Provides the building blocks used in applying the
-  CQRS architectural pattern. \\[3px]
+  \item[Axon Framework ] \hfill \\ Provides the building blocks used in
+    applying the CQRS architectural pattern.
 
-  Spring Framework & Provides a comprehensive programming and
-  configuration model for modern Java-based enterprise applications.\\[3px]
+  \item[Spring Framework ] \hfill \\ Provides a comprehensive programming and
+    configuration model for modern Java-based enterprise applications.
 
-  Spring MVC & Model-view-controller framework for web applications.\\[3px]
+  \item[Spring MVC ] \hfill \\ Model-view-controller framework for web
+    applications.
 
-  Spring Security & A customizable authentication and access-control framework
-  for securing web applications.\\[3px]
+  \item[Spring Security ] \hfill \\ A customizable authentication and
+    access-control framework for securing web applications.
 
-  Hibernate & An object-relational mapping library that provides a framework to
-  map a data model to a relational database. \\[3px]
+  \item[Hibernate ] \hfill \\ An object-relational mapping library that
+    provides a framework to map a data model to a relational database.
 
-  Twitter Bootstrap & Bootstrap is a sleek, intuitive, and powerful
-  front-end framework for faster and easier web user interface development
-  \cite{bootstrap} \\
+  \item[Twitter Bootstrap ] \hfill \\ Bootstrap is a sleek, intuitive, and
+    powerful front-end framework for faster and easier web user interface
+    development \cite{bootstrap}
 
-\end{tabularx}
+\end{description}
 
 \section{CQRS}
 
-The main reasons for choosing a CQRS architecture are:
+There are a number of reasons for choosing the CQRS architecture for
+Biobank. Amongst these are:
 
 \begin{itemize}
 \item Employs a message-based system that allows for decoupling and is more
