@@ -1,0 +1,121 @@
+\documentclass[10pt,twoside,letterpaper]{book}
+% Page margins
+\usepackage[top=3cm,bottom=3cm,left=3.2cm,right=3.2cm,headsep=10pt,a4paper]{geometry}
+
+\usepackage[T1]{fontenc}
+\usepackage{titlesec} % Allows customization of titles
+
+\usepackage[english]{babel} % English language/hyphenation
+\usepackage{booktabs} % Required for nicer horizontal rules in tables
+\usepackage{graphicx} % Required for including pictures
+
+\usepackage[svgnames]{xcolor} % Required to specify font color
+
+% Font Settings
+\usepackage{avant} % Use the Avantgarde font for headings
+%\usepackage{times} % Use the Times font for headings
+%\usepackage{mathptmx} % Use the Adobe Times Roman as the default text font together with math symbols from the Sym­bol, Chancery and Com­puter Modern fonts
+
+\usepackage{bookman}
+%\linespread{1.05}         % Palatino needs more leading (space between lines)
+
+\usepackage{microtype} % Slightly tweak font spacing for aesthetics
+\usepackage[utf8]{inputenc} % Required for including letters with accents
+\usepackage{tabularx}
+
+% Bibliography
+\usepackage[
+  style=alphabetic,
+  sorting=nyt,
+  sortcites=true,
+  autopunct=true,
+  babel=hyphen,
+  hyperref=true,
+  abbreviate=false,
+  backref=true,
+  backend=biber
+]{biblatex}
+\addbibresource{bibliography.bib} % BibTeX bibliography file
+\defbibheading{bibempty}{}
+
+\usepackage[colorinlistoftodos, textwidth=3cm, textsize=tiny, shadow]{todonotes}
+\usepackage[pdftex,
+  pdfauthor={AICML},
+  pdftitle={BioBank V4 Design},
+  colorlinks,
+  linkcolor=blue,
+  bookmarks=true,
+  bookmarksopen=true,
+  pdfstartview=FitH]
+	   {hyperref}
+
+\DeclareMathAlphabet{\mathpzc}{OT1}{pzc}{m}{it}
+\DeclareGraphicsExtensions{.pdf,.png,.jpg}
+
+\setcounter{secnumdepth}{3}
+
+%----------------------------------------------------------------------------------------
+%	SECTIONS
+%----------------------------------------------------------------------------------------
+
+\definecolor{Blue}{rgb}{.204,.353,.541}
+\definecolor{LightBlue}{rgb}{.31,.506,.741}
+
+\definecolor{gray75}{gray}{0.75}
+\newcommand{\hsp}{\hspace{20pt}}
+\titleformat{\chapter}[hang]{\Huge\bfseries\sffamily\color{Blue}}{\thechapter\hsp}{0pt}{\Huge\bfseries}
+\titleformat*{\section}{\Large\bfseries\sffamily\color{Blue}}
+\titleformat*{\subsection}{\large\bfseries\sffamily\color{LightBlue}}
+
+%----------------------------------------------------------------------------------------
+%	TITLE PAGE
+%----------------------------------------------------------------------------------------
+
+\newcommand*{\titleTH}{\begingroup % Create the command for including the title page in the document
+\raggedleft % Right-align all text
+\vspace*{\baselineskip} % Whitespace at the top of the page
+
+{\Large Nelson Loyola}\\[0.167\textheight] % Author name
+
+{\LARGE\bfseries Biobank V4}\\[\baselineskip] % First part of the title
+
+{\textcolor{Red}{\Huge Design Document}}\\[\baselineskip] % Main title which draws the focus of the reader
+
+%{\Large \textit{A predictable tagline}}\par % Tagline or further description
+
+\vfill % Whitespace between the title block and the publisher
+
+{\large Alberta Innovates Center for Mathine Learning }\par % Publisher and logo
+
+\vspace*{3\baselineskip} % Whitespace at the bottom of the page
+\endgroup}
+
+
+\begin{document}
+\frontmatter
+
+\thispagestyle{empty} % Removes page numbers
+\titleTH % This command includes the title page
+
+\clearpage
+\tableofcontents
+\clearpage
+\listoffigures
+\clearpage
+\listoftodos
+\clearpage
+
+\mainmatter
+\include{introduction}
+\include{architecture}
+\include{domain-model}
+
+%----------------------------------------------------------------------------------------
+%	BIBLIOGRAPHY
+%----------------------------------------------------------------------------------------
+
+\chapter*{Bibliography}
+\addcontentsline{toc}{chapter}{Bibliography}
+\printbibliography[heading=bibempty]
+
+\end{document}

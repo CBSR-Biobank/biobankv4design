@@ -1,0 +1,68 @@
+\chapter{Introduction}
+
+Biobank version 4 is a rewrite of the Biobank application, meant to provide the
+majority of its functionality through a web browser based interface. It was
+designed using Domain Driven Design principles \cite{evans2004domain} and
+employs a CQRS architecture (Command Query Responsibility Segregation)
+\cite{vernon2013implementing}.
+
+In addition, version 4 includes enhancements to the domain model which provides
+better workflow and an improved user experience.
+
+Flatbed scanning is supported by having a separate dedicated client, but this
+client's functionality is focused only on scanning and decoding tubes etched
+with 2D barcodes.
+
+\section{Dependencies}
+
+This version of Biobank uses the following open source tools / software packages:
+
+% table with no indentation
+\noindent\begin{tabularx}{\textwidth}{@{} >{\bfseries}p{3.5cm} X}
+
+  Jetty Http Server & The Embedded Jetty Server provides access to the
+  application. \\[3px]
+
+  MongoDB & A document database used to store the command model. \\[3px]
+
+  MySQL database & Used to store the query model. \\[3px]
+
+  Axon Framework & Provides the building blocks used in applying the
+  CQRS architectural pattern. \\[3px]
+
+  Spring Framework & Provides a comprehensive programming and
+  configuration model for modern Java-based enterprise applications.\\[3px]
+
+  Spring MVC & Model-view-controller framework for web applications.\\[3px]
+
+  Spring Security & A customizable authentication and access-control framework
+  for securing web applications.\\[3px]
+
+  Hibernate & An object-relational mapping library that provides a framework to
+  map a data model to a relational database. \\[3px]
+
+  Twitter Bootstrap & Bootstrap is a sleek, intuitive, and powerful
+  front-end framework for faster and easier web user interface development
+  \cite{bootstrap} \\
+
+\end{tabularx}
+
+\section{CQRS}
+
+The main reasons for choosing a CQRS architecture are:
+
+\begin{itemize}
+\item Employs a message-based system that allows for decoupling and is more
+  reliable against transient failures.
+\item \textbf{Commands} (that change data) are separated from \textbf{queries}
+  (that read data).
+\item Enables domain driven design by capturing the intent in the form of
+commands.
+\item \textbf{Event Sourcing} allows persisting of application entities as a
+  sequence of events that created them. Thus, captures all business changes in a
+  lossless manner.
+\item Events are used to populate views also known as the reporting side. Thus,
+  allows for decoupling of domain logic from reporting.
+\item Allows for definitions of new reports that provide new insight to the
+  data that has already been captured.
+\end{itemize}
