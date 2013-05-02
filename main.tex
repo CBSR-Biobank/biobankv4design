@@ -16,6 +16,8 @@
 
 \usepackage{bookman}
 
+\usepackage{csquotes}
+
 \usepackage{microtype} % Slightly tweak font spacing for aesthetics
 \usepackage[utf8]{inputenc} % Required for including letters with accents
 
@@ -51,18 +53,20 @@
 \setcounter{secnumdepth}{3}
 
 %----------------------------------------------------------------------------------------
-%	SECTIONS
+% Colors used in document
 %----------------------------------------------------------------------------------------
 
 \definecolor{Blue}{rgb}{.204,.353,.541}
-%\definecolor{LightBlue}{rgb}{.31,.506,.741}
-
 \definecolor{LightBlue}{RGB}{76,129,188}
 \definecolor{Green}{RGB}{155,186,87}
 \definecolor{Orange}{RGB}{248,150,71}
 \definecolor{Purple}{RGB}{129,99,162}
-
 \definecolor{gray75}{gray}{0.75}
+
+%----------------------------------------------------------------------------------------
+% Chapter and section formating
+%----------------------------------------------------------------------------------------
+
 \newcommand{\hsp}{\hspace{20pt}}
 \titleformat{\chapter}[hang]{\Huge\bfseries\sffamily\color{Blue}}{\thechapter\hsp}{0pt}{\Huge\bfseries}
 \titleformat*{\section}{\Large\bfseries\sffamily\color{Blue}}
@@ -76,20 +80,30 @@
 \raggedleft % Right-align all text
 \vspace*{\baselineskip} % Whitespace at the top of the page
 
-{\Large\bfseries\sffamily Author: Nelson Loyola}\\[0.167\textheight] % Author name
+% Author % name
+{\Large\bfseries\sffamily Author: Nelson Loyola}\\[0.167\textheight]
 
-{\LARGE\bfseries\sffamily Biobank V4}\\[\baselineskip] % First part of the title
+{\hfill\rule{.7\textwidth}{2pt}}\vspace*{\baselineskip}
 
-{\textcolor{Blue}{\Huge\bfseries\sffamily Design Document}}\\[\baselineskip] % Main title which draws the focus of the reader
+% First part of the title
+{\LARGE\bfseries\sffamily Biobank V4}\\[\baselineskip]
 
-{\large\bfseries\sffamily \textit{Draft 0.1}}\par
+% Main title which draws the focus of the reader
+{\textcolor{Blue}{\Huge\bfseries\sffamily Design Document}}\\[\baselineskip]
 
-\vfill % Whitespace between the title block and the publisher
+{\large\bfseries\sffamily \textit{Draft 0.1}}
 
+{\hfill\rule{.7\textwidth}{2pt}}
+
+% Whitespace between the title block and the publisher
+\vfill
+
+% Publisher and logo
 {\large\bfseries\sffamily Prepared for the Canadian BioSample Repository \\
-by the Alberta Innovates Center for Mathine Learning\\ }\par % Publisher and logo
-{\textcolor{LightBlue}{
-    \small\bfseries\sffamily University of Alberta\\
+by the Alberta Innovates Center for Mathine Learning\\ }\par
+\vspace*{\baselineskip}
+{\textcolor{Blue}{
+    \small\sffamily University of Alberta\\
     Department of Computing Science\\
     2-21 Athabasca Hall\\
     Edmonton, Alberta\\
@@ -99,6 +113,33 @@ by the Alberta Innovates Center for Mathine Learning\\ }\par % Publisher and log
 \vspace*{3\baselineskip} % Whitespace at the bottom of the page
 \endgroup}
 
+%----------------------------------------------------------------------------------------
+% Ttable of contents
+%----------------------------------------------------------------------------------------
+
+\usepackage[nottoc]{tocbibind}
+\usepackage[titles]{tocloft}
+
+\renewcommand\cftchapfont{\normalfont\sffamily\bfseries}
+\renewcommand\cftsecfont{\normalfont\sffamily}
+\renewcommand\cftsubsecfont{\normalfont\sffamily}
+\renewcommand\cftchappagefont{\normalfont\sffamily\bfseries}
+\renewcommand\cftsecpagefont{\normalfont\sffamily}
+\renewcommand\cftsubsecpagefont{\normalfont\sffamily}
+
+\AtBeginDocument{\renewcommand\contentsname{Table of Contents}}
+
+%\titleformat{\chapter}[display]
+%{}{\hfill\rule{.7\textwidth}{3pt}}{0pt}
+%{\hspace*{.3\textwidth}\huge\bfseries}[\addvspace{-1pt}]
+%\titleformat{name=\chapter,numberless}[display]
+%{}{\hfill\rule{.7\textwidth}{3pt}}{0pt}
+%{\hspace*{.3\textwidth}\huge\bfseries}[\addvspace{-1pt}]
+
+
+%----------------------------------------------------------------------------------------
+% Document start
+%----------------------------------------------------------------------------------------
 
 \begin{document}
 \frontmatter
@@ -108,8 +149,8 @@ by the Alberta Innovates Center for Mathine Learning\\ }\par % Publisher and log
 
 \clearpage
 \tableofcontents
-\clearpage
-\listoffigures
+%\clearpage
+%\listoffigures
 \clearpage
 \listoftodos
 \clearpage
