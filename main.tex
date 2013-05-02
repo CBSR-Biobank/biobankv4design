@@ -1,4 +1,4 @@
-\documentclass[10pt,twoside,letterpaper]{book}
+\documentclass[10pt,twoside,letterpaper]{memoir}
 % Page margins
 \usepackage[top=3cm,bottom=3cm,left=3.2cm,right=3.2cm,headsep=10pt,a4paper]{geometry}
 
@@ -36,7 +36,6 @@
 \addbibresource{bibliography.bib} % BibTeX bibliography file
 \defbibheading{bibempty}{}
 
-\usepackage[colorinlistoftodos, textwidth=3cm, textsize=tiny, shadow]{todonotes}
 \usepackage[pdftex,
   pdfauthor={AICML},
   pdftitle={BioBank V4 Design},
@@ -50,8 +49,6 @@
 \DeclareMathAlphabet{\mathpzc}{OT1}{pzc}{m}{it}
 \DeclareGraphicsExtensions{.pdf,.png,.jpg}
 
-\setcounter{secnumdepth}{3}
-
 %----------------------------------------------------------------------------------------
 % Colors used in document
 %----------------------------------------------------------------------------------------
@@ -64,13 +61,17 @@
 \definecolor{gray75}{gray}{0.75}
 
 %----------------------------------------------------------------------------------------
-% Chapter and section formating
+% Chapter and section formating - using 'ell' chapter style with customizations
 %----------------------------------------------------------------------------------------
 
-\newcommand{\hsp}{\hspace{20pt}}
-\titleformat{\chapter}[hang]{\Huge\bfseries\sffamily\color{Blue}}{\thechapter\hsp}{0pt}{\Huge\bfseries}
-\titleformat*{\section}{\Large\bfseries\sffamily\color{Blue}}
-\titleformat*{\subsection}{\large\bfseries\sffamily\color{LightBlue}}
+\chapterstyle{ell}
+\renewcommand*{\chapnumfont}{\normalfont\Huge\bfseries\sffamily\color{Blue}}
+\renewcommand*{\chaptitlefont}{\normalfont\Huge\bfseries\sffamily\color{Blue}}
+\renewcommand*{\secheadstyle}{\normalfont\Large\bfseries\sffamily\color{Blue}}
+\renewcommand*{\subsecheadstyle}{\normalfont\Large\bfseries\sffamily\color{LightBlue}}
+
+\setcounter{secnumdepth}{3}
+\setsecnumdepth{subsection}
 
 %----------------------------------------------------------------------------------------
 %	TITLE PAGE
@@ -117,25 +118,18 @@ by the Alberta Innovates Center for Mathine Learning\\ }\par
 % Ttable of contents
 %----------------------------------------------------------------------------------------
 
-\usepackage[nottoc]{tocbibind}
-\usepackage[titles]{tocloft}
+\usepackage[textsize=small, backgroundcolor=Orange, bordercolor=Orange, shadow]{todonotes}
 
-\renewcommand\cftchapfont{\normalfont\sffamily\bfseries}
-\renewcommand\cftsecfont{\normalfont\sffamily}
-\renewcommand\cftsubsecfont{\normalfont\sffamily}
-\renewcommand\cftchappagefont{\normalfont\sffamily\bfseries}
-\renewcommand\cftsecpagefont{\normalfont\sffamily}
-\renewcommand\cftsubsecpagefont{\normalfont\sffamily}
+\renewcommand{\cftchapterfont}{\normalfont\bfseries\sffamily}
+\renewcommand{\cftsectionfont}{\normalfont\sffamily}
+\renewcommand{\cftsubsectionfont}{\normalfont\sffamily}
+\renewcommand{\cftchapterpagefont}{\normalfont\sffamily\bfseries}
+\renewcommand{\cftsectionpagefont}{\normalfont\sffamily}
+\renewcommand{\cftsubsectionpagefont}{\normalfont\sffamily}
+
+\maxtocdepth{subsection}
 
 \AtBeginDocument{\renewcommand\contentsname{Table of Contents}}
-
-%\titleformat{\chapter}[display]
-%{}{\hfill\rule{.7\textwidth}{3pt}}{0pt}
-%{\hspace*{.3\textwidth}\huge\bfseries}[\addvspace{-1pt}]
-%\titleformat{name=\chapter,numberless}[display]
-%{}{\hfill\rule{.7\textwidth}{3pt}}{0pt}
-%{\hspace*{.3\textwidth}\huge\bfseries}[\addvspace{-1pt}]
-
 
 %----------------------------------------------------------------------------------------
 % Document start
@@ -149,16 +143,17 @@ by the Alberta Innovates Center for Mathine Learning\\ }\par
 
 \clearpage
 \tableofcontents
-%\clearpage
+\clearpage
 %\listoffigures
-\clearpage
-\listoftodos
-\clearpage
+%\clearpage
+%\listoftodos
+%\clearpage
 
 \mainmatter
 \include{introduction}
 \include{architecture}
 \include{domain-model}
+\include{study_management}
 
 %----------------------------------------------------------------------------------------
 %	BIBLIOGRAPHY

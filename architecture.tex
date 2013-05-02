@@ -22,11 +22,11 @@ are accessed via dedicated ports.
 
 The client ports shown in Figure \ref{fig:hex-architecture} are managed by
 client adapters. These client adapters then interface to the rest of the system
-via \emph{Command Handlers} and the \emph{Query Interface}. Figure
-\ref{fig:cqrs-architecture} shows a more detailed view of the application. It
-is the architecture recommended by the Axon Framework\footnote{The figure and
-  the material that follows is borrowed from the Axon Framework Reference Guide
-  \cite{AxonOnline}}.
+via the \emph{Command Bus} and the \emph{Query Interface} provided by the
+\emph{Thin Data Layer}. Figure \ref{fig:cqrs-architecture} shows a more detailed
+view of the application. It is the architecture recommended by the Axon
+Framework\footnote{The figure and the material that follows is borrowed from
+  the Axon Framework Reference Guide \cite{AxonOnline}}.
 
 \begin{figure}[h]
 \includegraphics[width=0.95\textwidth]{images/cqrs-architecture}
@@ -101,4 +101,4 @@ specific view in the UI (also referred to as table-per-view).
 The Axon Framework provides a number of different modules that target specific
 problem areas of CQRS. This section describes which modules were chosen.
 
-\todo[size=\small]{complete this section}
+\todo[inline]{This section is incomplete.}

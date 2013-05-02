@@ -1,25 +1,51 @@
 \chapter{Domain Model}
 
-The Biobank application is composed different modules\footnote{The term ``Module''
-  is used in the context described in \cite{vernon2013implementing}}. Each
-module is described briefly here and in more details are provided in the
-remaining chapters.
-
+The Biobank application is composed of several modules. Each module is
+introduced briefly here and more details are provided in the remaining
+chapters.
 
 \begin{description}
 
-  \item[Study Configuration] \hfill \\
+  \item[Study Management] \hfill \\ Specimens collected by the Biobank
+    application belong to an individual studies. Before specimens can be
+    recorded, the study must be defined, along with the specimen types being
+    collected, how specimens are collected from the study's participants, and
+    how they are processed. This modules manages these tasks.
 
-  \item[Patient Collection] \hfill \\
+  \item[Patient Collection] \hfill \\ This module is used to record specimens
+    collected from participants belonging to a study. The specimens collected
+    must be those configured for the study.
 
-  \item[Specimen Processing] \hfill \\
+  \item[Center Configuration] \hfill \\ Centers participating in collecting,
+    processing, or storing specimens and also centers that request processed
+    specimens must be registered in the application. Centers have the
+    flexibility to be configured in one or more of the allowed
+    configurations. Eg. a center can be both a collecting site and a storage
+    site.
 
-  \item[Center Shipment] \hfill \\
+  \item[Center Shipment] \hfill \\ Collecting centers ship specimens to a
+    storage center for processing and storage. Storage centers ship processed
+    specimens to request centers. This module is used to record shipments of
+    specimens between centers.
 
-  \item[Center Configuration] \hfill \\
+  \item[Specimen Processing and Storage] \hfill \\ Processing centers process
+    specimens collected from participants. Processing of specimens includes
+    aliquoting, centrifuging, and combining of specimens with preservation
+    fluids.  Once specimens have been processed, centers configured for storage
+    can store them in their storage containers. This module is used to record
+    the procesing of specimens and where specimens are stored.
 
-  \item[Center Storage Configuration] \hfill \\
+  \item[Center Storage Configuration] \hfill \\ Storage centers have different
+    types of storage containers. This module is used to define the layout of
+    storage containers and also storage hierarchies.
 
-  \item[Specimen Request] \hfill \\
+  \item[Specimen Request] \hfill \\ After specimens have been processed and
+    stored, request centers submit specimen requests to retrieve some or all of
+    the specimens stored for a particular study. Specimen requests can be done
+    for sets of participants or meet certain criteria. This module is used to
+    aid in creating specimen requests and track shipping details.
 
 \end{description}
+
+The following chapters describe the entities, aggregates, command and events
+used in the  modules listed above.
