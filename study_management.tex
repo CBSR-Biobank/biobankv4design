@@ -6,17 +6,24 @@ The entities in this module are:
 
 \begin{description}
 
-  \item[Study] \hfill \\
-    Represents a collection of participants and specimens collected for a
-    particular research study. The study is part of an aggregate that define
-    the types of specimens to be collected and how they are to be collected
-    from participants.
+  \item[Study] \hfill \\ Represents a collection of participants and specimens
+    collected for a particular research study. The study is part of an
+    aggregate that define the types of specimens to be collected and how they
+    are to be collected from participants.\par A study can be enabled or
+    disabled. When disabled, changes to its configuration are possible but
+    patients and specimens cannot be added to it. When enabled, no further
+    configuration changes are allowed. However, once enabled participants and
+    specimens can be added.\par  A study may have one or more comments assigned to
+    it during it's lifetime.
 
-  \item[] \hfill \\
+  \item[CollectionEventType] \hfill \\ A uniquely named, within the \texttt{Study},
+    classification of a visit by a \texttt{Patient}.
 
-  \item[] \hfill \\
-
-  \item[] \hfill \\
+  \item[ProcessingType] \hfill \\ Describes a regularly performed procedure
+    with a unique name (within its {@link Study}). There should be one or more
+    associated {@link SpecimenProcesingLinkType}s that (1) further define legal
+    procedures and (2) allow logging of procedures performed on different types
+    of {@link Specimen}s.
 
   \item[] \hfill \\
 
@@ -33,11 +40,30 @@ The value objects in this module are:
 
 \begin{description}
 
-  \item[Study] \hfill \\
+  \item[SpecimenGroupCollectionEventType] \hfill \\ Defines which types of
+    specimens (i.e. which \texttt{SpecimenGroup}s) need to be collected as
+    part of a \texttt{CollectionEventType}.
 
-  \item[] \hfill \\
+  \item[SpecimenLinkType] \hfill \\ Represents a regularly performed processing
+    procedure involving two \texttt{Specimen}s: an input, which must be in a
+    specific \texttt{SpecimenGroup}, and an output, which must be in a specific
+    \texttt{SpecimenGroup}.
 
-  \item[] \hfill \\
+  \item[SpecimenGroup] \hfill \\ Ownership, summary, storage, and
+    classification information that applies to an entire group or collection of
+    \texttt{Specimen}s.
+
+  \item[SpecimenType] \hfill \\ A standardised set of classifications that
+    describe \emph{what} a \texttt{Specimen} is. Potential examples include:
+    urine, whole blood, plasma, nail, protein, etc.
+
+  \item[Preservation] \hfill \\ Describes how a \texttt{Specimen} should be
+    preserved/stored by describing temperature requirements, as well as a
+    preservation method (see \texttt{PreservationType}).
+
+  \item[PreservationType] \hfill \\ A standardised set of methods for
+    preserving and storing \texttt{Specimen}s.  Potential examples include:
+    frozen specimen, RNA later, fresh specimen, slide, etc.
 
   \item[] \hfill \\
 
