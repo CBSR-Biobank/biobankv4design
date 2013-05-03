@@ -5,6 +5,9 @@
 %
 % https://github.com/cbsrbiobank/biobankv4design
 %
+% Command to create bibliography:
+%
+%   > pdflatex main && biber main
 %----------------------------------------------------------------------------------------
 
 \documentclass[10pt,twoside,letterpaper]{memoir}
@@ -35,10 +38,14 @@
 %----------------------------------------------------------------------------------------
 
 \definecolor{Blue}{rgb}{.204,.353,.541}
+\definecolor{DarkBlue}{RGB}{46,71,108}
 \definecolor{LightBlue}{RGB}{76,129,188}
 \definecolor{Green}{RGB}{155,186,87}
+\definecolor{DarkGreen}{RGB}{86,114,44}
 \definecolor{Orange}{RGB}{248,150,71}
+\definecolor{DarkOrange}{RGB}{187,115,53}
 \definecolor{Purple}{RGB}{129,99,162}
+\definecolor{DarkPurple}{RGB}{94,72,120}
 \definecolor{gray75}{gray}{0.75}
 
 %----------------------------------------------------------------------------------------
@@ -49,15 +56,16 @@
   pdfauthor={AICML},
   pdftitle={BioBank V4 Design},
   colorlinks,
+  linktoc=all,
   linkcolor=Blue,
+  urlcolor=Purple,
+  citecolor=Blue,
   bookmarks=true,
   bookmarksopen=true,
   pdfstartview=FitH]
 	   {hyperref}
 
 \hypersetup{
-  citecolor=Blue,
-  linkcolor=Purple
 }
 
 %----------------------------------------------------------------------------------------
@@ -160,7 +168,6 @@
 \newcommand{\entitylink}[1]{\hyperlink{#1}{\texttt{\textbf{#1}}}}
 \newcommand{\valobjlink}[1]{\hyperlink{#1}{\texttt{\textbf{#1}}}}
 
-
 %----------------------------------------------------------------------------------------
 % Document start
 %----------------------------------------------------------------------------------------
@@ -183,7 +190,7 @@
 \include{introduction}
 \include{architecture}
 \include{domain-model}
-\include{study_management}
+\include{study-management}
 
 %----------------------------------------------------------------------------------------
 % Bibliography

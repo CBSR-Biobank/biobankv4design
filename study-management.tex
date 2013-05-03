@@ -1,23 +1,37 @@
 \chapter{Study Management}
 
-\section{Entities}
+\section{Study Aggregate}
+
+ The Study aggregate defines the valid types of specimens that can be
+ collected, how they are to be collected from participants, and how collected
+ specimens are processed.
+
+\begin{figure}[h]
+  \includegraphics[trim={9mm 124mm 80mm 8mm}, clip,
+    width=1\textwidth]{images/study-aggregate}
+  \caption{Study aggregate}
+  \label{fig:study-aggregate}
+\end{figure}
+
+\subsection{Entities}
 
 \begin{description}[listparindent=\parindent]
 
   \item[\entitytarget{Study}] \hfill \\ Represents a collection of participants and
-    specimens collected for a particular research study. The study is part of
-    an aggregate that define the types of specimens to be collected and how
-    they are to be collected from participants.
+    specimens collected for a particular research study.
 
     A study can be enabled or disabled. When disabled, changes to its
     configuration are possible but patients and specimens cannot be added. When
-    enabled, no further configuration changes are allowed. However,
-    participants and specimens can be added.
+    enabled, no further configuration changes are allowed, and participants and
+    specimens can be added.
 
     A study may have one or more comments assigned to it during it's lifetime.
 
   \item[\entitytarget{CollectionEventType}] \hfill \\ A classification name,
-    unique to the \entitylink{Study}, of a visit by the study's participants.
+    unique to the \entitylink{Study}, for a visit by the study's
+    participants. One or more of these can be defined per study. Each
+    collection event type has a number specimen groups (see
+    \valobjlink{SpecimenGroupCollectionEventType}).
 
   \item[\entitytarget{ProcessingType}] \hfill \\ Describes a regularly
     performed procedure with a unique name (within its
@@ -33,7 +47,7 @@
 
 \end{description}
 
-\section{Value Objects}
+\subsection{Value Objects}
 
 \begin{description}
 
@@ -70,5 +84,6 @@
 
   \item[\valobjtarget{}] \hfill \\
 
-
 \end{description}
+
+\section{Aggregates}
