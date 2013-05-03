@@ -1,3 +1,12 @@
+%----------------------------------------------------------------------------------------
+% Biobank V4 Design
+%
+% The latest version of this document is kept on GitHub at:
+%
+% https://github.com/cbsrbiobank/biobankv4design
+%
+%----------------------------------------------------------------------------------------
+
 \documentclass[10pt,twoside,letterpaper]{memoir}
 % Page margins
 \usepackage[top=3cm,bottom=3cm,left=3.2cm,right=3.2cm,headsep=10pt,a4paper]{geometry}
@@ -9,39 +18,14 @@
 \usepackage{booktabs} % Required for nicer horizontal rules in tables
 \usepackage{graphicx} % Required for including pictures
 
-\usepackage[svgnames]{xcolor} % Required to specify font color
+\usepackage[svgnames]{xcolor} % Required to specify font colors
 
-% Font Settings\usepackage{avant} % Use the Avantgarde font for headings
-\usepackage{bookman}
+\usepackage{bookman} % font used for text
 \usepackage{csquotes}
 
 \usepackage{microtype} % Slightly tweak font spacing for aesthetics
 \usepackage[utf8]{inputenc} % Required for including letters with accents
-
-% Bibliography
-\usepackage[
-  style=alphabetic,
-  sorting=nyt,
-  sortcites=true,
-  autopunct=true,
-  babel=hyphen,
-  hyperref=true,
-  abbreviate=false,
-  backref=true,
-  backend=biber
-]{biblatex}
-\addbibresource{bibliography.bib} % BibTeX bibliography file
-\defbibheading{bibempty}{}
-
-\usepackage[pdftex,
-  pdfauthor={AICML},
-  pdftitle={BioBank V4 Design},
-  colorlinks,
-  linkcolor=blue,
-  bookmarks=true,
-  bookmarksopen=true,
-  pdfstartview=FitH]
-	   {hyperref}
+\usepackage{enumitem} % allows lists to be customized
 
 \DeclareMathAlphabet{\mathpzc}{OT1}{pzc}{m}{it}
 \DeclareGraphicsExtensions{.pdf,.png,.jpg}
@@ -56,6 +40,43 @@
 \definecolor{Orange}{RGB}{248,150,71}
 \definecolor{Purple}{RGB}{129,99,162}
 \definecolor{gray75}{gray}{0.75}
+
+%----------------------------------------------------------------------------------------
+% PDF settings
+%----------------------------------------------------------------------------------------
+
+\usepackage[pdftex,
+  pdfauthor={AICML},
+  pdftitle={BioBank V4 Design},
+  colorlinks,
+  linkcolor=Blue,
+  bookmarks=true,
+  bookmarksopen=true,
+  pdfstartview=FitH]
+	   {hyperref}
+
+\hypersetup{
+  citecolor=Blue,
+  linkcolor=Purple
+}
+
+%----------------------------------------------------------------------------------------
+% Bibliography settings
+%----------------------------------------------------------------------------------------
+
+\usepackage[
+  style=alphabetic,
+  sorting=nyt,
+  sortcites=true,
+  autopunct=true,
+  babel=hyphen,
+  hyperref=true,
+  abbreviate=false,
+  backref=true,
+  backend=biber
+]{biblatex}
+\addbibresource{bibliography.bib} % BibTeX bibliography file
+\defbibheading{bibempty}{}
 
 %----------------------------------------------------------------------------------------
 % Chapter and section formating - using 'ell' chapter style with customizations
@@ -97,15 +118,16 @@
 \vfill
 
 % Publisher and logo
-{\large\bfseries\sffamily Prepared for the Canadian BioSample Repository \\
-by the Alberta Innovates Center for Mathine Learning\\ }\par
+{\large\bfseries\sffamily
+  \href{http://biosample.ca/}{Prepared for the Canadian Biosample Repository} \\
+  by the \href{http://www.aicml.ca/}{Alberta Innovates Center for Mathine Learning}\\ }\par
 \vspace*{\baselineskip}
 {\textcolor{Blue}{
     \small\sffamily University of Alberta\\
     Department of Computing Science\\
     2-21 Athabasca Hall\\
     Edmonton, Alberta\\
-    \href{mailto:info@aicml.ca}{\nolinkurl{info@aicml.ca}}
+    \href{mailto:info@aicml.ca}{info@aicml.ca}
 }}
 
 \vspace*{3\baselineskip} % Whitespace at the bottom of the page
@@ -127,6 +149,17 @@ by the Alberta Innovates Center for Mathine Learning\\ }\par
 \maxtocdepth{subsection}
 
 \AtBeginDocument{\renewcommand\contentsname{Table of Contents}}
+
+%----------------------------------------------------------------------------------------
+% document macros
+%----------------------------------------------------------------------------------------
+
+\newcommand{\entitytarget}[1]{\hypertarget{#1}{#1}}
+\newcommand{\valobjtarget}[1]{\hypertarget{#1}{#1}}
+
+\newcommand{\entitylink}[1]{\hyperlink{#1}{\texttt{\textbf{#1}}}}
+\newcommand{\valobjlink}[1]{\hyperlink{#1}{\texttt{\textbf{#1}}}}
+
 
 %----------------------------------------------------------------------------------------
 % Document start
@@ -153,7 +186,7 @@ by the Alberta Innovates Center for Mathine Learning\\ }\par
 \include{study_management}
 
 %----------------------------------------------------------------------------------------
-%	BIBLIOGRAPHY
+% Bibliography
 %----------------------------------------------------------------------------------------
 
 \chapter*{Bibliography}

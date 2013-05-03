@@ -2,76 +2,73 @@
 
 \section{Entities}
 
-The entities in this module are:
+\begin{description}[listparindent=\parindent]
 
-\begin{description}
+  \item[\entitytarget{Study}] \hfill \\ Represents a collection of participants and
+    specimens collected for a particular research study. The study is part of
+    an aggregate that define the types of specimens to be collected and how
+    they are to be collected from participants.
 
-  \item[Study] \hfill \\ Represents a collection of participants and specimens
-    collected for a particular research study. The study is part of an
-    aggregate that define the types of specimens to be collected and how they
-    are to be collected from participants.\par A study can be enabled or
-    disabled. When disabled, changes to its configuration are possible but
-    patients and specimens cannot be added to it. When enabled, no further
-    configuration changes are allowed. However, once enabled participants and
-    specimens can be added.\par  A study may have one or more comments assigned to
-    it during it's lifetime.
+    A study can be enabled or disabled. When disabled, changes to its
+    configuration are possible but patients and specimens cannot be added. When
+    enabled, no further configuration changes are allowed. However,
+    participants and specimens can be added.
 
-  \item[CollectionEventType] \hfill \\ A uniquely named, within the \texttt{Study},
-    classification of a visit by a \texttt{Patient}.
+    A study may have one or more comments assigned to it during it's lifetime.
 
-  \item[ProcessingType] \hfill \\ Describes a regularly performed procedure
-    with a unique name (within its {@link Study}). There should be one or more
-    associated {@link SpecimenProcesingLinkType}s that (1) further define legal
+  \item[\entitytarget{CollectionEventType}] \hfill \\ A classification name,
+    unique to the \entitylink{Study}, of a visit by the study's participants.
+
+  \item[\entitytarget{ProcessingType}] \hfill \\ Describes a regularly
+    performed procedure with a unique name (within its
+    \entitylink{Study}). There should be one or more associated
+    \entitylink{SpecimenProcesingLinkType}s that (1) further define legal
     procedures and (2) allow logging of procedures performed on different types
-    of {@link Specimen}s.
+    of \entitylink{Specimen}s.
 
-  \item[] \hfill \\
+  \item[\entitytarget{}] \hfill \\
 
-  \item[] \hfill \\
-
-  \item[] \hfill \\
+  \item[\entitytarget{}] \hfill \\
 
 
 \end{description}
 
 \section{Value Objects}
 
-The value objects in this module are:
-
 \begin{description}
 
-  \item[SpecimenGroupCollectionEventType] \hfill \\ Defines which types of
-    specimens (i.e. which \texttt{SpecimenGroup}s) need to be collected as
-    part of a \texttt{CollectionEventType}.
+  \item[\valobjtarget{SpecimenGroupCollectionEventType}] \hfill \\ Defines
+    which types of specimens (i.e. which \valobjlink{SpecimenGroup}s) need to
+    be collected as part of a \entitylink{CollectionEventType}.
 
-  \item[SpecimenLinkType] \hfill \\ Represents a regularly performed processing
-    procedure involving two \texttt{Specimen}s: an input, which must be in a
-    specific \texttt{SpecimenGroup}, and an output, which must be in a specific
-    \texttt{SpecimenGroup}.
+  \item[\valobjtarget{SpecimenLinkType}] \hfill \\ Represents a regularly
+    performed processing procedure involving two \entitylink{Specimen}s: an
+    input, which must be in a specific \valobjlink{SpecimenGroup}, and an
+    output, which must be in a specific \valobjlink{SpecimenGroup}.
 
-  \item[SpecimenGroup] \hfill \\ Ownership, summary, storage, and
-    classification information that applies to an entire group or collection of
-    \texttt{Specimen}s.
+  \item[\valobjtarget{SpecimenGroup}] \hfill \\ Ownership, summary, storage,
+    and classification information that applies to an entire group or
+    collection of \entitylink{Specimen}s.
 
-  \item[SpecimenType] \hfill \\ A standardised set of classifications that
-    describe \emph{what} a \texttt{Specimen} is. Potential examples include:
-    urine, whole blood, plasma, nail, protein, etc.
+  \item[\valobjtarget{SpecimenType}] \hfill \\ A standardised set of
+    classifications that describe \emph{what} a \entitylink{Specimen}
+    is. Potential examples include: urine, whole blood, plasma, nail, protein,
+    etc.
 
-  \item[Preservation] \hfill \\ Describes how a \texttt{Specimen} should be
-    preserved/stored by describing temperature requirements, as well as a
-    preservation method (see \texttt{PreservationType}).
+  \item[\valobjtarget{Preservation}] \hfill \\ Describes how a
+    \entitylink{Specimen} should be preserved/stored by describing temperature
+    requirements, as well as a preservation method (see
+    \valobjlink{PreservationType}).
 
-  \item[PreservationType] \hfill \\ A standardised set of methods for
-    preserving and storing \texttt{Specimen}s.  Potential examples include:
-    frozen specimen, RNA later, fresh specimen, slide, etc.
+  \item[\valobjtarget{PreservationType}] \hfill \\ A standardised set of
+    methods for preserving and storing \entitylink{Specimen}s.  Potential
+    examples include: frozen specimen, RNA later, fresh specimen, slide, etc.
 
-  \item[] \hfill \\
+  \item[\valobjtarget{}] \hfill \\
 
-  \item[] \hfill \\
+  \item[\valobjtarget{}] \hfill \\
 
-  \item[] \hfill \\
-
-  \item[] \hfill \\
+  \item[\valobjtarget{}] \hfill \\
 
 
 \end{description}
