@@ -1,10 +1,14 @@
 \chapter{Study Management}
 
-\section{Study Aggregate}
+ In this module the \entitylink{Study} aggregate is used to configure a
+ study. It defines the valid types of specimens that can be collected, when
+ they are to be collected from participants, and how the collected specimens
+ are processed.
 
- The Study aggregate is used to configure a study. It defines the valid types
- of specimens that can be collected, when they are to be collected from
- participants, and how collected specimens are processed.
+ This section first describes the study aggregate and then defines the commands
+ it handles.
+
+\section{Study Aggregate}
 
 \begin{figure}[h]
   \includegraphics[trim={9mm 104mm 80mm 9mm}, clip,
@@ -15,8 +19,12 @@
 
 \begin{description}[listparindent=\parindent]
 
-  \item[\entitytarget{Study}] \hfill \\ Represents a collection of participants and
-    specimens collected for a particular research study.
+  \item[\entitytarget{Study}] \hfill \\ Represents a collection of participants
+    and specimens collected for a particular research study. The study name is
+    a short descriptive name that is used to display summary information. The
+    description contains text used to give more details on the name. Usually
+    the name is an acronym and the description contains the words used in the
+    acronym.
 
     A study can be enabled or disabled. When disabled, changes to its
     configuration are possible but patients and specimens cannot be added. When
@@ -33,26 +41,25 @@
     using other value objects discussed in Section \ref{sec:specimen-group}.
 
     This entity is used to record the specimen types used by the study. It can
-    specify the specimens collected from participants, and the asscociations to
-    the specimens that are processed from them.
+    specify the specimens collected from participants, and the specimens that
+    are processed from them.
 
   \item[\entitytarget{CollectionEventType}] \hfill \\ A classification name,
-    unique to the \entitylink{Study}, for a visit by the study's
-    participants. One or more of these can be defined per study. Each
-    collection event type has a number specimen groups (see
-    \valobjlink{SpecimenGroupCollectionEventType}).
+    unique to the \entitylink{Study}, for a visit by study participants. For
+    specimen collection to be allowed on a study, at least one collection event
+    type must be defined. Each collection event type has one or more specimen
+    groups (see Section \ref{sec:collection-event-type}).
 
   \item[\entitytarget{ProcessingType}] \hfill \\ Describes a regularly
-    performed procedure with a unique name (within its
+    performed specimen processing procedure with a unique name (unique to the
     \entitylink{Study}). There should be one or more associated
-    \entitylink{SpecimenProcesingLinkType}s that (1) further define legal
-    procedures and (2) allow logging of procedures performed on different types
-    of \entitylink{Specimen}s.
+    \entitylink{SpecimenLinkType}s that (1) further define legal procedures and
+    (2) allow recording of procedures performed on different types of
+    \entitylink{Specimen}s.
 
-  \item[\entitytarget{}] \hfill \\
-
-  \item[\entitytarget{}] \hfill \\
-
+  \item[\valobjtarget{StudyComment}] \hfill \\ The comment contains a message
+    and the user that added the comment. The date and time the comment was made
+    is recorded as meta data.
 
 \end{description}
 
@@ -60,28 +67,34 @@
 \label{sec:specimen-group}
 
 The SpecimenGroup entity is composed of other value objects as shown in Figure
-\ref{fig:specimen-group}.
+\ref{fig:specimen-group}. \entitylink{SpecimenGroup} entities are accessed
+via the \entitylink{Study} aggregate.
 
 \begin{figure}[h]
   \centering
   \includegraphics[trim={9mm 110mm 80mm 9mm}, clip,
-    width=0.9\textwidth]{images/specimen-group}
+    width=1\textwidth]{images/specimen-group}
   \caption{SpecimenGroup entity}
   \label{fig:specimen-group}
 \end{figure}
 
 \begin{description}
 
+  \item[\valobjtarget{AnatomicalSource}] \hfill \\ A standardized set of
+    regions of a \entitylink{Participant} \emph{where} a \entitylink{Specimen}
+    is collected from. Potential examples include: colon, ear, leg, kidney,
+    etc.
+
   \item[\valobjtarget{Preservation}] \hfill \\ Describes how a
     \entitylink{Specimen} should be preserved/stored by describing temperature
-    requirements, as well as a preservation method (see
+    requirements ($^\circ$C), as well as a preservation method (see
     \valobjlink{PreservationType}).
 
-  \item[\valobjtarget{PreservationType}] \hfill \\ A standardised set of
+  \item[\valobjtarget{PreservationType}] \hfill \\ A standardized set of
     methods for preserving and storing \entitylink{Specimen}s.  Potential
     examples include: frozen specimen, RNA later, fresh specimen, slide, etc.
 
-  \item[\valobjtarget{SpecimenType}] \hfill \\ A standardised set of
+  \item[\valobjtarget{SpecimenType}] \hfill \\ A standardized set of
     classifications that describe \emph{what} a \entitylink{Specimen}
     is. Potential examples include: urine, whole blood, plasma, nail, protein,
     etc.
@@ -112,6 +125,10 @@ performed processing procedure involving two \entitylink{Specimen}s: an input,
 which must be in a specific \valobjlink{SpecimenGroup}, and an output, which
 must be in a specific \valobjlink{SpecimenGroup}.
 
+The count specifies how many preservation types (e.g. tubes, FTA cards, etc.) are to
+be collected. The amount is the volume required for each preservation type when
+applicable. When not applicable the amount is set to zero.
+
 \begin{figure}[h]
   \centering
   \includegraphics[trim={9mm 120mm 172mm 9mm}, clip,
@@ -120,3 +137,4 @@ must be in a specific \valobjlink{SpecimenGroup}.
   \label{fig:processing-type}
 \end{figure}
 
+\section {Study Aggregate Commands}
