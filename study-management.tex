@@ -129,7 +129,7 @@ The count specifies how many preservation types (e.g. tubes, FTA cards, etc.) ar
 be collected. The amount is the volume required for each preservation type when
 applicable. When not applicable the amount is set to zero.
 
-\begin{figure}[h]
+\begin{figure}[H]
   \centering
   \includegraphics[trim={9mm 120mm 172mm 9mm}, clip,
     width=0.6\textwidth]{images/processing-type}
@@ -138,3 +138,37 @@ applicable. When not applicable the amount is set to zero.
 \end{figure}
 
 \section {Study Aggregate Commands}
+
+\subsection{StudyCreateCommand}
+
+This command is used to create a study. The arguments for this command are:
+
+\vspace{6pt}
+\begin{tabularx}{\textwidth}{@{} >{\bfseries}l l X }
+
+  name & String & The name to associate with a study, usually an acronym.\\
+
+  description & String & A more detailed name used to describe the study,
+  usually the words that make up the acronym.\\
+
+\end{tabularx}
+
+\subsection{CreateSpecimenGroupCommand}
+
+This command is used to create a specimen group in a study. The arguments are:
+
+\vspace{6pt}
+\begin{tabularx}{\textwidth}{@{} >{\bfseries}l l X }
+
+  studyId & String & The unique ID associated with the study.\\
+
+  Name & String & The name to associate with a study, usually an acronym.\\
+
+  Description & String & A more detailed name used to describe the study, usually
+    the words that make up the acronym. \\
+
+  preservationName & String & \\
+
+  preservationTemperature & BigDecimal & \\
+
+\end{tabularx}
