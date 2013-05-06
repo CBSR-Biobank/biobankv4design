@@ -2,18 +2,16 @@
 
 \section{Study Aggregate}
 
- The Study aggregate defines the valid types of specimens that can be
- collected, how they are to be collected from participants, and how collected
- specimens are processed.
+ The Study aggregate is used to configure a study. It defines the valid types
+ of specimens that can be collected, when they are to be collected from
+ participants, and how collected specimens are processed.
 
 \begin{figure}[h]
-  \includegraphics[trim={9mm 124mm 80mm 8mm}, clip,
+  \includegraphics[trim={9mm 104mm 80mm 9mm}, clip,
     width=1\textwidth]{images/study-aggregate}
   \caption{Study aggregate}
   \label{fig:study-aggregate}
 \end{figure}
-
-\subsection{Entities}
 
 \begin{description}[listparindent=\parindent]
 
@@ -26,6 +24,17 @@
     specimens can be added.
 
     A study may have one or more comments assigned to it during it's lifetime.
+
+  \item[\entitytarget{SpecimenGroup}] \hfill \\ Ownership, summary, storage,
+    and classification information that applies to an entire group or
+    collection of \entitylink{Specimen}s.
+
+    The anatomical source, preservation medium and specimen type are defined
+    using other value objects discussed in Section \ref{sec:specimen-group}.
+
+    This entity is used to record the specimen types used by the study. It can
+    specify the specimens collected from participants, and the asscociations to
+    the specimens that are processed from them.
 
   \item[\entitytarget{CollectionEventType}] \hfill \\ A classification name,
     unique to the \entitylink{Study}, for a visit by the study's
@@ -47,27 +56,21 @@
 
 \end{description}
 
-\subsection{Value Objects}
+\subsection{SpecimenGroup}
+\label{sec:specimen-group}
+
+The SpecimenGroup entity is composed of other value objects as shown in Figure
+\ref{fig:specimen-group}.
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[trim={9mm 110mm 80mm 9mm}, clip,
+    width=0.9\textwidth]{images/specimen-group}
+  \caption{SpecimenGroup entity}
+  \label{fig:specimen-group}
+\end{figure}
 
 \begin{description}
-
-  \item[\valobjtarget{SpecimenGroupCollectionEventType}] \hfill \\ Defines
-    which types of specimens (i.e. which \valobjlink{SpecimenGroup}s) need to
-    be collected as part of a \entitylink{CollectionEventType}.
-
-  \item[\valobjtarget{SpecimenLinkType}] \hfill \\ Represents a regularly
-    performed processing procedure involving two \entitylink{Specimen}s: an
-    input, which must be in a specific \valobjlink{SpecimenGroup}, and an
-    output, which must be in a specific \valobjlink{SpecimenGroup}.
-
-  \item[\valobjtarget{SpecimenGroup}] \hfill \\ Ownership, summary, storage,
-    and classification information that applies to an entire group or
-    collection of \entitylink{Specimen}s.
-
-  \item[\valobjtarget{SpecimenType}] \hfill \\ A standardised set of
-    classifications that describe \emph{what} a \entitylink{Specimen}
-    is. Potential examples include: urine, whole blood, plasma, nail, protein,
-    etc.
 
   \item[\valobjtarget{Preservation}] \hfill \\ Describes how a
     \entitylink{Specimen} should be preserved/stored by describing temperature
@@ -78,12 +81,42 @@
     methods for preserving and storing \entitylink{Specimen}s.  Potential
     examples include: frozen specimen, RNA later, fresh specimen, slide, etc.
 
-  \item[\valobjtarget{}] \hfill \\
-
-  \item[\valobjtarget{}] \hfill \\
-
-  \item[\valobjtarget{}] \hfill \\
+  \item[\valobjtarget{SpecimenType}] \hfill \\ A standardised set of
+    classifications that describe \emph{what} a \entitylink{Specimen}
+    is. Potential examples include: urine, whole blood, plasma, nail, protein,
+    etc.
 
 \end{description}
 
-\section{Aggregates}
+\subsection{CollectionEventType}
+\label{sec:collection-event-type}
+
+The \texttt{\textbf{\valobjtarget{SpecimenGroupCollectionEventType}}} value
+object is used to define which types of specimens (i.e. which
+\valobjlink{SpecimenGroup}s) need to be collected as part of a
+\entitylink{CollectionEventType}. See Figure \ref{fig:collection-event-type}.
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[trim={9mm 118mm 158mm 9mm}, clip,
+    width=0.6\textwidth]{images/collection-event-type}
+  \caption{Associating collection event types and specimen groups}
+  \label{fig:collection-event-type}
+\end{figure}
+
+\subsection{ProcessingType}
+\label{sec:Processing-type}
+
+The \texttt{\textbf{\valobjtarget{SpecimenLinkType}}} represents a regularly
+performed processing procedure involving two \entitylink{Specimen}s: an input,
+which must be in a specific \valobjlink{SpecimenGroup}, and an output, which
+must be in a specific \valobjlink{SpecimenGroup}.
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[trim={9mm 120mm 172mm 9mm}, clip,
+    width=0.6\textwidth]{images/processing-type}
+  \caption{Association processing types with specimen groups}
+  \label{fig:processing-type}
+\end{figure}
+
