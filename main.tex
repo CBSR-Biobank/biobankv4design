@@ -95,7 +95,7 @@
 \renewcommand*{\chapnumfont}{\normalfont\Huge\bfseries\sffamily\color{Blue}}
 \renewcommand*{\chaptitlefont}{\normalfont\Huge\bfseries\sffamily\color{Blue}}
 \renewcommand*{\secheadstyle}{\normalfont\Large\bfseries\sffamily\color{Blue}}
-\renewcommand*{\subsecheadstyle}{\normalfont\Large\bfseries\sffamily\color{LightBlue}}
+\renewcommand*{\subsecheadstyle}{\normalfont\normalsize\bfseries\sffamily\color{LightBlue}}
 
 \setcounter{secnumdepth}{3}
 \setsecnumdepth{subsection}
@@ -171,10 +171,12 @@
 
 %----------------------------------------------------------------------------------------
 % environment to help with command arguments tables
+%
+% the first column is the argument name, second is the java type, and third is
+% the a description.
 %----------------------------------------------------------------------------------------
 
 \newenvironment{commandargtable}{%
-  %\vspace{6pt}
   \table[!htbp]
   \renewcommand{\arraystretch}{1.2}
   \tabularx{\textwidth}{@{} >{\itshape}l @{\hspace{6pt}} >{\ttfamily}l X }

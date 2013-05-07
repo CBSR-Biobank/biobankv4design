@@ -33,16 +33,19 @@
 
     A study may have one or more comments assigned to it during it's lifetime.
 
+    Note: this aggregate has other associations that are introduced in later
+    sections.
+
   \item[\entitytarget{SpecimenGroup}] \hfill \\ Ownership, summary, storage,
     and classification information that applies to an entire group or
     collection of \entitylink{Specimen}s.
 
-    The anatomical source, preservation medium and specimen type are defined
-    using other value objects discussed in Section \ref{sec:specimen-group}.
-
     This entity is used to record the specimen types used by the study. It can
     specify the specimens collected from participants, and the specimens that
     are processed from them.
+
+    The anatomical source, preservation medium and specimen type are defined
+    using other value objects discussed in Section \ref{sec:specimen-group}.
 
   \item[\entitytarget{CollectionEventType}] \hfill \\ A classification name,
     unique to the \entitylink{Study}, for a visit by study participants. For
@@ -72,7 +75,7 @@ via the \entitylink{Study} aggregate.
 
 \begin{figure}[h]
   \centering
-  \includegraphics[trim={9mm 110mm 80mm 9mm}, clip,
+  \includegraphics[trim={9mm 162mm 80mm 9mm}, clip,
     width=1\textwidth]{images/specimen-group}
   \caption{SpecimenGroup entity}
   \label{fig:specimen-group}
@@ -80,28 +83,25 @@ via the \entitylink{Study} aggregate.
 
 \begin{description}
 
-  \item[\valobjtarget{AnatomicalSource}] \hfill \\ A standardized set of
-    regions of a \entitylink{Participant} \emph{where} a \entitylink{Specimen}
-    is collected from. Potential examples include: colon, ear, leg, kidney,
-    etc.
+  \item[\valobjtarget{AnatomicalSourceId}] \hfill \\ The ID belonging to a
+    \valobjlink{AnatomicalSource} which is a standardized set of regions from a
+    \entitylink{Participant} \emph{where} a \entitylink{Specimen} is collected
+    from. Potential examples include: colon, ear, leg, kidney, etc.
 
-  \item[\valobjtarget{Preservation}] \hfill \\ Describes how a
+  \item[\valobjtarget{PreservationId}] \hfill \\ The ID belonging to a
+    \valobjlink{Preservation} value object which describes how a
     \entitylink{Specimen} should be preserved/stored by describing temperature
     requirements ($^\circ$C), as well as a preservation method (see
     \valobjlink{PreservationType}).
 
-  \item[\valobjtarget{PreservationType}] \hfill \\ A standardized set of
-    methods for preserving and storing \entitylink{Specimen}s.  Potential
-    examples include: frozen specimen, RNA later, fresh specimen, slide, etc.
-
-  \item[\valobjtarget{SpecimenType}] \hfill \\ A standardized set of
-    classifications that describe \emph{what} a \entitylink{Specimen}
-    is. Potential examples include: urine, whole blood, plasma, nail, protein,
-    etc.
+  \item[\valobjtarget{SpecimenTypeId}] \hfill \\ The ID belonging to a
+    \valobjlink{SpecimenType} which is standardized set of classifications that
+    describe \emph{what} a \entitylink{Specimen} is. Potential examples
+    include: urine, whole blood, plasma, nail, protein, etc.
 
 \end{description}
 
-\subsection{CollectionEventType}
+\subsection{CollectionEventType Details}
 \label{sec:collection-event-type}
 
 The \texttt{\textbf{\valobjtarget{SpecimenGroupCollectionEventType}}} value
@@ -117,70 +117,105 @@ object is used to define which types of specimens (i.e. which
   \label{fig:collection-event-type}
 \end{figure}
 
-\subsection{ProcessingType}
+The count specifies how many specimens are to be collected. Amount is the
+amount of substance that is expected in each collected specimen, or null if
+there is no default amount.
+\clearpage
+
+\subsection{ProcessingType Details}
 \label{sec:Processing-type}
 
-The \texttt{\textbf{\valobjtarget{SpecimenLinkType}}} represents a regularly
-performed processing procedure involving two \entitylink{Specimen}s: an input,
-which must be in a specific \valobjlink{SpecimenGroup}, and an output, which
-must be in a specific \valobjlink{SpecimenGroup}.
-
-The count specifies how many preservation types (e.g. tubes, FTA cards, etc.) are to
-be collected. The amount is the volume required for each preservation type when
-applicable. When not applicable the amount is set to zero.
+The \texttt{\textbf{\valobjtarget{SpecimenLinkType}}} entity represents a
+regularly performed processing procedure involving two \entitylink{Specimen}s:
+an input, which must be in a specific \valobjlink{SpecimenGroup}, and an
+output, which must be in a specific \valobjlink{SpecimenGroup}.
 
 \begin{figure}[H]
   \centering
-  \includegraphics[trim={9mm 120mm 172mm 9mm}, clip,
+  \includegraphics[trim={9mm 100mm 172mm 9mm}, clip,
     width=0.6\textwidth]{images/processing-type}
   \caption{Association processing types with specimen groups}
   \label{fig:processing-type}
 \end{figure}
 
+The expectedInputChange is the expected amount (decimal value) to be removed
+from each input. The expectedOutputChange is also the expected amount to be
+added to each output. The expected input and output change values can be zero.
+The counts in inputCount and outputCount are the number of expected specimens
+when the processing is carried out. A value of zerof for output count implies
+that the count is the same as the input count. The specimen container type that
+holds the input specimens is given in inputContainerType. The specimen
+container type that the output specimens are stored into is given in
+outputContainerType. If specifying the container types is not required for one
+or both of these fields they can be assigned the \texttt{null} value.
+
+To avoid redundancy, a specimen link type may exist only once for a given input
+and output specimen group.
+
 \section {Study Aggregate Commands}
+These are the commands used to configure a study.
 
-\subsection{StudyCreateCommand}
+\begin{description}
 
-This command is used to create a study. The arguments are:
+    \item[StudyCreateCommand] \hfill \\ Used to create a study. The arguments
+      are: \texttt{name (String)} and \texttt{description (String)}. The name
+      used to refer to the study and is usually an acronym. The description
+      describes the study and is usually the words that make up the acronym.
 
-\begin{commandargtable}
+    \item[StudyUpdateCommand] \hfill \\ Used to create a study. The arguments
+      are: \texttt{studyId (String)}, \texttt{name (String)} and
+      \texttt{description (String)}. The studyId is the unique identifier for
+      the study. The name contains the updated name or the current name if no
+      update is required. The description contains the updated description or
+      the current description if no update is required.
 
-  name & String & The name used to refer to the study, usually an acronym.\\
+    \item[StudyEnableCommand] \hfill \\ Used to enable a study. Once enabled
+      the study is ready to collect and process specimens from
+      participants. The single argument is \texttt{studyId (String)} which is
+      the unique identifier for the study.
 
-  description & String & A more detailed name used to describe the study,
-  usually the words that make up the acronym.\\
+    \item[StudyDisableCommand] \hfill \\ Used to disable a study. Once disabled
+      the study can no longer collect and / or process specimens from
+      participants. The single arguments is \texttt{studyId (String)} which is
+      the unique identifier for the study.
 
-\end{commandargtable}
+    \item[CreateSpecimenGroupCommand] \hfill \\ Used to create
+      a specimen group in a study. The arguments are: \texttt{studyId
+	(String)}, \texttt{name (String)}, \texttt{description (String)},
+      \texttt{anatomicalSourceId (String)}, \texttt{preservationId (String)},
+      and \texttt{specimenTypeId (String)}. The studyId is the unique
+      identifier for the study. The name describes the specimen group. The
+      description provides more details for the speciment group.  The
+      anatomicalSourceId is used to identify anatomical source on the
+      participants whre this group belongs to.  The preservationId is used to
+      record how this group is stored.  The specimenTypeId identifies the type
+      of specimens contained in this group.
 
-\subsection{StudyUpdateCommand}
+    \item[DeleteSpecimenGroupCommand] \hfill \\ Used to delete a specimen group
+      from the study. The arguments are: \texttt{studyId (String)} and
+      \texttt{specimenGroupId (String)}. The studyId is the unique identifier
+      for the study. The specimenGroupId is the unique identifier for the
+      specimen group.
 
-This command is used to update the name or description on a study.
+    \item[CreateCollectionEventType] \hfill \\
 
-\begin{commandargtable}
+    \item[DeleteCollectionEventType] \hfill \\
 
-  studyId & String & The unique ID associated with the study.\\
+    \item[AddSpecimenGroupToCollectionEventType] \hfill \\
 
-  name & String & The updated name or the current name if no update is required.\\
+    \item[RemoveSpecimenGroupToCollectionEventType] \hfill \\
 
-  description & String & The updated description or the current description if
-  no update is required.\\
+    \item[CreateProcessingType] \hfill \\
 
-\end{commandargtable}
+    \item[DeleteProcessingType] \hfill \\
 
-\subsection{CreateSpecimenGroupCommand}
+    \item[AddSpecimenLinkType] \hfill \\
 
-This command is used to create a specimen group in a study. The arguments are:
+    \item[RemoveSpecimenLinkType] \hfill \\
 
-\begin{commandargtable}
+    \item[] \hfill \\
 
-  studyId & String & The unique ID associated with the study.\\
+    \item[] \hfill \\
 
-  name & String & The name used to reference the group by\\
+\end{description}
 
-  description & String & A description for this group.\\
-
-  preservationName & String & The \\
-
-  temperature & BigDecimal & \\
-
-\end{commandargtable}
