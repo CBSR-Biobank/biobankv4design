@@ -143,7 +143,7 @@
 \endgroup}
 
 %----------------------------------------------------------------------------------------
-% Ttable of contents
+% Table of contents
 %----------------------------------------------------------------------------------------
 
 \usepackage[textsize=small, backgroundcolor=Orange, bordercolor=Orange, shadow]{todonotes}
@@ -160,7 +160,7 @@
 \AtBeginDocument{\renewcommand\contentsname{Table of Contents}}
 
 %----------------------------------------------------------------------------------------
-% document macros
+% hyperlinks to entities and value objects
 %----------------------------------------------------------------------------------------
 
 \newcommand{\entitytarget}[1]{\hypertarget{#1}{#1}}
@@ -168,6 +168,20 @@
 
 \newcommand{\entitylink}[1]{\hyperlink{#1}{\texttt{\textbf{#1}}}}
 \newcommand{\valobjlink}[1]{\hyperlink{#1}{\texttt{\textbf{#1}}}}
+
+%----------------------------------------------------------------------------------------
+% environment to help with command arguments tables
+%----------------------------------------------------------------------------------------
+
+\newenvironment{commandargtable}{%
+  %\vspace{6pt}
+  \table[!htbp]
+  \renewcommand{\arraystretch}{1.2}
+  \tabularx{\textwidth}{@{} >{\itshape}l @{\hspace{6pt}} >{\ttfamily}l X }
+}{%
+  \endtabularx%
+  \endtable%
+}
 
 %----------------------------------------------------------------------------------------
 % Document start

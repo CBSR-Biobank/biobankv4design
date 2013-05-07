@@ -141,34 +141,46 @@ applicable. When not applicable the amount is set to zero.
 
 \subsection{StudyCreateCommand}
 
-This command is used to create a study. The arguments for this command are:
+This command is used to create a study. The arguments are:
 
-\vspace{6pt}
-\begin{tabularx}{\textwidth}{@{} >{\bfseries}l l X }
+\begin{commandargtable}
 
-  name & String & The name to associate with a study, usually an acronym.\\
+  name & String & The name used to refer to the study, usually an acronym.\\
 
   description & String & A more detailed name used to describe the study,
   usually the words that make up the acronym.\\
 
-\end{tabularx}
+\end{commandargtable}
+
+\subsection{StudyUpdateCommand}
+
+This command is used to update the name or description on a study.
+
+\begin{commandargtable}
+
+  studyId & String & The unique ID associated with the study.\\
+
+  name & String & The updated name or the current name if no update is required.\\
+
+  description & String & The updated description or the current description if
+  no update is required.\\
+
+\end{commandargtable}
 
 \subsection{CreateSpecimenGroupCommand}
 
 This command is used to create a specimen group in a study. The arguments are:
 
-\vspace{6pt}
-\begin{tabularx}{\textwidth}{@{} >{\bfseries}l l X }
+\begin{commandargtable}
 
   studyId & String & The unique ID associated with the study.\\
 
-  Name & String & The name to associate with a study, usually an acronym.\\
+  name & String & The name used to reference the group by\\
 
-  Description & String & A more detailed name used to describe the study, usually
-    the words that make up the acronym. \\
+  description & String & A description for this group.\\
 
-  preservationName & String & \\
+  preservationName & String & The \\
 
-  preservationTemperature & BigDecimal & \\
+  temperature & BigDecimal & \\
 
-\end{tabularx}
+\end{commandargtable}
