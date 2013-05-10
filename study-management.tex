@@ -34,11 +34,16 @@ other entitites and value objects which are described below.
 
 \subsection*{SpecimenGroup}
 
-This entity is used to record one or more specimen type used by the study.  It
+This entity is used to configure a specimen type used by the study.  It
 records ownership, summary, storage, and classification information that
 applies to an entire group or collection of \entitylink{Specimen}s. A specimen
 group is defined either for specimens types collected from participants, or the
 types of specimens that are processed.
+
+A specimen group has a name and a description: the name is a short identifying
+name that is unique to the study, and the description is optional and can
+provide additional details. The unit specifies how the specimen amount is
+measured (e.g. volume, weight, length, etc.).
 
 A study can have one or more specimen groups defined.  For specimen collection
 to be allowed on a study, at least one specimen group must be defined.
@@ -285,44 +290,46 @@ An example of an annotation on a participant can be their gender.
 
 \section {Study Aggregate Commands}
 
-These are the commands handled by the study aggregate are listed below.
+The commands handled by the study aggregate are listed below.
 
 \subsection*{StudyCreateCommand}
 
-Used to create a study. The arguments are: \texttt{name (String)} and
-\texttt{description (String)}. The name used to refer to the study and is
-usually an acronym. The description describes the study and is usually the
-words that make up the acronym.
+Used to create a study. A study can be created at any time. The arguments are:
+\texttt{name (String)} and \texttt{description (String)}. The name used to
+refer to the study and is usually an acronym. The description describes the
+study and is usually the words that make up the acronym.
 
 \subsection*{StudyUpdateCommand}
 
-Used to create a study. The arguments are: \texttt{studyId (String)},
-\texttt{name (String)} and \texttt{description (String)}. The studyId is the
-unique identifier for the study. The name contains the updated name or the
-current name if no update is required. The description contains the updated
-description or the current description if no update is required.
+Used to update a study's name, description, or both. The arguments are:
+\texttt{studyId (String)}, \texttt{name (String)} and \texttt{description
+  (String)}. The studyId is the study's unique identifier. The name contains
+the updated. The description contains the updated description. If either name
+or description is not to be updated, it should contain the original value.
 
 \subsection*{StudyEnableCommand}
 
 Used to enable a study. Once enabled the study is ready to collect and process
 specimens from participants. The single argument is \texttt{studyId (String)}
-which is the unique identifier for the study.
+is the study's unique identifier.
 
 \subsection*{StudyDisableCommand}
 
-Used to disable a study. Once disabled the study can no longer collect and / or
-process specimens from participants. The single arguments is \texttt{studyId
-  (String)} which is the unique identifier for the study.
+Used to disable a study. A study may be disabled because no more specimen
+collection will be done with it, or because it requires configuration
+changes. Once disabled the study can no longer collect and / or process
+specimens from participants. The single argument is \texttt{studyId (String)}
+is the study's unique identifier.
 
 \subsection*{CreateSpecimenGroupCommand}
 
 Used to create a specimen group in a study. The arguments are: \texttt{studyId
   (String)}, \texttt{name (String)}, \texttt{description (String)},
 \texttt{anatomicalSourceId (String)}, \texttt{preservationId (String)}, and
-\texttt{specimenTypeId (String)}. The studyId is the unique identifier for the
-study. The name describes the specimen group. The description provides more
-details for the speciment group.  The anatomicalSourceId is used to identify
-anatomical source on the participants whre this group belongs to.  The
+\texttt{specimenTypeId (String)}. The studyId is the study's unique
+identifier. The name describes the specimen group. The description provides
+more details for the speciment group.  The anatomicalSourceId is used to
+identify anatomical source on the participants whre this group belongs to.  The
 preservationId is used to record how this group is stored.  The specimenTypeId
 identifies the type of specimens contained in this group.
 
