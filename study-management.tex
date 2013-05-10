@@ -1,13 +1,14 @@
 \chapter{Study Management}
 
-In this module the \entitytarget{Study} aggregate is used to configure a
-study. It defines the valid types of specimens that can be collected, when they
-are to be collected from participants, how the collected specimens are
-processed, and allows for customization with use of annotations. This aggregate
-is made up of the entities and value objects shown in the figure below.
+This section first describes the study aggregate, its composition, and then
+defines the commands it handles.
 
-This section first describes the study aggregate and then defines the commands
-it handles.
+The \entitytarget{Study} aggregate is used to configure different aspects for a
+study. It is used to define the valid types of specimens that can be collected
+from participants, when they are to be collected, how the collected specimens
+are processed, and allows for customization with use of annotation types. This
+aggregate is made up of the entities and value objects shown in the figure
+below.
 
 \begin{figure}[h]
   \includegraphics[trim={9mm 85mm 36mm 9mm}, clip,
@@ -18,11 +19,12 @@ it handles.
 
 \subsection*{Study}
 
-Represents a collection of participants and specimens collected for a
-particular research study. The study name is a short descriptive name that is
-usually an acronym used for quick identification. The description contains text
-used to give more details on the name and is usually the words that make up the
-acronym.
+A \entitylink{Study} represents a collection of participants and specimens
+collected for a particular research study. Each study has a unique identifier,
+\texttt{StudyId}, that is used to reference it. \texttt{name} is a short
+descriptive name that is usually an acronym used for quick identification.
+\texttt{description} give more details on the name and is usually the words
+that make up the acronym.
 
 A study can be enabled or disabled. When disabled, changes to its configuration
 are possible but patients and specimens cannot be added. When enabled, no
@@ -34,16 +36,16 @@ other entitites and value objects which are described below.
 
 \subsection*{SpecimenGroup}
 
-This entity is used to configure a specimen type used by the study.  It
-records ownership, summary, storage, and classification information that
-applies to an entire group or collection of \entitylink{Specimen}s. A specimen
-group is defined either for specimens types collected from participants, or the
-types of specimens that are processed.
+A \entitytarget{SpecimenGroup} is used to configure a specimen type used by the
+study.  It records ownership, summary, storage, and classification information
+that applies to an entire group or collection of \entitylink{Specimen}s. A
+specimen group is defined either for specimens types collected from
+participants, or for the types of specimens that are processed.
 
 A specimen group has a name and a description: the name is a short identifying
-name that is unique to the study, and the description is optional and can
-provide additional details. The unit specifies how the specimen amount is
-measured (e.g. volume, weight, length, etc.).
+name that is unique to the study, and the description can provide additional
+details but is optional. The unit specifies how the specimen amount is measured
+(e.g. volume, weight, length, etc.).
 
 A study can have one or more specimen groups defined.  For specimen collection
 to be allowed on a study, at least one specimen group must be defined.
@@ -53,9 +55,10 @@ other value objects discussed in Section \ref{sec:specimen-group}.
 
 \subsection*{CollectionEventType}
 
-A classification name, unique to the \entitylink{Study}, for a visit by study
-participants. Each collection event type has one or more specimen groups (see
-Section \ref{sec:collection-event-type}).
+A \entitytarget{CollectionEventType} defines a classification name, unique to
+the \entitylink{Study}, for a visit by study participants. Each collection
+event type is assigned one or more specimen groups to specify the specimen
+types that are collected (see Section \ref{sec:collection-event-type}).
 
 A study can have one or more collection event types defined. For specimen
 collection to be allowed on a study, at least one collection event type must be
@@ -63,8 +66,9 @@ defined.
 
 \subsection*{ProcessingType}
 
-Describes a regularly performed specimen processing procedure with a unique
-name (unique to the \entitylink{Study}). There should be one or more associated
+A \entitytarget{ProcessingType} describes a regularly performed specimen
+processing procedure with a unique name (unique to the
+\entitylink{Study}). There should be one or more associated
 \entitylink{SpecimenLinkType}s that (1) further define legal procedures and (2)
 allow recording of procedures performed on different types of
 \entitylink{Specimen}s.
@@ -75,24 +79,25 @@ defined.
 
 \subsection*{StudyAnnotationType}
 
-Annotations types allow a study to collect custom named and defined pieces of
-data on collection event types (Section \ref{sec:collection-event-type}),
-processing events (Section \ref{sec:processing-type}), and participants
-(Section \ref{sec:participant-annotations}).
+\entitytarget{StudyAnnotationType}s allows a study to collect custom named and
+defined pieces of data on collection event types (Section
+\ref{sec:collection-event-type}), processing events (Section
+\ref{sec:processing-type}), and participants (Section
+\ref{sec:participant-annotations}).
 
 Annotations are optional and are not a requirement for specimen collection or
 processing.
 
 \subsection*{StudyComment}
 
-The comment contains a message and the user that added the comment. The date
-and time the comment was made is recorded as meta data. A study can have one or
-more comments.
+A \entitytarget{StudyComment} contains a textual message and the user that
+added the comment. The date and time the comment was made is recorded as meta
+data. A study can have one or more comments.
 
 \section{SpecimenGroup Details}
 \label{sec:specimen-group}
 
-The \entitytarget{SpecimenGroup} entity is composed of the value objects shown
+The \entitylink{SpecimenGroup} entity is composed of the value objects shown
 in Figure \ref{fig:specimen-group}.
 
 \begin{figure}[h]
@@ -130,10 +135,10 @@ A specimen group contains the ID of a single preservation object.
 
 \valobjlink{SpecimenType} is standardized set of classifications that describe
 \emph{what} a \entitylink{Specimen} is. Potential examples include: urine,
-whole blood, plasma, nail, protein, etc.\valobjlink{SpecimenType} is also a value
-object with a unique ID. They are defined globally and new ones can be created
-at any time. They can be accessed via lookup service described in Section
-\ref{sec:lookup-service}.
+whole blood, plasma, nail, protein, etc. \valobjlink{SpecimenType} is also a
+value object with a unique ID. They are defined globally and new ones can be
+created at any time. They can be accessed via lookup service described in
+Section \ref{sec:lookup-service}.
 
 A specimen group contains the ID of a single specimen type.
 
@@ -141,7 +146,7 @@ A specimen group contains the ID of a single specimen type.
 \label{sec:collection-event-type}
 
 A collection even type can be configured to collect one or more specimens using
-\entitylink{SpecimenGroupCollectionEventType}. Also, it can be configured to
+\entitylink{SpecimenGroupCollectionEventType}. It can also be configured to
 record one or more annotation types using
 \entitylink{CollectionEventTypeAnnotationType}. These associations are shown in
 Figure \ref{fig:collection-event-type}.
@@ -154,25 +159,24 @@ Figure \ref{fig:collection-event-type}.
   \label{fig:collection-event-type}
 \end{figure}
 
-A single specimen group can be used in multiple collection event
-types. Also, a single collection event annotation type can be used in multiple
-collection event types.
-
 \subsection*{SpecimenGroupCollectionEventType}
 
-\valobjtarget{SpecimenGroupCollectionEventType}s are used to
-define which types of specimens (i.e. which \valobjlink{SpecimenGroup}s) need
-to be collected with a type of collection event.
+\valobjtarget{SpecimenGroupCollectionEventType}s are used to define which types
+of specimens (i.e. which \valobjlink{SpecimenGroup}s) need to be collected with
+a type of collection event. A single specimen group can be used in multiple
+collection event types.
 
 The \texttt{count} specifies how many specimens are to be collected. The
 \texttt{amount} is the amount of substance that is expected in each collected
-specimen, or null if there is no default amount.
+specimen, or null if there is no default amount. The unit on the amount is
+defined in the \entitylink{SpecimenGroup}.
 
 \subsection*{CollectionEventAnnotationType}
 
 Collection event annotations are defined using
 \valobjtarget{CollectionEventAnnotationType}. One or more of these can be
-defined for the study.
+defined for the study. A single collection event annotation type can be used in
+multiple collection event types.
 
 \section{ProcessingType Details}
 \label{sec:processing-type}
@@ -191,8 +195,8 @@ provides more details for the processing type entity.
   \label{fig:processing-type}
 \end{figure}
 
-Processing of specimens is not allowed until a valid processing type is defined
-for the study.
+Processing of specimens is not allowed until at least one processing type is
+defined for the study.
 
 \subsection*{SpecimenLinkType}
 
@@ -203,16 +207,17 @@ specific \valobjlink{SpecimenGroup}, and an output, which must be in a specific
 \valobjlink{SpecimenGroup}.
 
 The \texttt{expectedInputChange} is the expected amount (decimal value) to be
-removed from each input. The \texttt{expectedOutputChange} is the expected
-amount to be added to each output. The expected input and output change values
-can be zero.  The counts in \texttt{inputCount} and \texttt{outputCount} are
-the number of expected and resulting specimens, respectively, when the
-processing is carried out. A value of zero for output count implies that the
-count is the same as the input count. The specimen container type that holds
-the input specimens is given in \texttt{inputContainerType}. The specimen
-container type that the output specimens are stored into is given in
-\texttt{outputContainerType}. If specifying the container types is not required
-for one or both of these fields they can be assigned the \texttt{null} value.
+removed from each input. The \texttt{expectedOutputChange} (also a decimal
+value) is the expected amount to be added to each output. If the expected input
+and output change values are not required, they can be assigned a zero value.
+The counts in \texttt{inputCount} and \texttt{outputCount} are the number of
+expected and resulting specimens, respectively, when the processing is carried
+out. A value of zero for output count implies that the count is the same as the
+input count. The specimen container type that holds the input specimens is
+given in \texttt{inputContainerType}. The specimen container type that the
+output specimens are stored into is given in \texttt{outputContainerType}. If
+specifying the container types is not required for one or both of these fields,
+they can be assigned a \texttt{null} value.
 
 To avoid redundancy, a specimen link type may exist only once for a given input
 and output specimen group.
@@ -262,20 +267,18 @@ a value of 1. If an unlimited number of values are allowed then,
 
 \subsection*{CollectionEventTypeAnnotationType}
 
-A \valobjtarget{CollectionEventTypeAnnotationType} is used to to
-configure a collection event type to use an annotation. When
-\texttt{required} is set to true the annotation value is not allowed to be
-empty.
+A \valobjtarget{CollectionEventTypeAnnotationType} is used to to configure an
+annotation to be used by collection event types. When \texttt{required} is set
+to true the annotation value is not allowed to be empty.
 
 An example of an annotation on a collection even type can be consent given by
 the participant at the collection visit.
 
 \subsection*{SpecimenLinkAnnotationType}
 
-A \valobjtarget{SpecimenLinkAnnotationType} is used to to configure a specimen
-link type, within a processing type, to use an annotation. When
-\texttt{required} is set to true the annotation value is not allowed to be
-empty.
+A \valobjtarget{SpecimenLinkAnnotationType} is used to to configure an
+annotation to be used with specimen link types. When \texttt{required} is set
+to true the annotation value is not allowed to be empty.
 
 An example of an annotation type on a specimen link can be the PMBC count on
 the collected specimen.
@@ -292,34 +295,52 @@ An example of an annotation on a participant can be their gender.
 
 The commands handled by the study aggregate are listed below.
 
-\subsection*{StudyCreateCommand}
+\subsection*{CreateStudyCommand}
 
-Used to create a study. A study can be created at any time. The arguments are:
-\texttt{name (String)} and \texttt{description (String)}. The name used to
-refer to the study and is usually an acronym. The description describes the
-study and is usually the words that make up the acronym.
+Used to create a study. A study can be created at any time.
 
-\subsection*{StudyUpdateCommand}
+\begin{commandparmtable}
 
-Used to update a study's name, description, or both. The arguments are:
-\texttt{studyId (String)}, \texttt{name (String)} and \texttt{description
-  (String)}. The studyId is the study's unique identifier. The name contains
-the updated. The description contains the updated description. If either name
-or description is not to be updated, it should contain the original value.
+  name & A short descriptive name associated with the study. Usually an acronym.\\
 
-\subsection*{StudyEnableCommand}
+  description & A more detailed name for the study. If an acronym is used for
+  the study name, then the description should contain the words that make up
+  the acronym.\\
 
-Used to enable a study. Once enabled the study is ready to collect and process
-specimens from participants. The single argument is \texttt{studyId (String)}
-is the study's unique identifier.
+\end{commandparmtable}
 
-\subsection*{StudyDisableCommand}
+\subsection*{UpdateStudyCommand}
 
-Used to disable a study. A study may be disabled because no more specimen
-collection will be done with it, or because it requires configuration
-changes. Once disabled the study can no longer collect and / or process
-specimens from participants. The single argument is \texttt{studyId (String)}
-is the study's unique identifier.
+Used to update a study's name, description, or both. If either name or
+description is not to be updated, it should contain the original value.
+
+\begin{commandparmtable}
+
+  studyId & The study's unique identifier.\\
+
+  name & The new name for the study. If not modifying the name, then it should
+  be the original name.\\
+
+  description & The new description for the study. If not modifying the
+  description, then it should be the original description.\\
+
+\end{commandparmtable}
+
+%
+%  EnableStudyCommand & studyId & Used to enable a study. Once enabled the study
+%  is ready to collect and process specimens from participants.  See
+%  \entitylink{Study} for more details on the argument. \\
+%
+%  DisableStudyCommand & studyId & Used to disable a study. A study may be
+%  disabled because no more specimen collection will be done with it, or because
+%  it requires configuration changes. Once disabled the study can no longer
+%  collect and / or process specimens from participants. See \entitylink{Study}
+%  for more details on the argument. \\
+%
+%  CreateSpecimenGroupCommand & \parbox[t]{1.8cm}{studyId,\\ name,
+%    \\description,\\ anatomicalSourceId,\\preservationId,\\specimenTypeId} &
+%  Used to create a specimen group for a study. See \entitylink{SpecimenGroup}
+%  for more details on the argument. \\
 
 \subsection*{CreateSpecimenGroupCommand}
 

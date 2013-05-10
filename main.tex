@@ -15,14 +15,10 @@
 \usepackage[top=3cm,bottom=3cm,left=3.2cm,right=3.2cm,headsep=10pt,a4paper]{geometry}
 
 \usepackage{bookman} % font used for text
-%\usepackage{fourier}
-%\usepackage{fouriernc}
-%\usepackage{pandora}
-%\usepackage{nimbus}
-%\usepackage{libertine}
-
 \usepackage[T1]{fontenc}
 \usepackage{titlesec} % Allows customization of titles
+
+\usepackage{tabularx,environ}
 
 \usepackage[english]{babel} % English language/hyphenation
 \usepackage{booktabs} % Required for nicer horizontal rules in tables
@@ -30,10 +26,10 @@
 
 \usepackage[svgnames]{xcolor} % Required to specify font colors
 
+\usepackage[utf8]{inputenc} % Required for including letters with accents
 \usepackage{csquotes}
 
 \usepackage{microtype} % Slightly tweak font spacing for aesthetics
-\usepackage[utf8]{inputenc} % Required for including letters with accents
 \usepackage{enumitem} % allows lists to be customized
 \usepackage{float} % figure placement
 
@@ -182,13 +178,16 @@
 % the a description.
 %----------------------------------------------------------------------------------------
 
-\newenvironment{commandargtable}{%
-  \table[!htbp]
+\NewEnviron{commandparmtable}{%
+  \begin{table}[!htbp]
   \renewcommand{\arraystretch}{1.2}
-  \tabularx{\textwidth}{@{} >{\itshape}l @{\hspace{6pt}} >{\ttfamily}l X }
-}{%
-  \endtabularx%
-  \endtable%
+  \begin{tabularx}{\textwidth}{@{\hspace{6pt}} >{\ttfamily}l X }
+
+  \sffamily{\textbf{Parameter}} & \sffamily{\textbf{Description}} \\ \hline
+  \BODY
+  \hline
+  \end{tabularx}
+  \end{table}
 }
 
 %----------------------------------------------------------------------------------------
