@@ -301,63 +301,85 @@ Used to create a study. A study can be created at any time.
 
 \begin{commandparmtable}
 
-  name & A short descriptive name associated with the study. Usually an acronym.\\
+  name & string & A short descriptive name associated with the study. Usually
+  an acronym.\\
 
-  description & A more detailed name for the study. If an acronym is used for
-  the study name, then the description should contain the words that make up
-  the acronym.\\
+  description & string & A more detailed name for the study. If an acronym is
+  used for the study name, then the description should contain the words that
+  make up the acronym.\\
 
 \end{commandparmtable}
 
 \subsection*{UpdateStudyCommand}
 
-Used to update a study's name, description, or both. If either name or
-description is not to be updated, it should contain the original value.
+Used to update a study's name, description, or both.
 
 \begin{commandparmtable}
 
-  studyId & The study's unique identifier.\\
+  studyId & string & The study's unique identifier.\\
 
-  name & The new name for the study. If not modifying the name, then it should
-  be the original name.\\
+  name & string & The new name for the study. If not modifying the name, then
+  it should be the original name.\\
 
-  description & The new description for the study. If not modifying the
-  description, then it should be the original description.\\
+  description & string & The new description for the study. If not modifying
+  the description, then it should be the original description.\\
 
 \end{commandparmtable}
 
-%
-%  EnableStudyCommand & studyId & Used to enable a study. Once enabled the study
-%  is ready to collect and process specimens from participants.  See
-%  \entitylink{Study} for more details on the argument. \\
-%
-%  DisableStudyCommand & studyId & Used to disable a study. A study may be
-%  disabled because no more specimen collection will be done with it, or because
-%  it requires configuration changes. Once disabled the study can no longer
-%  collect and / or process specimens from participants. See \entitylink{Study}
-%  for more details on the argument. \\
-%
-%  CreateSpecimenGroupCommand & \parbox[t]{1.8cm}{studyId,\\ name,
-%    \\description,\\ anatomicalSourceId,\\preservationId,\\specimenTypeId} &
-%  Used to create a specimen group for a study. See \entitylink{SpecimenGroup}
-%  for more details on the argument. \\
+\subsection*{EnableStudyCommand}
+
+Used to enable a study. Once enabled the study is ready to collect and process
+specimens from participants.
+
+\begin{commandparmtable}
+
+  studyId & string & The study's unique identifier.\\
+
+\end{commandparmtable}
+
+\subsection*{DisableStudyCommand}
+
+Used to disable a study. A study may be disabled because no more specimen
+collection and / or processing will be done on it, or because it requires
+configuration changes. Once disabled the study can no longer collect and / or
+process specimens from participants.
+
+\begin{commandparmtable}
+
+  studyId & string & The study's unique identifier.\\
+
+\end{commandparmtable}
 
 \subsection*{CreateSpecimenGroupCommand}
 
-Used to create a specimen group in a study. The arguments are: \texttt{studyId
-  (String)}, \texttt{name (String)}, \texttt{description (String)},
-\texttt{anatomicalSourceId (String)}, \texttt{preservationId (String)}, and
-\texttt{specimenTypeId (String)}. The studyId is the study's unique
-identifier. The name describes the specimen group. The description provides
-more details for the speciment group.  The anatomicalSourceId is used to
-identify anatomical source on the participants whre this group belongs to.  The
-preservationId is used to record how this group is stored.  The specimenTypeId
-identifies the type of specimens contained in this group.
+Used to create a specimen group for a study.
+
+\begin{commandparmtable}
+
+  studyId & string & The study's unique identifier.\\
+
+  name & string & A short descriptive name.\\
+
+  description & string & Provides more details for the specimen group. It can be left empty.\\
+
+  anatomicalSourceId & string & The ID corresponding to the anatomical source this group
+  belongs to.\\
+
+  preservationId & string & The ID corresponding to the preservation used by this
+  specimen group.\\
+
+  specimenTypeId & string & The ID corresponding to the specimen type.\\
+
+\end{commandparmtable}
 
 \subsection*{DeleteSpecimenGroupCommand}
 
-Used to delete a specimen group from the study. The arguments are:
-\texttt{studyId (String)} and \texttt{specimenGroupId (String)}. The studyId is
-the unique identifier for the study. The specimenGroupId is the unique
-identifier for the specimen group.
+Used to delete a specimen group from the study.
 
+\begin{commandparmtable}
+
+  studyId & string & The study's unique identifier.\\
+
+  specimenGroupId & string & The specimen group's unique identifier.\\
+
+\end{commandparmtable}

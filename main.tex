@@ -33,6 +33,10 @@
 \usepackage{enumitem} % allows lists to be customized
 \usepackage{float} % figure placement
 
+% the float package disables table repositioning
+\usepackage{float}
+\restylefloat{table}
+
 \DeclareMathAlphabet{\mathpzc}{OT1}{pzc}{m}{it}
 \DeclareGraphicsExtensions{.pdf,.png,.jpg}
 
@@ -179,11 +183,11 @@
 %----------------------------------------------------------------------------------------
 
 \NewEnviron{commandparmtable}{%
-  \begin{table}[!htbp]
+  \begin{table}[H]
   \renewcommand{\arraystretch}{1.2}
-  \begin{tabularx}{\textwidth}{@{\hspace{6pt}} >{\ttfamily}l X }
-
-  \sffamily{\textbf{Parameter}} & \sffamily{\textbf{Description}} \\ \hline
+  \small
+  \begin{tabularx}{\textwidth}{l l X}
+  \sffamily{\textbf{Parameter}} & \sffamily{\textbf{Type}} & \sffamily{\textbf{Description}} \\ \hline
   \BODY
   \hline
   \end{tabularx}
