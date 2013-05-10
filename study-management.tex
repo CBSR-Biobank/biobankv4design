@@ -2,9 +2,9 @@
 
 In this module the \entitytarget{Study} aggregate is used to configure a
 study. It defines the valid types of specimens that can be collected, when they
-are to be collected from participants, and how the collected specimens are
-processed. This aggregate is made up of the entities and value objects shown in
-the figure below.
+are to be collected from participants, how the collected specimens are
+processed, and allows for customization with use of annotations. This aggregate
+is made up of the entities and value objects shown in the figure below.
 
 This section first describes the study aggregate and then defines the commands
 it handles.
@@ -29,15 +29,19 @@ are possible but patients and specimens cannot be added. When enabled, no
 further configuration changes are allowed, and participants and specimens can
 be added.
 
-A study may have one or more comments assigned to it during it's lifetime.
+As shown in the Figure \ref{fig:study-aggregate}, the study has collections of
+other entitites and value objects which are described below.
 
 \subsection*{SpecimenGroup}
 
-This entity is used to record the specimen types used by the study.  It records
-wwnership, summary, storage, and classification information that applies to an
-entire group or collection of \entitylink{Specimen}s. It is used to specify
-specimens collected from participants, and the specimens that are processed
-from them.
+This entity is used to record one or more specimen type used by the study.  It
+records ownership, summary, storage, and classification information that
+applies to an entire group or collection of \entitylink{Specimen}s. A specimen
+group is defined either for specimens types collected from participants, or the
+types of specimens that are processed.
+
+A study can have one or more specimen groups defined.  For specimen collection
+to be allowed on a study, at least one specimen group must be defined.
 
 The anatomical source, preservation medium and specimen type are defined using
 other value objects discussed in Section \ref{sec:specimen-group}.
@@ -45,9 +49,12 @@ other value objects discussed in Section \ref{sec:specimen-group}.
 \subsection*{CollectionEventType}
 
 A classification name, unique to the \entitylink{Study}, for a visit by study
-participants. For specimen collection to be allowed on a study, at least one
-collection event type must be defined. Each collection event type has one or
-more specimen groups (see Section \ref{sec:collection-event-type}).
+participants. Each collection event type has one or more specimen groups (see
+Section \ref{sec:collection-event-type}).
+
+A study can have one or more collection event types defined. For specimen
+collection to be allowed on a study, at least one collection event type must be
+defined.
 
 \subsection*{ProcessingType}
 
@@ -57,26 +64,31 @@ name (unique to the \entitylink{Study}). There should be one or more associated
 allow recording of procedures performed on different types of
 \entitylink{Specimen}s.
 
+One or more processing types can be defined for a study. For specimen
+processing to be allowed on a study, at least one processing type must be
+defined.
+
 \subsection*{StudyAnnotationType}
 
-Annotations allow further customization of a study and record supplementary
-information. Annotations can be used with the following entities: collection
-event types (Section \ref{sec:collection-event-type}), processing events
-(Section \ref{sec:processing-type}), and participants (Section
-\ref{sec:participant-annotations}).
+Annotations types allow a study to collect custom named and defined pieces of
+data on collection event types (Section \ref{sec:collection-event-type}),
+processing events (Section \ref{sec:processing-type}), and participants
+(Section \ref{sec:participant-annotations}).
+
+Annotations are optional and are not a requirement for specimen collection or
+processing.
 
 \subsection*{StudyComment}
 
 The comment contains a message and the user that added the comment. The date
-and time the comment was made is recorded as meta data.
+and time the comment was made is recorded as meta data. A study can have one or
+more comments.
 
 \section{SpecimenGroup Details}
 \label{sec:specimen-group}
 
-The \entitytarget{SpecimenGroup} entity is
-composed of other value objects as shown in Figure
-\ref{fig:specimen-group}. \entitylink{SpecimenGroup} entities are accessed via
-the \entitylink{Study} aggregate.
+The \entitytarget{SpecimenGroup} entity is composed of the value objects shown
+in Figure \ref{fig:specimen-group}.
 
 \begin{figure}[h]
   \centering
@@ -88,22 +100,37 @@ the \entitylink{Study} aggregate.
 
 \subsection*{AnatomicalSourceId}
 
-The ID belonging to a \valobjlink{AnatomicalSource} which is a standardized set
-of regions from a \entitylink{Participant} \emph{where} a \entitylink{Specimen}
-is collected from. Potential examples include: colon, ear, leg, kidney, etc.
+An \valobjlink{AnatomicalSource} is a standardized set of regions from a
+\entitylink{Participant} \emph{where} a \entitylink{Specimen} is collected
+from. Potential examples include: colon, ear, leg, kidney,
+etc. \valobjlink{AnatomicalSource} is a value object with a unique ID. They are
+defined globally and new ones can be created at any time. They can be accessed
+via lookup service described in Section \ref{sec:lookup-service}.
+
+A specimen group contains the ID of a single anatomical source.
 
 \subsection*{PreservationId}
 
-The ID belonging to a \valobjlink{Preservation} value object which describes
-how a \entitylink{Specimen} should be preserved/stored by describing
-temperature requirements ($^\circ$C), as well as a preservation method (see
-\valobjlink{PreservationType}).
+\valobjlink{Preservation} is a value object that describes how a
+\entitylink{Specimen} should be preserved/stored by describing temperature
+requirements ($^\circ$C), as well as a preservation method (see
+\valobjlink{PreservationType}). \valobjlink{Preservation} is also a value
+object with a unique ID. They are defined globally and new ones can be created
+at any time. They can be accessed via lookup service described in Section
+\ref{sec:lookup-service}.
+
+A specimen group contains the ID of a single preservation object.
 
 \subsection*{SpecimenTypeId}
 
-The ID belonging to a \valobjlink{SpecimenType} which is standardized set of
-classifications that describe \emph{what} a \entitylink{Specimen} is. Potential
-examples include: urine, whole blood, plasma, nail, protein, etc.
+\valobjlink{SpecimenType} is standardized set of classifications that describe
+\emph{what} a \entitylink{Specimen} is. Potential examples include: urine,
+whole blood, plasma, nail, protein, etc.\valobjlink{SpecimenType} is also a value
+object with a unique ID. They are defined globally and new ones can be created
+at any time. They can be accessed via lookup service described in Section
+\ref{sec:lookup-service}.
+
+A specimen group contains the ID of a single specimen type.
 
 \section{CollectionEventType Details}
 \label{sec:collection-event-type}
@@ -114,13 +141,17 @@ record one or more annotation types using
 \entitylink{CollectionEventTypeAnnotationType}. These associations are shown in
 Figure \ref{fig:collection-event-type}.
 
-\begin{figure}[h]
+\begin{figure}[H]
   \centering
-  \includegraphics[trim={9mm 45mm 96mm 9mm}, clip,
+  \includegraphics[trim={9mm 70mm 96mm 9mm}, clip,
     width=0.8\textwidth]{images/collection-event-type}
   \caption{Details for the CollectionEventType entity}
   \label{fig:collection-event-type}
 \end{figure}
+
+A single specimen group can be used in multiple collection event
+types. Also, a single collection event annotation type can be used in multiple
+collection event types.
 
 \subsection*{SpecimenGroupCollectionEventType}
 
@@ -132,11 +163,11 @@ The \texttt{count} specifies how many specimens are to be collected. The
 \texttt{amount} is the amount of substance that is expected in each collected
 specimen, or null if there is no default amount.
 
-\subsection*{CollectionEventTypeAnnotationType}
+\subsection*{CollectionEventAnnotationType}
 
-One or more \valobjtarget{CollectionEventTypeAnnotationType} are used to record
-the annotation types to be recorded with a collection event type. When required
-is set to true the annotation value is not allowed to be empty.
+Collection event annotations are defined using
+\valobjtarget{CollectionEventAnnotationType}. One or more of these can be
+defined for the study.
 
 \section{ProcessingType Details}
 \label{sec:processing-type}
@@ -149,11 +180,14 @@ provides more details for the processing type entity.
 
 \begin{figure}[H]
   \centering
-  \includegraphics[trim={9mm 38mm 45mm 9mm}, clip,
-    width=1\textwidth]{images/processing-type}
+  \includegraphics[trim={9mm 48mm 120mm 9mm}, clip,
+    width=0.7\textwidth]{images/processing-type}
   \caption{Details for the ProcessingType entity.}
   \label{fig:processing-type}
 \end{figure}
+
+Processing of specimens is not allowed until a valid processing type is defined
+for the study.
 
 \subsection*{SpecimenLinkType}
 
@@ -178,23 +212,80 @@ for one or both of these fields they can be assigned the \texttt{null} value.
 To avoid redundancy, a specimen link type may exist only once for a given input
 and output specimen group.
 
-\subsection*{SpecimenLinkAnnotationType}
-
-Specimen link annotations are defined using
-\valobjtarget{SpecimenLinkAnnotationType}. One or more of these can be defined
-for the study.
-
 \subsection*{SpecimenLinkTypeAnnotationType}
 
-A \valobjtarget{SpecimenLinkTypeAnnotationType} is used to tie the specimen
-link annotation types to a specimenlink type. \texttt{required} is set to
+A \valobjtarget{SpecimenLinkTypeAnnotationType} is used to tie a specimen
+link annotation type to a specimenlink type. When \texttt{required} is set to
 \texttt{true} the annotation value is not allowed to be empty.
 
 \section{Participant Annotations}
 \label{sec:participant-annotations}
 
+Figure \ref{fig:study-annotations} show the possible annotations types that can
+be configured for a study. Annotations types must be defined before they can be
+assigned to the respective entity.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[trim={9mm 108mm 64mm 9mm}, clip,
+    width=0.8\textwidth]{images/study-annotations}
+  \caption{Study annotation entities}
+  \label{fig:study-annotations}
+\end{figure}
+
+An annotation type has a short identifying name that is unique to the study. A
+description can also be defined but is optional. The \texttt{valueType} can be
+one of:
+
+\begin{table}[!htbp]
+\renewcommand{\arraystretch}{1.1}
+\begin{tabularx}{\textwidth}{@{\hspace{6pt}} >{\ttfamily}l X }
+
+  String & an alphanumeric string.\\
+  Number & a number, either integer or decimal.\\
+  Date & date string, usually of the form \emph{YYYY-MM-DD HH:MM}.\\
+  Select & a value selected from a predefined list.\\
+
+\end{tabularx}
+\end{table}
+
+When \texttt{valueType} is assigned to be of type \texttt{Select},
+\texttt{maxValueCount} is the number of of items that can be selected from the
+predefiend list. If only one value is allowed, then \texttt{maxValueCount} has
+a value of 1. If an unlimited number of values are allowed then,
+\texttt{maxValueCount} has a value of 0.
+
+\subsection*{CollectionEventTypeAnnotationType}
+
+A \valobjtarget{CollectionEventTypeAnnotationType} is used to to
+configure a collection event type to use an annotation. When
+\texttt{required} is set to true the annotation value is not allowed to be
+empty.
+
+An example of an annotation on a collection even type can be consent given by
+the participant at the collection visit.
+
+\subsection*{SpecimenLinkAnnotationType}
+
+A \valobjtarget{SpecimenLinkAnnotationType} is used to to configure a specimen
+link type, within a processing type, to use an annotation. When
+\texttt{required} is set to true the annotation value is not allowed to be
+empty.
+
+An example of an annotation type on a specimen link can be the PMBC count on
+the collected specimen.
+
+\subsection*{ParticipantAnnotationType}
+
+A \valobjtarget{ParticipantAnnotationType} is used to to configure a an
+annotation for a participant. When \texttt{required} is set to true the
+annotation value is not allowed to be empty.
+
+An example of an annotation on a participant can be their gender.
+
 \section {Study Aggregate Commands}
-These are the commands used to configure a study.
+
+These are the commands handled by the study aggregate are listed below.
 
 \subsection*{StudyCreateCommand}
 
