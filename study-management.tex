@@ -32,7 +32,7 @@ further configuration changes are allowed, and participants and specimens can
 be added.
 
 As shown in the Figure \ref{fig:study-aggregate}, the study has collections of
-other entitites and value objects which are described below.
+other entities and value objects which are described below.
 
 \subsection*{SpecimenGroup}
 
@@ -59,6 +59,9 @@ A \entitytarget{CollectionEventType} defines a classification name, unique to
 the \entitylink{Study}, for a visit by study participants. Each collection
 event type is assigned one or more specimen groups to specify the specimen
 types that are collected (see Section \ref{sec:collection-event-type}).
+
+If the collection event of this type occurs more than once during the lifetime
+of the study, then set \texttt{recurring} to \texttt{true}.
 
 A study can have one or more collection event types defined. For specimen
 collection to be allowed on a study, at least one collection event type must be
@@ -115,7 +118,7 @@ An \valobjlink{AnatomicalSource} is a standardized set of regions from a
 from. Potential examples include: colon, ear, leg, kidney,
 etc. \valobjlink{AnatomicalSource} is a value object with a unique ID. They are
 defined globally and new ones can be created at any time. They can be accessed
-via lookup service described in Section \ref{sec:lookup-service}.
+via look up service described in Section \ref{sec:lookup-service}.
 
 A specimen group contains the ID of a single anatomical source.
 
@@ -126,7 +129,7 @@ A specimen group contains the ID of a single anatomical source.
 requirements ($^\circ$C), as well as a preservation method (see
 \valobjlink{PreservationType}). \valobjlink{Preservation} is also a value
 object with a unique ID. They are defined globally and new ones can be created
-at any time. They can be accessed via lookup service described in Section
+at any time. They can be accessed via look up service described in Section
 \ref{sec:lookup-service}.
 
 A specimen group contains the ID of a single preservation object.
@@ -137,7 +140,7 @@ A specimen group contains the ID of a single preservation object.
 \emph{what} a \entitylink{Specimen} is. Potential examples include: urine,
 whole blood, plasma, nail, protein, etc. \valobjlink{SpecimenType} is also a
 value object with a unique ID. They are defined globally and new ones can be
-created at any time. They can be accessed via lookup service described in
+created at any time. They can be accessed via look up service described in
 Section \ref{sec:lookup-service}.
 
 A specimen group contains the ID of a single specimen type.
@@ -225,7 +228,7 @@ and output specimen group.
 \subsection*{SpecimenLinkTypeAnnotationType}
 
 A \valobjtarget{SpecimenLinkTypeAnnotationType} is used to tie a specimen
-link annotation type to a specimenlink type. When \texttt{required} is set to
+link annotation type to a specimen link type. When \texttt{required} is set to
 \texttt{true} the annotation value is not allowed to be empty.
 
 \section{Participant Annotations}
@@ -261,7 +264,7 @@ one of:
 
 When \texttt{valueType} is assigned to be of type \texttt{Select},
 \texttt{maxValueCount} is the number of of items that can be selected from the
-predefiend list. If only one value is allowed, then \texttt{maxValueCount} has
+predefined list. If only one value is allowed, then \texttt{maxValueCount} has
 a value of 1. If an unlimited number of values are allowed then,
 \texttt{maxValueCount} has a value of 0.
 
@@ -297,7 +300,8 @@ The commands handled by the study aggregate are listed below.
 
 \subsection*{CreateStudyCommand}
 
-Used to create a study. A study can be created at any time.
+Creates a new study. A study can be created at any time. If a study with the
+given name already exists the command fails and throws a checked exception.
 
 \begin{commandparmtable}
 
@@ -312,23 +316,23 @@ Used to create a study. A study can be created at any time.
 
 \subsection*{UpdateStudyCommand}
 
-Used to update a study's name, description, or both.
+Update a study's name, description, or both. If a study with the
+new name already exists the command fails and throws a checked exception.
 
 \begin{commandparmtable}
 
   studyId & string & The study's unique identifier.\\
 
-  name & string & The new name for the study. If not modifying the name, then
-  it should be the original name.\\
+  name & string & The new name, or the original name if it's not being modified.\\
 
-  description & string & The new description for the study. If not modifying
-  the description, then it should be the original description.\\
+  description & string & The new description, or the original description if
+  it's not being modified.\\
 
 \end{commandparmtable}
 
 \subsection*{EnableStudyCommand}
 
-Used to enable a study. Once enabled the study is ready to collect and process
+Enables a study. Once enabled the study is ready to collect and process
 specimens from participants.
 
 \begin{commandparmtable}
@@ -340,9 +344,9 @@ specimens from participants.
 \subsection*{DisableStudyCommand}
 
 Used to disable a study. A study may be disabled because no more specimen
-collection and / or processing will be done on it, or because it requires
-configuration changes. Once disabled the study can no longer collect and / or
-process specimens from participants.
+collection and processing will be done on it, or because it requires
+configuration changes. Once disabled specimen collection and processing cannot
+be performed on this study.
 
 \begin{commandparmtable}
 
@@ -352,7 +356,9 @@ process specimens from participants.
 
 \subsection*{CreateSpecimenGroupCommand}
 
-Used to create a specimen group for a study.
+Create a specimen group on a study. If the study is not disabled the command
+fails and throws a checked exception. If a specimen group already exists with
+the given name the command fails and throws a checked exception.
 
 \begin{commandparmtable}
 
@@ -360,7 +366,7 @@ Used to create a specimen group for a study.
 
   name & string & A short descriptive name.\\
 
-  description & string & Provides more details for the specimen group. It can be left empty.\\
+  description & string & Provides more details for the specimen group. Can be left empty.\\
 
   anatomicalSourceId & string & The ID corresponding to the anatomical source this group
   belongs to.\\
@@ -372,14 +378,188 @@ Used to create a specimen group for a study.
 
 \end{commandparmtable}
 
+\subsection*{UpdateSpecimenGroupCommand}
+
+Updates a specimen group on a study. If the study is not disabled the command
+fails and throws a checked exception. If a specimen group already exists with
+the new name the command fails and throws a checked exception.
+
+\begin{commandparmtable}
+
+  studyId & string & The study's unique identifier.\\
+
+  name & string & The new name, or the original name if it's not being modified.\\
+
+  description & string & The new description, or the original description if
+  it's not being modified.\\
+
+  anatomicalSourceId & string & The ID corresponding to the updated or original
+  anatomical source.\\
+
+  preservationId & string & The ID corresponding to the updated or original preservation.\\
+
+  specimenTypeId & string & The ID corresponding to the updated or original specimen type.\\
+
+\end{commandparmtable}
+
 \subsection*{DeleteSpecimenGroupCommand}
 
-Used to delete a specimen group from the study.
+Deletes a specimen group from the study. If the study is not disabled the
+command fails and throws a checked exception.
 
 \begin{commandparmtable}
 
   studyId & string & The study's unique identifier.\\
 
   specimenGroupId & string & The specimen group's unique identifier.\\
+
+\end{commandparmtable}
+
+\subsection*{CreateCollectionEventType}
+
+Create a collection event type for a study. If the study is not disabled the
+command fails and throws a checked exception. If a collection event with the
+given name already exists the command fails and throws a checked exception.
+
+\begin{commandparmtable}
+
+  studyId & string & The study's unique identifier.\\
+
+  name & string & A short descriptive name.\\
+
+  description & string & Provides more details. Can be left empty.\\
+
+  recurring & boolean & Set to \texttt{true} if this collection event type
+  occurs more than once for the duration of the study.\\
+
+\end{commandparmtable}
+
+\subsection*{UpdateCollectionEventType}
+
+Used to update one or more attributes of a collection event type. If a collection event with the
+given name already exists the command fails and throws a checked exception.
+
+\begin{commandparmtable}
+
+  studyId & string & The study's unique identifier.\\
+
+  collectionEventTypeId & string & The collection event type's unique identifier.\\
+
+  name & string & The new name, or the original name if it's not being modified.\\
+
+  description & string & The new description, or the original description if
+  it's not being modified.\\
+
+  recurring & boolean & The new value, or the original value if it's not being
+  modified.\\
+
+\end{commandparmtable}
+
+\subsection*{DeleteCollectionEventType}
+
+Used to delete a collection event type.
+
+\begin{commandparmtable}
+
+  studyId & string & The study's unique identifier.\\
+
+  collectionEventTypeId & string & The collection event type's unique identifier.\\
+
+\end{commandparmtable}
+
+\subsection*{}
+
+%
+
+\begin{commandparmtable}
+
+\end{commandparmtable}
+
+\subsection*{}
+
+%
+
+\begin{commandparmtable}
+
+\end{commandparmtable}
+
+\subsection*{}
+
+%
+
+\begin{commandparmtable}
+
+\end{commandparmtable}
+
+
+\subsection*{}
+
+%
+
+\begin{commandparmtable}
+
+\end{commandparmtable}
+
+\subsection*{}
+
+%
+
+\begin{commandparmtable}
+
+\end{commandparmtable}
+
+\subsection*{}
+
+
+\subsection*{}
+
+%
+
+\begin{commandparmtable}
+
+\end{commandparmtable}
+
+\subsection*{}
+
+%
+
+\begin{commandparmtable}
+
+\end{commandparmtable}
+
+\subsection*{}
+
+%
+
+\begin{commandparmtable}
+
+\end{commandparmtable}
+%
+
+\begin{commandparmtable}
+
+\end{commandparmtable}
+
+\subsection*{}
+
+%
+
+\begin{commandparmtable}
+
+\end{commandparmtable}
+
+\subsection*{}
+
+%
+
+\begin{commandparmtable}
+
+\end{commandparmtable}
+
+\subsection*{}
+
+%
+
+\begin{commandparmtable}
 
 \end{commandparmtable}
