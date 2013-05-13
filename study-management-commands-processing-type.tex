@@ -1,0 +1,226 @@
+\subsection{Processing Type Commands}
+
+\subsection*{CreateProcessingType}
+Creates a processing type for a study. If the study is not disabled the command
+fails and throws a checked exception. The command fails with a checked
+exception if name already exists.
+
+\begin{commandparmtable}
+
+  studyId & string & The study's unique identifier.\\
+
+  name & string & A short descriptive name.\\
+
+  description & string & Provides more details. Can be left empty.\\
+
+  enabled & boolean & Set to \texttt{true} when this processing type is still
+  in use.\\
+
+\end{commandparmtable}
+
+\subsection*{UpdateProcessingType}
+Updates one or more attributes of a processing type. If a processing with the
+given name already exists the command fails and throws a checked exception.
+
+\begin{commandparmtable}
+
+  studyId & string & The study's unique identifier.\\
+
+  processingTypeId & string & The processing type's unique identifier.\\
+
+  name & string & The new name, or the original name if it's not being modified.\\
+
+  description & string & The new description, or the original description if
+  it's not being modified.\\
+
+  enabled & boolean & The new value, or the original value if it's not being
+  modified.\\
+
+\end{commandparmtable}
+
+\subsection*{DeleteProcessingType}
+Deletes a processing type.
+
+\begin{commandparmtable}
+
+  studyId & string & The study's unique identifier.\\
+
+  processingTypeId & string & The processing type's unique identifier.\\
+
+\end{commandparmtable}
+
+\subsection*{EnableProcessingType}
+Used to enable a processing type that was previously disabled.
+
+\begin{commandparmtable}
+
+  studyId & string & The study's unique identifier.\\
+
+  processingTypeId & string & The processing type's unique identifier.\\
+
+\end{commandparmtable}
+
+\subsection*{DisableProcessingType}
+Used to disable a processing type that was previously enabled.
+
+\begin{commandparmtable}
+
+  studyId & string & The study's unique identifier.\\
+
+  processingTypeId & string & The processing type's unique identifier.\\
+
+\end{commandparmtable}
+
+\subsection*{AddSpecimenLinkType}
+
+\begin{commandparmtable}
+
+  studyId & string & The study's unique identifier.\\
+
+  processingTypeId & string & The processing type's unique identifier.\\
+
+  expectedInputChange & decimal & Amount to be removed from input. Use a value
+  of zero if amount change tracking is not required.\\
+
+  expectedOutputChange & decimal & Amount to be added to each output. Use a value
+  of zero if amount change tracking is not required.\\
+
+  inputCount & integer & The number of expected specimens.\\
+
+  outputCount & integer & The number of resulting specimens after processing. A
+  value of zero implies that the output count is the same as the input count.\\
+
+  inputContainerType & \entitylink{SpecimenContainer} & The specimen container type
+  that holds the input specimens.\\
+
+  outputContainerType & \entitylink{SpecimenContainer} & The specimen container type
+  that holds the output specimens.\\
+
+\end{commandparmtable}
+
+\subsection*{UpdateSpecimenLinkType}
+
+\begin{commandparmtable}
+
+  studyId & string & The study's unique identifier.\\
+
+  processingTypeId & string & The processing type's unique identifier.\\
+
+  specimenLinkTypeId & string & The specimen link type's unique identifier.\\
+
+  expectedInputChange & decimal & The new or original input change amount.\\
+
+  expectedOutputChange & decimal & The new or original output change amount.\\
+
+  inputCount & integer & The new or original number expected specimens.\\
+
+  outputCount & integer & The new or original number of resulting specimens.\\
+
+  inputContainerType & \entitylink{SpecimenContainer} & The new or original
+  input specimen container type.\\
+
+  outputContainerType & \entitylink{SpecimenContainer} & The new or original
+  output specimen container type.\\
+
+\end{commandparmtable}
+
+\subsection*{RemoveSpecimenLinkType}
+
+\begin{commandparmtable}
+
+  studyId & string & The study's unique identifier.\\
+
+  processingTypeId & string & The processing type's unique identifier.\\
+
+  specimenLinkTypeId & string & The specimen link type's unique identifier.\\
+
+\end{commandparmtable}
+
+\subsection*{AddInputSpecimenGroupToSpecimenLinkType}
+
+\begin{commandparmtable}
+
+  studyId & string & The study's unique identifier.\\
+
+  processingTypeId & string & The processing type's unique identifier.\\
+
+  specimenLinkTypeId & string & The specimen link type's unique identifier.\\
+
+  specimenGroupId & string & The specimen group's unique identifier.\\
+
+\end{commandparmtable}
+
+\subsection*{RemoveInputSpecimenGroupFromSpecimenLinkType}
+
+\begin{commandparmtable}
+
+  studyId & string & The study's unique identifier.\\
+
+  processingTypeId & string & The processing type's unique identifier.\\
+
+  specimenLinkTypeId & string & The specimen link type's unique identifier.\\
+
+  specimenGroupId & string & The specimen group's unique identifier.\\
+
+\end{commandparmtable}
+
+\subsection*{AddOutputSpecimenGroupToSpecimenLinkType}
+
+\begin{commandparmtable}
+
+  studyId & string & The study's unique identifier.\\
+
+  processingTypeId & string & The processing type's unique identifier.\\
+
+  specimenLinkTypeId & string & The specimen link type's unique identifier.\\
+
+  specimenGroupId & string & The specimen group's unique identifier.\\
+
+\end{commandparmtable}
+
+\subsection*{RemoveOutputSpecimenGroupFromSpecimenLinkType}
+
+\begin{commandparmtable}
+
+  studyId & string & The study's unique identifier.\\
+
+  processingTypeId & string & The processing type's unique identifier.\\
+
+  specimenLinkTypeId & string & The specimen link type's unique identifier.\\
+
+  specimenGroupId & string & The specimen group's unique identifier.\\
+
+\end{commandparmtable}
+
+\subsection*{AddAnnotationToSpecimenLinkType}
+
+\begin{commandparmtable}
+
+  studyId & string & The study's unique identifier.\\
+
+  processingTypeId & string & The processing type's unique identifier.\\
+
+  specimenLinkTypeId & string & The specimen link type's unique identifier.\\
+
+  specimenLinkAnnotationTypeId & string & The specimen link annotation types's
+  unique identifier.\\
+
+  required & boolean & Use \texttt{true} when this annotation type is required
+  and cannot be left empty.\\
+
+\end{commandparmtable}
+
+\subsection*{RemoveAnnotationFromSpecimenLinkType}
+
+\begin{commandparmtable}
+
+  studyId & string & The study's unique identifier.\\
+
+  processingTypeId & string & The processing type's unique identifier.\\
+
+  specimenLinkTypeId & string & The specimen link type's unique identifier.\\
+
+  specimenLinkAnnotationTypeId & string & The specimen link annotation types's
+  unique identifier.\\
+
+\end{commandparmtable}

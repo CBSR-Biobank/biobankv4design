@@ -21,10 +21,10 @@ below.
 
 A \entitylink{Study} represents a collection of participants and specimens
 collected for a particular research study. Each study has a unique identifier,
-\texttt{StudyId}, that is used to reference it. \texttt{name} is a short
-descriptive name that is usually an acronym used for quick identification.
-\texttt{description} give more details on the name and is usually the words
-that make up the acronym.
+\texttt{StudyId}, that is used to reference it. The \texttt{name} is a short
+descriptive name, unique within the application, that is usually an acronym
+used for quick identification.  The \texttt{description} give more details on
+the name and is usually the words that make up the acronym.
 
 A study can be enabled or disabled. When disabled, changes to its configuration
 are possible but patients and specimens cannot be added. When enabled, no
@@ -56,9 +56,11 @@ other value objects discussed in Section \ref{sec:specimen-group}.
 \subsection*{CollectionEventType}
 
 A \entitytarget{CollectionEventType} defines a classification name, unique to
-the \entitylink{Study}, for a visit by study participants. Each collection
-event type is assigned one or more specimen groups to specify the specimen
-types that are collected (see Section \ref{sec:collection-event-type}).
+the \entitylink{Study}, to a paricipant visit. A participan visit is when
+specimens are collected directly from the participant at a collection
+center. Each collection event type is assigned one or more specimen groups to
+specify the specimen types that are collected (see Section
+\ref{sec:collection-event-type}).
 
 If the collection event of this type occurs more than once during the lifetime
 of the study, then set \texttt{recurring} to \texttt{true}.
@@ -75,6 +77,11 @@ processing procedure with a unique name (unique to the
 \entitylink{SpecimenLinkType}s that (1) further define legal procedures and (2)
 allow recording of procedures performed on different types of
 \entitylink{Specimen}s.
+
+A processing type should have \texttt{enabled} set to \texttt{true} if when
+processing of specimens is taking place. However, throughout the lifetime of
+the study, it may be decided to stop a processing type in favour of
+another. In this case \texttt{enabled} is set to \texttt{false}.
 
 One or more processing types can be defined for a study. For specimen
 processing to be allowed on a study, at least one processing type must be
@@ -240,8 +247,8 @@ assigned to the respective entity.
 
 \begin{figure}[H]
   \centering
-  \includegraphics[trim={9mm 108mm 64mm 9mm}, clip,
-    width=0.8\textwidth]{images/study-annotations}
+  \includegraphics[trim={9mm 108mm 16mm 9mm}, clip,
+    width=0.9\textwidth]{images/study-annotations}
   \caption{Study annotation entities}
   \label{fig:study-annotations}
 \end{figure}
@@ -267,6 +274,9 @@ When \texttt{valueType} is assigned to be of type \texttt{Select},
 predefined list. If only one value is allowed, then \texttt{maxValueCount} has
 a value of 1. If an unlimited number of values are allowed then,
 \texttt{maxValueCount} has a value of 0.
+
+One or more \entitylink{AnnotationOption}s are created to add select options to
+a \texttt{Select} annotation type.
 
 \subsection*{CollectionEventTypeAnnotationType}
 
@@ -296,6 +306,7 @@ An example of an annotation on a participant can be their gender.
 
 \section {Study Aggregate Commands}
 
+\subsection{Study Commands}
 The commands handled by the study aggregate are listed below.
 
 \subsection*{CreateStudyCommand}
@@ -354,212 +365,8 @@ be performed on this study.
 
 \end{commandparmtable}
 
-\subsection*{CreateSpecimenGroupCommand}
+\input{study-management-commands-specimen-group}
+\input{study-management-commands-collection-event-type}
+\input{study-management-commands-processing-type}
+\input{study-management-annotations}
 
-Create a specimen group on a study. If the study is not disabled the command
-fails and throws a checked exception. If a specimen group already exists with
-the given name the command fails and throws a checked exception.
-
-\begin{commandparmtable}
-
-  studyId & string & The study's unique identifier.\\
-
-  name & string & A short descriptive name.\\
-
-  description & string & Provides more details for the specimen group. Can be left empty.\\
-
-  anatomicalSourceId & string & The ID corresponding to the anatomical source this group
-  belongs to.\\
-
-  preservationId & string & The ID corresponding to the preservation used by this
-  specimen group.\\
-
-  specimenTypeId & string & The ID corresponding to the specimen type.\\
-
-\end{commandparmtable}
-
-\subsection*{UpdateSpecimenGroupCommand}
-
-Updates a specimen group on a study. If the study is not disabled the command
-fails and throws a checked exception. If a specimen group already exists with
-the new name the command fails and throws a checked exception.
-
-\begin{commandparmtable}
-
-  studyId & string & The study's unique identifier.\\
-
-  name & string & The new name, or the original name if it's not being modified.\\
-
-  description & string & The new description, or the original description if
-  it's not being modified.\\
-
-  anatomicalSourceId & string & The ID corresponding to the updated or original
-  anatomical source.\\
-
-  preservationId & string & The ID corresponding to the updated or original preservation.\\
-
-  specimenTypeId & string & The ID corresponding to the updated or original specimen type.\\
-
-\end{commandparmtable}
-
-\subsection*{DeleteSpecimenGroupCommand}
-
-Deletes a specimen group from the study. If the study is not disabled the
-command fails and throws a checked exception.
-
-\begin{commandparmtable}
-
-  studyId & string & The study's unique identifier.\\
-
-  specimenGroupId & string & The specimen group's unique identifier.\\
-
-\end{commandparmtable}
-
-\subsection*{CreateCollectionEventType}
-
-Create a collection event type for a study. If the study is not disabled the
-command fails and throws a checked exception. If a collection event with the
-given name already exists the command fails and throws a checked exception.
-
-\begin{commandparmtable}
-
-  studyId & string & The study's unique identifier.\\
-
-  name & string & A short descriptive name.\\
-
-  description & string & Provides more details. Can be left empty.\\
-
-  recurring & boolean & Set to \texttt{true} if this collection event type
-  occurs more than once for the duration of the study.\\
-
-\end{commandparmtable}
-
-\subsection*{UpdateCollectionEventType}
-
-Used to update one or more attributes of a collection event type. If a collection event with the
-given name already exists the command fails and throws a checked exception.
-
-\begin{commandparmtable}
-
-  studyId & string & The study's unique identifier.\\
-
-  collectionEventTypeId & string & The collection event type's unique identifier.\\
-
-  name & string & The new name, or the original name if it's not being modified.\\
-
-  description & string & The new description, or the original description if
-  it's not being modified.\\
-
-  recurring & boolean & The new value, or the original value if it's not being
-  modified.\\
-
-\end{commandparmtable}
-
-\subsection*{DeleteCollectionEventType}
-
-Used to delete a collection event type.
-
-\begin{commandparmtable}
-
-  studyId & string & The study's unique identifier.\\
-
-  collectionEventTypeId & string & The collection event type's unique identifier.\\
-
-\end{commandparmtable}
-
-\subsection*{}
-
-%
-
-\begin{commandparmtable}
-
-\end{commandparmtable}
-
-\subsection*{}
-
-%
-
-\begin{commandparmtable}
-
-\end{commandparmtable}
-
-\subsection*{}
-
-%
-
-\begin{commandparmtable}
-
-\end{commandparmtable}
-
-
-\subsection*{}
-
-%
-
-\begin{commandparmtable}
-
-\end{commandparmtable}
-
-\subsection*{}
-
-%
-
-\begin{commandparmtable}
-
-\end{commandparmtable}
-
-\subsection*{}
-
-
-\subsection*{}
-
-%
-
-\begin{commandparmtable}
-
-\end{commandparmtable}
-
-\subsection*{}
-
-%
-
-\begin{commandparmtable}
-
-\end{commandparmtable}
-
-\subsection*{}
-
-%
-
-\begin{commandparmtable}
-
-\end{commandparmtable}
-%
-
-\begin{commandparmtable}
-
-\end{commandparmtable}
-
-\subsection*{}
-
-%
-
-\begin{commandparmtable}
-
-\end{commandparmtable}
-
-\subsection*{}
-
-%
-
-\begin{commandparmtable}
-
-\end{commandparmtable}
-
-\subsection*{}
-
-%
-
-\begin{commandparmtable}
-
-\end{commandparmtable}

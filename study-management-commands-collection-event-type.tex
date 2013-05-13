@@ -1,0 +1,97 @@
+\subsection{Collection Event Type Commands}
+
+\subsection*{CreateCollectionEventType}
+Creates a collection event type for a study. If the study is not disabled the
+command fails and throws a checked exception. The command fails with a checked
+exception if name already exists.
+\begin{commandparmtable}
+
+  studyId & string & The study's unique identifier.\\
+
+  name & string & A short descriptive name.\\
+
+  description & string & Provides more details. Can be left empty.\\
+
+  recurring & boolean & Set to \texttt{true} if this collection event type
+  occurs more than once for the duration of the study.\\
+
+\end{commandparmtable}
+
+\subsection*{UpdateCollectionEventType}
+Updates one or more attributes of a collection event type. If a collection event with the
+given name already exists the command fails and throws a checked exception.
+\begin{commandparmtable}
+
+  studyId & string & The study's unique identifier.\\
+
+  collectionEventTypeId & string & The collection event type's unique identifier.\\
+
+  name & string & The new name, or the original name if it's not being modified.\\
+
+  description & string & The new description, or the original description if
+  it's not being modified.\\
+
+  recurring & boolean & The new value, or the original value if it's not being
+  modified.\\
+
+\end{commandparmtable}
+
+\subsection*{DeleteCollectionEventType}
+Deletes a collection event type.
+\begin{commandparmtable}
+
+  studyId & string & The study's unique identifier.\\
+
+  collectionEventTypeId & string & The collection event type's unique identifier.\\
+
+\end{commandparmtable}
+
+\subsection*{AddSpecimenGroupToCollectionEventType}
+Adds a specimen group to a collection event type.
+\begin{commandparmtable}
+
+  studyId & string & The study's unique identifier.\\
+
+  collectionEventTypeId & string & The collection event type's unique identifier.\\
+
+  specimenGroupId & string & The specimen group's unique identifier.\\
+
+\end{commandparmtable}
+
+\subsection*{RemoveSpecimenGroupFromCollectionEventType}
+Removes a specimen group from a collection event type.
+\begin{commandparmtable}
+
+  studyId & string & The study's unique identifier.\\
+
+  collectionEventTypeId & string & The collection event type's unique identifier.\\
+
+  specimenGroupId & string & The specimen group's unique identifier.\\
+
+\end{commandparmtable}
+
+\subsection*{AddAnnotationToCollectionEventType}
+Adds an annotation type to a collection event type.
+
+\begin{commandparmtable}
+
+  studyId & string & The study's unique identifier.\\
+
+  collectionEventTypeId & string & The collection event type's unique identifier.\\
+
+  collectionEventAnnotationTypeId & string & The annotation type's unique identifier.\\
+
+\end{commandparmtable}
+
+\subsection*{RemoveAnnotationFromCollectionEventType}
+Removes an annotation type from a collection event type.
+
+\begin{commandparmtable}
+
+  studyId & string & The study's unique identifier.\\
+
+  collectionEventTypeId & string & The collection event type's unique identifier.\\
+
+  collectionEventAnnotationTypeId & string & The annotation type's unique identifier.\\
+
+\end{commandparmtable}

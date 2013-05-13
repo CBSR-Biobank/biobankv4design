@@ -1,0 +1,61 @@
+\subsection{Specimen Group Commands}
+\subsection*{CreateSpecimenGroupCommand}
+
+Creates a specimen group on a study. If the study is not disabled the command
+fails and throws a checked exception. If a specimen group already exists with
+the given name the command fails and throws a checked exception.
+
+\begin{commandparmtable}
+
+  studyId & string & The study's unique identifier.\\
+
+  name & string & A short descriptive name.\\
+
+  description & string & Provides more details for the specimen group. Can be left empty.\\
+
+  anatomicalSourceId & string & The ID corresponding to the anatomical source this group
+  belongs to.\\
+
+  preservationId & string & The ID corresponding to the preservation used by this
+  specimen group.\\
+
+  specimenTypeId & string & The ID corresponding to the specimen type.\\
+
+\end{commandparmtable}
+
+\subsection*{UpdateSpecimenGroupCommand}
+
+Updates a specimen group on a study. If the study is not disabled the command
+fails and throws a checked exception. If a specimen group already exists with
+the new name the command fails and throws a checked exception.
+
+\begin{commandparmtable}
+
+  studyId & string & The study's unique identifier.\\
+
+  name & string & The new name, or the original name if it's not being modified.\\
+
+  description & string & The new description, or the original description if
+  it's not being modified.\\
+
+  anatomicalSourceId & string & The ID corresponding to the updated or original
+  anatomical source.\\
+
+  preservationId & string & The ID corresponding to the updated or original preservation.\\
+
+  specimenTypeId & string & The ID corresponding to the updated or original specimen type.\\
+
+\end{commandparmtable}
+
+\subsection*{DeleteSpecimenGroupCommand}
+
+Deletes a specimen group from the study. If the study is not disabled the
+command fails and throws a checked exception.
+
+\begin{commandparmtable}
+
+  studyId & string & The study's unique identifier.\\
+
+  specimenGroupId & string & The specimen group's unique identifier.\\
+
+\end{commandparmtable}
