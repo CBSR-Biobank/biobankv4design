@@ -11,6 +11,7 @@ aggregate is made up of the entities and value objects shown in the figure
 below.
 
 \begin{figure}[H]
+  \centering
   \includegraphics[trim={9mm 85mm 36mm 9mm}, clip,
     width=1\textwidth]{images/study-aggregate}
   \caption{Study aggregate}
@@ -21,9 +22,9 @@ below.
 
 A \entitylink{Study} represents a collection of participants and specimens
 collected for a particular research study. Each study has a unique identifier,
-\texttt{StudyId}, that is used to reference it. The \texttt{name} is a short
+\compfont{StudyId}, that is used to reference it. The \compfont{name} is a short
 descriptive name, unique within the application, that is usually an acronym
-used for quick identification.  The \texttt{description} give more details on
+used for quick identification.  The \compfont{description} give more details on
 the name and is usually the words that make up the acronym.
 
 A study can be enabled or disabled. When disabled, changes to its configuration
@@ -65,7 +66,7 @@ allow recording of procedures performed on different types of
 defined pieces of data on collection event types (Section
 \ref{sec:collection-event-type}), processing events (Section
 \ref{sec:processing-type}), and participants (Section
-\ref{sec:participant-annotations}).
+\ref{sec:study-annotations}).
 
 Annotations are optional and are not a requirement for specimen collection or
 processing.
@@ -133,11 +134,10 @@ A specimen group contains the ID of a single specimen type.
 
 \section{CollectionEventType Details}
 \label{sec:collection-event-type}
-
 A collection event type has a name and an optional description. The name is a
 short identifying name that is unique to the study, and the description can
-provide additional details on the name. The \texttt{recurring} field is set to
-\texttt{true} when the collection event type occurs more than once during the
+provide additional details on the name. The \compfont{recurring} field is set to
+\compfont{true} when the collection event type occurs more than once during the
 lifetime of the study.
 
 A collection event type can be configured to collect one or more specimens using
@@ -165,8 +165,8 @@ of specimens (i.e. which \valobjlink{SpecimenGroup}s) need to be collected with
 a type of collection event. A single specimen group can be used in multiple
 collection event types.
 
-The \texttt{count} specifies how many specimens are to be collected. The
-\texttt{amount} is the amount of substance that is expected in each collected
+The \compfont{count} specifies how many specimens are to be collected. The
+\compfont{amount} is the amount of substance that is expected in each collected
 specimen, or null if there is no default amount. The unit on the amount is
 defined in the \entitylink{SpecimenGroup}.
 
@@ -182,11 +182,11 @@ multiple collection event types.
 
 A processing type has a name and an optional description. The name is a short
 identifying name that is unique to the study, and the description can provide
-additional details on the name. A processing type should have \texttt{enabled}
-set to \texttt{true} when processing of the contained specimen types is taking
+additional details on the name. A processing type should have \compfont{enabled}
+set to \compfont{true} when processing of the contained specimen types is taking
 place. However, throughout the lifetime of the study, it may be decided to stop
-a processing type in favour of another. In this case \texttt{enabled} is set to
-\texttt{false}.
+a processing type in favour of another. In this case \compfont{enabled} is set to
+\compfont{false}.
 
 A processing type can be configured to process one or more collected specimens
 using \valobjlink{SpecimenLinkType}. Individual specimen link types within the
@@ -217,18 +217,18 @@ procedure involving two \entitylink{Specimen}s: an input, which must be in a
 specific \valobjlink{SpecimenGroup}, and an output, which must be in a specific
 \valobjlink{SpecimenGroup}.
 
-The \texttt{expectedInputChange} is the expected amount (decimal value) to be
-removed from each input. The \texttt{expectedOutputChange} (also a decimal
+The \compfont{expectedInputChange} is the expected amount (decimal value) to be
+removed from each input. The \compfont{expectedOutputChange} (also a decimal
 value) is the expected amount to be added to each output. If the expected input
 and output change values are not required, they can be assigned a zero value.
-The counts in \texttt{inputCount} and \texttt{outputCount} are the number of
+The counts in \compfont{inputCount} and \compfont{outputCount} are the number of
 expected and resulting specimens, respectively, when the processing is carried
 out. A value of zero for output count implies that the count is the same as the
 input count. The specimen container type that holds the input specimens is
-given in \texttt{inputContainerType}. The specimen container type that the
-output specimens are stored into is given in \texttt{outputContainerType}. If
+given in \compfont{inputContainerType}. The specimen container type that the
+output specimens are stored into is given in \compfont{outputContainerType}. If
 specifying the container types is not required for one or both of these fields,
-they can be assigned a \texttt{null} value.
+they can be assigned a \compfont{null} value.
 
 To avoid redundancy, a specimen link type may exist only once for a given input
 and output specimen group.
@@ -236,11 +236,11 @@ and output specimen group.
 \subsection*{SpecimenLinkTypeAnnotationType}
 
 A \valobjtarget{SpecimenLinkTypeAnnotationType} is used to tie a specimen
-link annotation type to a specimen link type. When \texttt{required} is set to
-\texttt{true} the annotation value is not allowed to be empty.
+link annotation type to a specimen link type. When \compfont{required} is set to
+\compfont{true} the annotation value is not allowed to be empty.
 
-\section{Participant Annotations}
-\label{sec:participant-annotations}
+\section{Study Annotations}
+\label{sec:study-annotations}
 
 Figure \ref{fig:study-annotations} show the possible annotations types that can
 be configured for a study. Annotations types must be defined before they can be
@@ -255,7 +255,7 @@ assigned to the respective entity.
 \end{figure}
 
 An annotation type has a short identifying name that is unique to the study. A
-description can also be defined but is optional. The \texttt{valueType} can be
+description can also be defined but is optional. The \compfont{valueType} can be
 one of:
 
 \begin{table}[!htbp]
@@ -270,19 +270,19 @@ one of:
 \end{tabularx}
 \end{table}
 
-When \texttt{valueType} is assigned to be of type \texttt{Select},
-\texttt{maxValueCount} is the number of of items that can be selected from the
-predefined list. If only one value is allowed, then \texttt{maxValueCount} has
+When \compfont{valueType} is assigned to be of type \compfont{Select},
+\compfont{maxValueCount} is the number of of items that can be selected from the
+predefined list. If only one value is allowed, then \compfont{maxValueCount} has
 a value of 1. If an unlimited number of values are allowed then,
-\texttt{maxValueCount} has a value of 0.
+\compfont{maxValueCount} has a value of 0.
 
 One or more \entitylink{AnnotationOption}s are created to add select options to
-a \texttt{Select} annotation type.
+a \compfont{Select} annotation type.
 
 \subsection*{CollectionEventTypeAnnotationType}
 
 A \valobjtarget{CollectionEventTypeAnnotationType} is used to to configure an
-annotation to be used by collection event types. When \texttt{required} is set
+annotation to be used by collection event types. When \compfont{required} is set
 to true the annotation value is not allowed to be empty.
 
 An example of an annotation on a collection even type can be consent given by
@@ -291,7 +291,7 @@ the participant at the collection visit.
 \subsection*{SpecimenLinkAnnotationType}
 
 A \valobjtarget{SpecimenLinkAnnotationType} is used to to configure an
-annotation to be used with specimen link types. When \texttt{required} is set
+annotation to be used with specimen link types. When \compfont{required} is set
 to true the annotation value is not allowed to be empty.
 
 An example of an annotation type on a specimen link can be the PMBC count on
@@ -300,7 +300,7 @@ the collected specimen.
 \subsection*{ParticipantAnnotationType}
 
 A \valobjtarget{ParticipantAnnotationType} is used to to configure a an
-annotation for a participant. When \texttt{required} is set to true the
+annotation for a participant. When \compfont{required} is set to true the
 annotation value is not allowed to be empty.
 
 An example of an annotation on a participant can be their gender.
@@ -370,4 +370,8 @@ be performed on this study.
 \input{study-management-commands-collection-event-type}
 \input{study-management-commands-processing-type}
 \input{study-management-annotations}
+
+% Local Variables:
+% compile-command: "/usr/bin/rubber --pdf main"
+% End:
 

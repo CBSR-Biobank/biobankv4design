@@ -5,7 +5,7 @@ here. The commands to add annotations to \entitylink{SpecimenLink} and
 \entitylink{Participants} as similar to these commands but are not listed here.
 
 See the \entitytarget{AddAnnotationOption} command for adding annotation
-options to \texttt{SELECT} annotation types.
+options to \compfont{SELECT} annotation types.
 
 \subsection*{CreateCollectionEventTypeAnnotationType}
 
@@ -19,7 +19,7 @@ options to \texttt{SELECT} annotation types.
   valueType & \valobjlink{AnnotationValueType} & The types of values
   (e.g. string, number, date, etc.) this type of annotation expects.\\
 
-  maxValueCount & integer & If value type is \texttt{SELECT}, then this is the
+  maxValueCount & integer & If value type is \compfont{SELECT}, then this is the
   maximum number of selections that can be made. Use zero for unlimited.\\
 \end{commandparmtable}
 
@@ -48,7 +48,7 @@ options to \texttt{SELECT} annotation types.
 \end{commandparmtable}
 
 \subsection*{AddCollectionEventTypeAnnotationOptions}
-The command fails if the annotation value type is not \texttt{SELECT}.
+The command fails if the annotation value type is not \compfont{SELECT}.
 
 \begin{commandparmtable}
   studyId & string & The study's unique identifier.\\
@@ -58,3 +58,7 @@ The command fails if the annotation value type is not \texttt{SELECT}.
 
   options & Set[String] & The options to add for this annotation.\\
 \end{commandparmtable}
+% Local Variables:
+% compile-command: "/usr/bin/rubber --pdf main"
+% End:
+
