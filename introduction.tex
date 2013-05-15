@@ -1,13 +1,13 @@
 \chapter{Introduction}
 
-Biobank version 4 is a rewrite of the Biobank application, meant to provide the
-majority of its functionality through a web browser based interface. It was
+Biobank version 4 is a rewrite of the Biobank application and meant to provide
+the majority of its functionality through a web browser based interface. It was
 designed using Domain Driven Design principles \cite{evans2004domain} and
 employs a CQRS architecture (Command Query Responsibility Segregation)
 \cite{vernon2013implementing}.
 
 In addition, version 4 includes enhancements to the domain model which provides
-better workflow and an improved user experience.
+better work flow and an improved user experience.
 
 Flatbed scanning is supported by having a separate dedicated client, but this
 client's functionality is focused only on scanning and decoding tubes etched
@@ -26,7 +26,7 @@ This version of Biobank uses the following open source tools / software packages
   \item[MongoDB ] \hfill \\ A document based NoSQL database and provides an
     event store implementation that stores event streams in a MongoDB database.
 
-  \item[MySQL database ] \hfill \\ A SQL relational database management sytem
+  \item[MySQL database ] \hfill \\ A SQL relational database management system
     used to store the query model.
 
   \item[Axon Framework ] \hfill \\ Provides the building blocks used in
@@ -52,7 +52,7 @@ This version of Biobank uses the following open source tools / software packages
 
 \section{Use of Domain Driven Design}
 
-This document assumes the reader is familiar with Doman Driven Design. The
+This document assumes the reader is familiar with Domain Driven Design. The
 document uses many of it's terminology to describe the design of this
 application.
 
@@ -70,7 +70,7 @@ Biobank. Amongst these are:
   commands.
 \item \textbf{Event Sourcing} allows persisting of application entities as a
   sequence of events that created them. Thus, captures all business changes in a
-  lossless manner.
+  loss less manner.
 \item Events are used to populate views also known as the reporting side. Thus,
   allows for decoupling of domain logic from reporting.
 \item Allows for definitions of new reports that provide new insight to the

@@ -12,7 +12,7 @@ in the system. This identifier is not the same as the
 
 \begin{figure}[H]
   \centering
-  \includegraphics[trim={10mm 75mm 102mm 10mm}, clip,
+  \includegraphics[trim={10mm 75mm 98mm 10mm}, clip,
     width=0.75\textwidth]{images/participant-aggregate}
   \caption{Participant aggregate}
   \label{fig:participant-aggregate}
@@ -21,12 +21,13 @@ in the system. This identifier is not the same as the
 \subsection*{CollectionEvent}
 Represents a visit made by a \entitylink{Participant} during which
 \entitylink{Specimen}s may have been collected and other information may have
-been recorded.
+been recorded. The \entitylink{CollectionEvent} entity is discussed in more
+details below.
 
 \subsection*{ParticipantAnnotation}
 This entity holds the annotation value for the
 \entitylink{ParticipantAnnotationType} defined in the study. See Chapter
-\ref{chap:annotations} for how annotation values are recorded.
+\ref{chap:study-annotations} for how annotation values are recorded.
 
 \subsection*{ParticipantComment}
 A \entitytarget{ParticipantComment} contains a textual message and the user
@@ -34,25 +35,24 @@ that added the comment. The date and time the comment was made is recorded as
 meta data. A participant can have one or more comments.
 
 \section{CollectionEvent Details}
-
 The \entitytarget{CollectionEvent} is used to record a visit by a participant
-to a \entitylink{Center} (e.g. a clinic). A collection event must have a
+to a \entitylink{Centre} (e.g. a clinic). A collection event must have a
 \entitylink{CollectionEventType} as defined by the study. See Section
 \ref{sec:collection-event-type} for more details on the collection event type.
 
 A collection event also has a \compfont{visitNumber} that is an integer and a
 \compfont{timeDone} which is a time stamp for when the participant made the
-visit to the center. The format for the time stamp is: YYYY-MM-DD HH:MM.
+visit to the centre. The format for the time stamp is: YYYY-MM-DD HH:MM.
 
 \begin{figure}[H]
   \centering
-  \includegraphics[trim={10mm 66mm 75mm 10mm}, clip,
+  \includegraphics[trim={10mm 66mm 70mm 10mm}, clip,
     width=0.85\textwidth]{images/collection-event}
   \caption{CollectionEvent entity}
   \label{fig:collection-event}
 \end{figure}
 
-\subsection*{Specimen}
+\subsection*{SpecimenCollectionEvent}
 One or more specimens may have been collected from the participant. Each
 specimen is recorded with the collection event. More information for the
 \entitylink{Specimen} aggregate root is given in Chapter
@@ -60,15 +60,15 @@ specimen is recorded with the collection event. More information for the
 
 \valobjtarget{SpecimenCollectionEvent} is used to associate a specimen to a
 collection event. It is possible that a specimen has multiple collection events
-for the case when specimens are trasnferred from one study to another. By
-having multiple collection events, the information from the original collection
-event is not lost for the specimen. It is not recommended that a specimen have
-multiple collection events within the same study.
+for the case when specimens are transferred from one study to another. By
+allowing multiple collection events, the information from the original
+collection event is not lost for the specimen. It is not recommended that a
+specimen have multiple collection events within the same study.
 
 \subsection*{CollectionEventAnnotation}
-This entity holds the annotation value for the
-\entitylink{CollectionEventTypeAnnotationType} defined in the study. See Chapter
-\ref{chap:annotations} for how annotation values are recorded.
+\entitytarget{CollectionEventAnnotation} holds the annotation value for the
+\entitylink{CollectionEventAnnotationType} defined in the study. See
+Chapter \ref{chap:study-annotations} for how annotation values are recorded.
 
 \subsection*{CollectionEventComment}
 A \entitytarget{CollectionEventComment} contains a textual message and the user

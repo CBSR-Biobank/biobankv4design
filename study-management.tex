@@ -46,9 +46,9 @@ entity are given in Section \ref{sec:specimen-group}.
 
 \subsection*{CollectionEventType}
 A \entitytarget{CollectionEventType} defines a classification name, unique to
-the \entitylink{Study}, to a paricipant visit. A participan visit is a record
+the \entitylink{Study}, to a participant visit. A participant visit is a record
 of when specimens were collected from a participant at a collection
-center. Each collection event type is assigned one or more specimen groups to
+centre. Each collection event type is assigned one or more specimen groups to
 specify the specimen types that are collected. See Section
 \ref{sec:collection-event-type} for more details.
 
@@ -66,7 +66,7 @@ allow recording of procedures performed on different types of
 defined pieces of data on collection event types (Section
 \ref{sec:collection-event-type}), processing events (Section
 \ref{sec:processing-type}), and participants (Section
-\ref{sec:study-annotations}). Annotations are optional and are not a
+\ref{chap:study-annotations}). Annotations are optional and are not a
 requirement for specimen collection or processing.
 
 \subsection*{StudyComment}
@@ -169,12 +169,19 @@ specimen, or null if there is no default amount. The unit on the amount is
 defined in the \entitylink{SpecimenGroup}.
 
 \subsection*{CollectionEventAnnotationType}
-
 Collection event annotations are defined using
-\valobjtarget{CollectionEventAnnotationType}. One or more of these can be
-defined for the study. A single collection event annotation type can be used in
-multiple collection event types. When \compfont{required} is set to
-\compfont{true}, the annotation value is not allowed to be empty.
+\entitytarget{CollectionEventAnnotationType}. One or more of these can be
+defined for the study. More details for this entity are given in Chapter
+\ref{chap:study-annotations}.
+
+\subsection*{CollectionEventTypeAnnotationType}
+\valobjtarget{CollectionEventTypeAnnotationType} allows a single
+\entitylink{CollectionEventAnnotationType} to be used in more than one
+collection event. When the \compfont{required} field is set to \compfont{true},
+the annotation value in \entitylink{CollectionEventAnnotation} is not allowed
+to be empty. This class is a value object since it only serves to associate a
+\valobjtarget{CollectionEventAnnotationTypeId} to a
+\valobjtarget{CollectionEventTypeId}.
 
 \section{ProcessingType Details}
 \label{sec:processing-type}
@@ -209,8 +216,7 @@ Processing of specimens is not allowed until at least one processing type is
 defined for the study.
 
 \subsection*{SpecimenLinkType}
-
- \valobjtarget{SpecimenLinkType}s are assigned to
+\valobjtarget{SpecimenLinkType}s are assigned to
 a processing type, and used to represent a regularly performed processing
 procedure involving two \entitylink{Specimen}s: an input, which must be in a
 specific \valobjlink{SpecimenGroup}, and an output, which must be in a specific
@@ -229,60 +235,19 @@ output specimens are stored into is given in \compfont{outputContainerType}. If
 specifying the container types is not required for one or both of these fields,
 they can be assigned a \compfont{null} value.
 
-To avoid redundancy, a specimen link type may exist only once for a given input
-and output specimen group.
+To avoid redundancy, each combination of \compfont{inputGroup} and
+\compfont{outputGroup}) may exist only once per \entitylink{ProcessingType}.
 
 \subsection*{SpecimenLinkTypeAnnotationType}
 
 A \valobjtarget{SpecimenLinkTypeAnnotationType} is used to tie a specimen
 link annotation type to a specimen link type.
 
-\section{Study Annotations}
-\label{sec:study-annotations}
-
-Figure \ref{fig:study-annotations} show the possible annotations types that can
-be configured for a study. Annotations types must be defined before they can be
-assigned to the respective entity. See Chapter \ref{chap:annotations} for more
-details on how annotations are configured and used.
-
-\begin{figure}[H]
-  \centering
-  \includegraphics[trim={9mm 135mm 68mm 9mm}, clip,
-    width=0.9\textwidth]{images/study-annotations}
-  \caption{Study annotation entities}
-  \label{fig:study-annotations}
-\end{figure}
-
-\subsection*{CollectionEventTypeAnnotationType}
-
-A \entitytarget{CollectionEventTypeAnnotationType} is used to to configure an
-annotation to be used by collection event types. An example of an annotation on
-a collection even type can be consent given by the participant at the
-collection visit. \valobjtarget{CollectionEvent
-
-\subsection*{SpecimenLinkAnnotationType}
-
-A \valobjtarget{SpecimenLinkAnnotationType} is used to to configure an
-annotation to be used with specimen link types.
-
-An example of an annotation type on a specimen link can be the PMBC count on
-the collected specimen.
-
-\subsection*{ParticipantAnnotationType}
-
-A \valobjtarget{ParticipantAnnotationType} is used to to configure a an
-annotation for a participant. When \compfont{required} is set to true the
-annotation value is not allowed to be empty.
-
-An example of an annotation on a participant can be their gender.
-
 \section {Study Aggregate Commands}
-
 \subsection{Study Commands}
 The commands handled by the study aggregate are listed below.
 
 \subsection*{CreateStudyCommand}
-
 Creates a new study. A study can be created at any time. If a study with the
 given name already exists the command fails and throws a checked exception.
 
@@ -340,7 +305,6 @@ be performed on this study.
 \input{study-management-commands-specimen-group}
 \input{study-management-commands-collection-event-type}
 \input{study-management-commands-processing-type}
-\input{study-management-annotations}
 
 % Local Variables:
 % compile-command: "/usr/bin/rubber --pdf main"
