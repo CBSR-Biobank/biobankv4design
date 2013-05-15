@@ -1,35 +1,13 @@
 \chapter{Specimen Processing and Storage}
 \label{chap:specimen-processing}
 
-\entitytarget{Specimen}s can be added to the system using the specimen
-aggregate. A Specimen collected from a participant can be created with this
-aggregate and then added to a collection event. Figure
-\ref{fig:specimen-aggregate} shows that when a specimen is created it must be
-assigned the corresponding \entitylink{SpecimenGroup} defined in the study.
+When a specimen is processed portions of it are used to create aliquots or
+derivative specimens. Figure \ref{fig:specimen-aggregate} shows the model to
+record the processing information.
 
 \begin{figure}[H]
   \centering
-  \includegraphics[trim={10mm 102mm 158mm 10mm}, clip,
-    width=0.5\textwidth]{images/specimen-aggregate}
-  \caption{Specimen Aggregate Root}
-  \label{fig:specimen-aggregate}
-\end{figure}
-
-The \entitylink{Specimen} records the following: time the specimen was created;
-the amount stored (the units are specified in \entitylink{SpecimenGroup}). The
-location for the \entitylink{Centre} where the collection was done; the current
-location for the specimen which may be different than the origin location; if
-this specimen is stored then its location is recorded in the
-\compfont{container} and \compfont{position} fields.
-
-\section{Specimen Processing}
-When a specimen is processed most of it, usually all of it, is used to create
-aliquots or derivative specimens. Figure \ref{fig:specimen-aggregate} shows the
-model to record the processing information.
-
-\begin{figure}[H]
-  \centering
-  \includegraphics[trim={10mm 48mm 78mm 10mm}, clip,
+  \includegraphics[trim={10mm 42mm 78mm 18mm}, clip,
     width=0.75\textwidth]{images/specimen-processing}
   \caption{Specimen Processing Model}
   \label{fig:specimen-processing}

@@ -12,7 +12,7 @@ below.
 
 \begin{figure}[H]
   \centering
-  \includegraphics[trim={9mm 85mm 36mm 9mm}, clip,
+  \includegraphics[trim={9mm 76mm 36mm 18mm}, clip,
     width=1\textwidth]{images/study-aggregate}
   \caption{Study aggregate}
   \label{fig:study-aggregate}
@@ -90,7 +90,7 @@ allowed on a study, at least one specimen group must be defined.
 
 \begin{figure}[H]
   \centering
-  \includegraphics[trim={9mm 130mm 80mm 9mm}, clip,
+  \includegraphics[trim={9mm 120mm 80mm 18mm}, clip,
     width=1\textwidth]{images/specimen-group}
   \caption{SpecimenGroup entity}
   \label{fig:specimen-group}
@@ -150,7 +150,7 @@ defined.
 
 \begin{figure}[H]
   \centering
-  \includegraphics[trim={9mm 65mm 96mm 9mm}, clip,
+  \includegraphics[trim={9mm 56mm 96mm 18mm}, clip,
     width=0.8\textwidth]{images/collection-event-type}
   \caption{Details for the CollectionEventType entity}
   \label{fig:collection-event-type}
@@ -206,9 +206,9 @@ defined.
 
 \begin{figure}[H]
   \centering
-  \includegraphics[trim={9mm 35mm 120mm 9mm}, clip,
+  \includegraphics[trim={9mm 26mm 120mm 18mm}, clip,
     width=0.7\textwidth]{images/processing-type}
-  \caption{Details for the ProcessingType entity.}
+  \caption{Model for defining processing types.}
   \label{fig:processing-type}
 \end{figure}
 
@@ -253,10 +253,10 @@ given name already exists the command fails and throws a checked exception.
 
 \begin{commandparmtable}
 
-  name & string & A short descriptive name associated with the study. Usually
+  name & String & A short descriptive name associated with the study. Usually
   an acronym.\\
 
-  description & string & A more detailed name for the study. If an acronym is
+  description & String & A more detailed name for the study. If an acronym is
   used for the study name, then the description should contain the words that
   make up the acronym.\\
 
@@ -269,11 +269,11 @@ new name already exists the command fails and throws a checked exception.
 
 \begin{commandparmtable}
 
-  studyId & string & The study's unique identifier.\\
+  studyId & String & The study's unique identifier.\\
 
-  name & string & The new name, or the original name if it's not being modified.\\
+  name & String & The new name, or the original name if it's not being modified.\\
 
-  description & string & The new description, or the original description if
+  description & String & The new description, or the original description if
   it's not being modified.\\
 
 \end{commandparmtable}
@@ -285,7 +285,7 @@ specimens from participants.
 
 \begin{commandparmtable}
 
-  studyId & string & The study's unique identifier.\\
+  studyId & String & The study's unique identifier.\\
 
 \end{commandparmtable}
 
@@ -298,7 +298,7 @@ be performed on this study.
 
 \begin{commandparmtable}
 
-  studyId & string & The study's unique identifier.\\
+  studyId & String & The study's unique identifier.\\
 
 \end{commandparmtable}
 

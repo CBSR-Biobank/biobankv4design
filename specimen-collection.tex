@@ -12,7 +12,7 @@ in the system. This identifier is not the same as the
 
 \begin{figure}[H]
   \centering
-  \includegraphics[trim={10mm 75mm 98mm 10mm}, clip,
+  \includegraphics[trim={10mm 67mm 98mm 18mm}, clip,
     width=0.75\textwidth]{images/participant-aggregate}
   \caption{Participant aggregate}
   \label{fig:participant-aggregate}
@@ -46,7 +46,7 @@ visit to the centre. The format for the time stamp is: YYYY-MM-DD HH:MM.
 
 \begin{figure}[H]
   \centering
-  \includegraphics[trim={10mm 66mm 70mm 10mm}, clip,
+  \includegraphics[trim={10mm 72mm 70mm 18mm}, clip,
     width=0.85\textwidth]{images/collection-event}
   \caption{CollectionEvent entity}
   \label{fig:collection-event}
@@ -65,6 +65,11 @@ allowing multiple collection events, the information from the original
 collection event is not lost for the specimen. It is not recommended that a
 specimen have multiple collection events within the same study.
 
+\subsection*{Specimen}
+The \entitylink{Specimen} aggregate root is used to add specimens to the
+system. It is discussed in more details in Section
+\ref{sec:specimen-aggregate}.
+
 \subsection*{CollectionEventAnnotation}
 \entitytarget{CollectionEventAnnotation} holds the annotation value for the
 \entitylink{CollectionEventAnnotationType} defined in the study. See
@@ -75,6 +80,28 @@ A \entitytarget{CollectionEventComment} contains a textual message and the user
 that added the comment. The date and time the comment was made is recorded as
 meta data. A collection event can have one or more comments.
 
+\section{Specimen Details}
+\label{sec:specimen-aggregate}
+\entitytarget{Specimen}s can be added to the system using the specimen
+aggregate. A Specimen collected from a participant can be created with this
+aggregate and then added to a collection event. Figure
+\ref{fig:specimen-aggregate} shows that when a specimen is created it must be
+assigned the corresponding \entitylink{SpecimenGroup} defined in the study.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[trim={10mm 96mm 158mm 18mm}, clip,
+    width=0.5\textwidth]{images/specimen-aggregate}
+  \caption{Specimen Aggregate Root}
+  \label{fig:specimen-aggregate}
+\end{figure}
+
+The \entitylink{Specimen} records the following: time the specimen was created;
+the amount stored (the units are specified in \entitylink{SpecimenGroup}). The
+location for the \entitylink{Centre} where the collection was done; the current
+location for the specimen which may be different than the origin location; if
+this specimen is stored then its location is recorded in the
+\compfont{container} and \compfont{position} fields.
 
 % Local Variables:
 % compile-command: "/usr/bin/rubber --pdf main"

@@ -7,13 +7,13 @@ exception if name already exists.
 
 \begin{commandparmtable}
 
-  studyId & string & The study's unique identifier.\\
+  studyId & String & The study's unique identifier.\\
 
-  name & string & A short descriptive name.\\
+  name & String & A short descriptive name.\\
 
-  description & string & Provides more details. Can be left empty.\\
+  description & String & Provides more details. Can be left empty.\\
 
-  enabled & boolean & Set to \compfont{true} when this processing type is still
+  enabled & Boolean & Set to \compfont{true} when this processing type is still
   in use.\\
 
 \end{commandparmtable}
@@ -24,16 +24,16 @@ given name already exists the command fails and throws a checked exception.
 
 \begin{commandparmtable}
 
-  studyId & string & The study's unique identifier.\\
+  studyId & String & The study's unique identifier.\\
 
-  processingTypeId & string & The processing type's unique identifier.\\
+  processingTypeId & String & The processing type's unique identifier.\\
 
-  name & string & The new name, or the original name if it's not being modified.\\
+  name & String & The new name, or the original name if it's not being modified.\\
 
-  description & string & The new description, or the original description if
+  description & String & The new description, or the original description if
   it's not being modified.\\
 
-  enabled & boolean & The new value, or the original value if it's not being
+  enabled & Boolean & The new value, or the original value if it's not being
   modified.\\
 
 \end{commandparmtable}
@@ -43,9 +43,9 @@ Deletes a processing type.
 
 \begin{commandparmtable}
 
-  studyId & string & The study's unique identifier.\\
+  studyId & String & The study's unique identifier.\\
 
-  processingTypeId & string & The processing type's unique identifier.\\
+  processingTypeId & String & The processing type's unique identifier.\\
 
 \end{commandparmtable}
 
@@ -54,9 +54,9 @@ Used to enable a processing type that was previously disabled.
 
 \begin{commandparmtable}
 
-  studyId & string & The study's unique identifier.\\
+  studyId & String & The study's unique identifier.\\
 
-  processingTypeId & string & The processing type's unique identifier.\\
+  processingTypeId & String & The processing type's unique identifier.\\
 
 \end{commandparmtable}
 
@@ -65,9 +65,9 @@ Used to disable a processing type that was previously enabled.
 
 \begin{commandparmtable}
 
-  studyId & string & The study's unique identifier.\\
+  studyId & String & The study's unique identifier.\\
 
-  processingTypeId & string & The processing type's unique identifier.\\
+  processingTypeId & String & The processing type's unique identifier.\\
 
 \end{commandparmtable}
 
@@ -75,19 +75,19 @@ Used to disable a processing type that was previously enabled.
 
 \begin{commandparmtable}
 
-  studyId & string & The study's unique identifier.\\
+  studyId & String & The study's unique identifier.\\
 
-  processingTypeId & string & The processing type's unique identifier.\\
+  processingTypeId & String & The processing type's unique identifier.\\
 
-  expectedInputChange & decimal & Amount to be removed from input. Use a value
+  expectedInputChange & Decimal & Amount to be removed from input. Use a value
   of zero if amount change tracking is not required.\\
 
-  expectedOutputChange & decimal & Amount to be added to each output. Use a value
+  expectedOutputChange & Decimal & Amount to be added to each output. Use a value
   of zero if amount change tracking is not required.\\
 
-  inputCount & integer & The number of expected specimens.\\
+  inputCount & Integer & The number of expected specimens.\\
 
-  outputCount & integer & The number of resulting specimens after processing. A
+  outputCount & Integer & The number of resulting specimens after processing. A
   value of zero implies that the output count is the same as the input count.\\
 
   inputContainerType & \entitylink{SpecimenContainer} & The specimen container type
@@ -102,19 +102,19 @@ Used to disable a processing type that was previously enabled.
 
 \begin{commandparmtable}
 
-  studyId & string & The study's unique identifier.\\
+  studyId & String & The study's unique identifier.\\
 
-  processingTypeId & string & The processing type's unique identifier.\\
+  processingTypeId & String & The processing type's unique identifier.\\
 
-  specimenLinkTypeId & string & The specimen link type's unique identifier.\\
+  specimenLinkTypeId & String & The specimen link type's unique identifier.\\
 
-  expectedInputChange & decimal & The new or original input change amount.\\
+  expectedInputChange & Decimal & The new or original input change amount.\\
 
-  expectedOutputChange & decimal & The new or original output change amount.\\
+  expectedOutputChange & Decimal & The new or original output change amount.\\
 
-  inputCount & integer & The new or original number expected specimens.\\
+  inputCount & Integer & The new or original number expected specimens.\\
 
-  outputCount & integer & The new or original number of resulting specimens.\\
+  outputCount & Integer & The new or original number of resulting specimens.\\
 
   inputContainerType & \entitylink{SpecimenContainer} & The new or original
   input specimen container type.\\
@@ -128,11 +128,11 @@ Used to disable a processing type that was previously enabled.
 
 \begin{commandparmtable}
 
-  studyId & string & The study's unique identifier.\\
+  studyId & String & The study's unique identifier.\\
 
-  processingTypeId & string & The processing type's unique identifier.\\
+  processingTypeId & String & The processing type's unique identifier.\\
 
-  specimenLinkTypeId & string & The specimen link type's unique identifier.\\
+  specimenLinkTypeId & String & The specimen link type's unique identifier.\\
 
 \end{commandparmtable}
 
@@ -140,13 +140,13 @@ Used to disable a processing type that was previously enabled.
 
 \begin{commandparmtable}
 
-  studyId & string & The study's unique identifier.\\
+  studyId & String & The study's unique identifier.\\
 
-  processingTypeId & string & The processing type's unique identifier.\\
+  processingTypeId & String & The processing type's unique identifier.\\
 
-  specimenLinkTypeId & string & The specimen link type's unique identifier.\\
+  specimenLinkTypeId & String & The specimen link type's unique identifier.\\
 
-  specimenGroupId & string & The specimen group's unique identifier.\\
+  specimenGroupId & String & The specimen group's unique identifier.\\
 
 \end{commandparmtable}
 
@@ -154,13 +154,13 @@ Used to disable a processing type that was previously enabled.
 
 \begin{commandparmtable}
 
-  studyId & string & The study's unique identifier.\\
+  studyId & String & The study's unique identifier.\\
 
-  processingTypeId & string & The processing type's unique identifier.\\
+  processingTypeId & String & The processing type's unique identifier.\\
 
-  specimenLinkTypeId & string & The specimen link type's unique identifier.\\
+  specimenLinkTypeId & String & The specimen link type's unique identifier.\\
 
-  specimenGroupId & string & The specimen group's unique identifier.\\
+  specimenGroupId & String & The specimen group's unique identifier.\\
 
 \end{commandparmtable}
 
@@ -168,13 +168,13 @@ Used to disable a processing type that was previously enabled.
 
 \begin{commandparmtable}
 
-  studyId & string & The study's unique identifier.\\
+  studyId & String & The study's unique identifier.\\
 
-  processingTypeId & string & The processing type's unique identifier.\\
+  processingTypeId & String & The processing type's unique identifier.\\
 
-  specimenLinkTypeId & string & The specimen link type's unique identifier.\\
+  specimenLinkTypeId & String & The specimen link type's unique identifier.\\
 
-  specimenGroupId & string & The specimen group's unique identifier.\\
+  specimenGroupId & String & The specimen group's unique identifier.\\
 
 \end{commandparmtable}
 
@@ -182,13 +182,13 @@ Used to disable a processing type that was previously enabled.
 
 \begin{commandparmtable}
 
-  studyId & string & The study's unique identifier.\\
+  studyId & String & The study's unique identifier.\\
 
-  processingTypeId & string & The processing type's unique identifier.\\
+  processingTypeId & String & The processing type's unique identifier.\\
 
-  specimenLinkTypeId & string & The specimen link type's unique identifier.\\
+  specimenLinkTypeId & String & The specimen link type's unique identifier.\\
 
-  specimenGroupId & string & The specimen group's unique identifier.\\
+  specimenGroupId & String & The specimen group's unique identifier.\\
 
 \end{commandparmtable}
 
@@ -196,16 +196,16 @@ Used to disable a processing type that was previously enabled.
 
 \begin{commandparmtable}
 
-  studyId & string & The study's unique identifier.\\
+  studyId & String & The study's unique identifier.\\
 
-  processingTypeId & string & The processing type's unique identifier.\\
+  processingTypeId & String & The processing type's unique identifier.\\
 
-  specimenLinkTypeId & string & The specimen link type's unique identifier.\\
+  specimenLinkTypeId & String & The specimen link type's unique identifier.\\
 
-  specimenLinkAnnotationTypeId & string & The specimen link annotation type's
+  specimenLinkAnnotationTypeId & String & The specimen link annotation type's
   unique identifier.\\
 
-  required & boolean & Use \compfont{true} when this annotation type is required
+  required & Boolean & Use \compfont{true} when this annotation type is required
   and cannot be left empty.\\
 
 \end{commandparmtable}
@@ -214,13 +214,13 @@ Used to disable a processing type that was previously enabled.
 
 \begin{commandparmtable}
 
-  studyId & string & The study's unique identifier.\\
+  studyId & String & The study's unique identifier.\\
 
-  processingTypeId & string & The processing type's unique identifier.\\
+  processingTypeId & String & The processing type's unique identifier.\\
 
-  specimenLinkTypeId & string & The specimen link type's unique identifier.\\
+  specimenLinkTypeId & String & The specimen link type's unique identifier.\\
 
-  specimenLinkAnnotationTypeId & string & The specimen link annotation type's
+  specimenLinkAnnotationTypeId & String & The specimen link annotation type's
   unique identifier.\\
 
 \end{commandparmtable}

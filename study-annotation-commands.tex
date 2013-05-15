@@ -1,63 +1,82 @@
 \section{Commands}
 
-The commands for adding a collection event type - annotation type are shown
+The commands for adding a \entitylink{CollectionEventTypeAnnotationType} are shown
 here. The commands to add annotations to \entitylink{SpecimenLink} and
 \entitylink{Participants} as similar to these commands but are not listed here.
 
-See the \entitytarget{AddAnnotationOption} command for adding annotation
-options to \compfont{SELECT} annotation types.
+See the \entitylink{AddCollectionEventTypeAnnotationOptions} command below for
+adding annotation options to \compfont{SELECT} annotation types.
 
 \subsection*{CreateCollectionEventTypeAnnotationType}
 
 \begin{commandparmtable}
-  studyId & string & The study's unique identifier.\\
+  studyId & String & The study's unique identifier.\\
 
-  name & string & A short descriptive name.\\
+  name & String & A short descriptive name.\\
 
-  description & string & Provides more details. Can be left empty.\\
+  description & String & Provides more details. Can be left empty.\\
 
   valueType & \valobjlink{AnnotationValueType} & The types of values
   (e.g. string, number, date, etc.) this type of annotation expects.\\
 
-  maxValueCount & integer & If value type is \compfont{SELECT}, then this is the
+  maxValueCount & Integer & If value type is \compfont{SELECT}, then this is the
   maximum number of selections that can be made. Use zero for unlimited.\\
 \end{commandparmtable}
 
 \subsection*{UpdateCollectionEventTypeAnnotationType}
 
 \begin{commandparmtable}
-  studyId & string & The study's unique identifier.\\
+  studyId & String & The study's unique identifier.\\
 
-  collectionEventAnnotationTypeId & string & The annotation type's unique identifier.\\
+  collectionEventAnnotationTypeId & String & The annotation type's unique identifier.\\
 
-  name & string & The updated or original name.\\
+  name & String & The updated or original name.\\
 
-  description & string & The updated or original description.\\
+  description & String & The updated or original description.\\
 
   valueType & \valobjlink{AnnotationValueType} & The updated or original value type.\\
 
-  maxValueCount & integer & The updated or original count.\\
+  maxValueCount & Integer & The updated or original count.\\
 \end{commandparmtable}
 
 \subsection*{DeleteCollectionEventTypeAnnotationType}
 
 \begin{commandparmtable}
-  studyId & string & The study's unique identifier.\\
+  studyId & String & The study's unique identifier.\\
 
-  collectionEventAnnotationTypeId & string & The annotation type's unique identifier.\\
+  collectionEventAnnotationTypeId & String & The annotation type's unique identifier.\\
 \end{commandparmtable}
 
 \subsection*{AddCollectionEventTypeAnnotationOptions}
-The command fails if the annotation value type is not \compfont{SELECT}.
+\hypertarget{AddCollectionEventTypeAnnotationOptions}{}
+
+Adds annotation options for a \compfont{SELECT} annotation type.  The command
+fails if the annotation value type is not \compfont{SELECT}.
 
 \begin{commandparmtable}
-  studyId & string & The study's unique identifier.\\
+  studyId & String & The study's unique identifier.\\
 
-  collectionEventAnnotationTypeId & string & The annotation type's unique
+  collectionEventAnnotationTypeId & String & The annotation type's unique
   identifier.\\
 
   options & Set[String] & The options to add for this annotation.\\
 \end{commandparmtable}
+
+\subsection*{RemoveCollectionEventTypeAnnotationOptions}
+
+Removes annotation options for a \compfont{SELECT} annotation type.  The command
+fails if the annotation value type is not \compfont{SELECT}.
+
+\begin{commandparmtable}
+  studyId & String & The study's unique identifier.\\
+
+  collectionEventAnnotationTypeId & String & The annotation type's unique
+  identifier.\\
+
+  values & Set[String] & A set containing strings for the values that should be
+  removed.\\
+\end{commandparmtable}
+
 % Local Variables:
 % compile-command: "/usr/bin/rubber --pdf main"
 % End:
