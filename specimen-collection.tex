@@ -10,7 +10,6 @@ A participant has a unique identifier that is used to identify the participant
 in the system. This identifier is not the same as the
 \valobjlink{ParticipantId} value object used by the domain model.
 
-
 \begin{figure}[H]
   \centering
   \includegraphics[trim={10mm 75mm 102mm 10mm}, clip,
@@ -26,24 +25,8 @@ been recorded.
 
 \subsection*{ParticipantAnnotation}
 This entity holds the annotation value for the
-\entitylink{ParticipantAnnotationType} defined in the study. For a single
-annotation, the \emph{Value Field} used (i.e. \compfont{stringValue},
-\compfont{numberValue}, or \compfont{selectedValue}) depends on the annotation
-type's \compfont{valueType} (see Section \ref{sec:study-annotations}). The
-unused fields are assigned the \compfont{null} value.
-
-\begin{table}[!htbp]
-\renewcommand{\arraystretch}{1.1}
-\begin{tabularx}{\textwidth}{l l}
-  \sffamily{\textbf{ValueType}} & \sffamily{\textbf{Value field}}\\
-  \hline
-  String & \compfont{stringValue}\\
-  Number & \compfont{numberValue}\\
-  Date & \compfont{numberValue} and stored as the number of seconds\\
-  Select & \compfont{selectedValue}\\
-
-\end{tabularx}
-\end{table}
+\entitylink{ParticipantAnnotationType} defined in the study. See Chapter
+\ref{chap:annotations} for how annotation values are recorded.
 
 \subsection*{ParticipantComment}
 A \entitytarget{ParticipantComment} contains a textual message and the user
@@ -52,11 +35,10 @@ meta data. A participant can have one or more comments.
 
 \section{CollectionEvent Details}
 
-The \entitytarget{CollectionEvent} is used to record a visit to a
-\entitylink{Center} (e.g. a clinic) by one of the study's participants. A
-collection event must have a \entitylink{CollectionEventType} as defined by
-the study. See Section \ref{sec:collection-event-type} for more details on
-the collection event type.
+The \entitytarget{CollectionEvent} is used to record a visit by a participant
+to a \entitylink{Center} (e.g. a clinic). A collection event must have a
+\entitylink{CollectionEventType} as defined by the study. See Section
+\ref{sec:collection-event-type} for more details on the collection event type.
 
 A collection event also has a \compfont{visitNumber} that is an integer and a
 \compfont{timeDone} which is a time stamp for when the participant made the
@@ -72,19 +54,21 @@ visit to the center. The format for the time stamp is: YYYY-MM-DD HH:MM.
 
 \subsection*{Specimen}
 One or more specimens may have been collected from the participant. Each
-specimen is recorded with the collection event. More information for this
-entity is given in Section \ref{sec:specimen}.
+specimen is recorded with the collection event. More information for the
+\entitylink{Specimen} aggregate root is given in Chapter
+\ref{chap:specimen-processing}.
 
 \valobjtarget{SpecimenCollectionEvent} is used to associate a specimen to a
-collection event. It is possible, although not recommended, that a specimen
-have multiple collection events for the case when specimens are trasnferred
-from one study to another. By having multiple collection events the information
-from the original collection event is not lost for the specimen.
+collection event. It is possible that a specimen has multiple collection events
+for the case when specimens are trasnferred from one study to another. By
+having multiple collection events, the information from the original collection
+event is not lost for the specimen. It is not recommended that a specimen have
+multiple collection events within the same study.
 
 \subsection*{CollectionEventAnnotation}
 This entity holds the annotation value for the
-\entitylink{CollectionEventTypeAnnotationType} defined in the study. This field
-is similar to the \entitylink{ParticipantAnnotation}. See above for how it used.
+\entitylink{CollectionEventTypeAnnotationType} defined in the study. See Chapter
+\ref{chap:annotations} for how annotation values are recorded.
 
 \subsection*{CollectionEventComment}
 A \entitytarget{CollectionEventComment} contains a textual message and the user

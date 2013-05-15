@@ -66,10 +66,8 @@ allow recording of procedures performed on different types of
 defined pieces of data on collection event types (Section
 \ref{sec:collection-event-type}), processing events (Section
 \ref{sec:processing-type}), and participants (Section
-\ref{sec:study-annotations}).
-
-Annotations are optional and are not a requirement for specimen collection or
-processing.
+\ref{sec:study-annotations}). Annotations are optional and are not a
+requirement for specimen collection or processing.
 
 \subsection*{StudyComment}
 A \entitytarget{StudyComment} contains a textual message and the user that
@@ -175,7 +173,8 @@ defined in the \entitylink{SpecimenGroup}.
 Collection event annotations are defined using
 \valobjtarget{CollectionEventAnnotationType}. One or more of these can be
 defined for the study. A single collection event annotation type can be used in
-multiple collection event types.
+multiple collection event types. When \compfont{required} is set to
+\compfont{true}, the annotation value is not allowed to be empty.
 
 \section{ProcessingType Details}
 \label{sec:processing-type}
@@ -236,63 +235,35 @@ and output specimen group.
 \subsection*{SpecimenLinkTypeAnnotationType}
 
 A \valobjtarget{SpecimenLinkTypeAnnotationType} is used to tie a specimen
-link annotation type to a specimen link type. When \compfont{required} is set to
-\compfont{true} the annotation value is not allowed to be empty.
+link annotation type to a specimen link type.
 
 \section{Study Annotations}
 \label{sec:study-annotations}
 
 Figure \ref{fig:study-annotations} show the possible annotations types that can
 be configured for a study. Annotations types must be defined before they can be
-assigned to the respective entity.
+assigned to the respective entity. See Chapter \ref{chap:annotations} for more
+details on how annotations are configured and used.
 
 \begin{figure}[H]
   \centering
-  \includegraphics[trim={9mm 108mm 16mm 9mm}, clip,
+  \includegraphics[trim={9mm 135mm 68mm 9mm}, clip,
     width=0.9\textwidth]{images/study-annotations}
   \caption{Study annotation entities}
   \label{fig:study-annotations}
 \end{figure}
 
-An annotation type has a short identifying name that is unique to the study. A
-description can also be defined but is optional. The \compfont{valueType} can be
-one of:
-
-\begin{table}[!htbp]
-\renewcommand{\arraystretch}{1.1}
-\begin{tabularx}{\textwidth}{@{\hspace{6pt}} >{\ttfamily}l X }
-
-  String & an alphanumeric string.\\
-  Number & a number, either integer or decimal.\\
-  Date & date string, usually of the form \emph{YYYY-MM-DD HH:MM}.\\
-  Select & a value selected from a predefined list.\\
-
-\end{tabularx}
-\end{table}
-
-When \compfont{valueType} is assigned to be of type \compfont{Select},
-\compfont{maxValueCount} is the number of of items that can be selected from the
-predefined list. If only one value is allowed, then \compfont{maxValueCount} has
-a value of 1. If an unlimited number of values are allowed then,
-\compfont{maxValueCount} has a value of 0.
-
-One or more \entitylink{AnnotationOption}s are created to add select options to
-a \compfont{Select} annotation type.
-
 \subsection*{CollectionEventTypeAnnotationType}
 
-A \valobjtarget{CollectionEventTypeAnnotationType} is used to to configure an
-annotation to be used by collection event types. When \compfont{required} is set
-to true the annotation value is not allowed to be empty.
-
-An example of an annotation on a collection even type can be consent given by
-the participant at the collection visit.
+A \entitytarget{CollectionEventTypeAnnotationType} is used to to configure an
+annotation to be used by collection event types. An example of an annotation on
+a collection even type can be consent given by the participant at the
+collection visit. \valobjtarget{CollectionEvent
 
 \subsection*{SpecimenLinkAnnotationType}
 
 A \valobjtarget{SpecimenLinkAnnotationType} is used to to configure an
-annotation to be used with specimen link types. When \compfont{required} is set
-to true the annotation value is not allowed to be empty.
+annotation to be used with specimen link types.
 
 An example of an annotation type on a specimen link can be the PMBC count on
 the collected specimen.
