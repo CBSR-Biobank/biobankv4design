@@ -9,7 +9,7 @@ shipments are managed by the \entitylink{Centre} aggregate root.
 \begin{figure}[H]
   \centering
   \includegraphics[trim={10mm 42mm 190mm 18mm}, clip,
-    width=0.35\textwidth]{images/centre-shipment}
+    width=0.3\textwidth]{images/centre-shipment}
   \caption{Shipment Entity}
   \label{fig:centre-shipment}
 \end{figure}
@@ -19,7 +19,7 @@ Since a centre could have multiple locations, \entitytarget{Shipment}s have a
 \entitylink{Centre}s involved. Both these centres must be enabled for the
 shipment to be allowed.
 
-A shipment has a state which is one of the following:
+A shipment has one of the following states:
 \begin{statetable}
   CREATED & The shipment is in the process of being created.\\
 
@@ -48,10 +48,10 @@ shows the remainder of the model for shipments.
 \end{figure}
 
 \subsection*{ShipmentContainer}
-\entitytarget{ShipmentContainer} is used to add a container to a shipment.
-An container at a storage center can be shipped, and if it contains specimens,
-then all specimens are also added to the shipment. The shipment container has a
-state and is one of the following:
+\entitytarget{ShipmentContainer} is used to add a container to a shipment.  A
+container at a storage center can be shipped, and if it contains specimens, all
+its specimens are added to the shipment. The shipment container has one of the
+following states:
 
 \begin{statetable}
   PRESENT & The item was recorded as shipped out, but it's not known yet
@@ -69,7 +69,7 @@ state and is one of the following:
 \subsection*{ShipmentSpecimen}
 \entitytarget{ShipmentSpecimen} is used to add a specimen at any center to a
 shipment.  A shipment specimen has a state and is the same as the ones for a
-\entitylink{ShipmentContainer} as described above. Also, specimens can be sent
+\entitylink{ShipmentContainer} described above. Also, specimens can be sent
 without a container. In this case the association to shipment container is
 \compfont{null}.
 
@@ -77,10 +77,15 @@ without a container. In this case the association to shipment container is
 The \valobjtarget{ShipmentData} value object records the courier company's name
 and the package's tracking number.
 
-\subsection*{ShipmentComment}
-A \entitytarget{ShipmentComment} contains a textual message and the user that
-added the comment. The date and time the comment was made is recorded as meta
-data. A shipment can have one or more comments.
+\subsection*{ShipmentComment, ShipmentContainerComment, and
+  ShipmentSpecimenComment}
+\hypertarget{ShipmentComment}{}
+\hypertarget{ShipmentContainerComment}{}
+\hypertarget{ShipmentSpecimenComment}{}
+
+Contain a textual message and the user that added the comment. The date and
+time the comment is made is recorded as meta data. A shipment can have one or
+more comments.
 
 % Local Variables:
 % compile-command: "/usr/bin/rubber --pdf main"
