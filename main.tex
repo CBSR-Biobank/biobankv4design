@@ -182,10 +182,10 @@
 \newcommand{\valobjlink}[1]{\hyperlink{#1}{\texttt{\textbf{#1}}}}
 
 %----------------------------------------------------------------------------------------
-% environment to help with command arguments tables
+% environment to help with command-argument tables
 %
 % the first column is the argument name, second is the java type, and third is
-% the a description.
+% a description.
 %----------------------------------------------------------------------------------------
 
 \NewEnviron{commandparmtable}{%
@@ -194,6 +194,24 @@
   \small
   \begin{tabularx}{\textwidth}{l l X}
   \sffamily{\textbf{Parameter}} & \sffamily{\textbf{Type}} & \sffamily{\textbf{Description}} \\ \hline
+  \BODY
+  \hline
+  \end{tabularx}
+  \end{table}
+}
+
+%----------------------------------------------------------------------------------------
+% environment to help with state tables
+%
+% the first column is the state name, and second is a description.
+%----------------------------------------------------------------------------------------
+
+\NewEnviron{statetable}{%
+  \begin{table}[H]
+  \renewcommand{\arraystretch}{1.2}
+  \small
+  \begin{tabularx}{\textwidth}{l X}
+  \sffamily{\textbf{State}} & \sffamily{\textbf{Description}} \\ \hline
   \BODY
   \hline
   \end{tabularx}
