@@ -94,19 +94,6 @@
 \defbibheading{bibempty}{}
 
 %----------------------------------------------------------------------------------------
-% Chapter and section formating - using 'ell' chapter style with customizations
-%----------------------------------------------------------------------------------------
-
-\chapterstyle{ell}
-\renewcommand*{\chapnumfont}{\normalfont\Huge\bfseries\sffamily\color{Blue}}
-\renewcommand*{\chaptitlefont}{\normalfont\Huge\bfseries\sffamily\color{Blue}}
-\renewcommand*{\secheadstyle}{\normalfont\Large\bfseries\sffamily\color{Blue}}
-\renewcommand*{\subsecheadstyle}{\normalfont\normalsize\bfseries\sffamily\color{LightBlue}}
-
-\setcounter{secnumdepth}{3}
-\setsecnumdepth{subsection}
-
-%----------------------------------------------------------------------------------------
 %	TITLE PAGE
 %----------------------------------------------------------------------------------------
 
@@ -135,7 +122,7 @@
 % Publisher and logo
 {\large\bfseries\sffamily
   \href{http://biosample.ca/}{Prepared for the Canadian Biosample Repository} \\
-  by the \href{http://www.aicml.ca/}{Alberta Innovates Center for Mathine Learning}\\ }\par
+  by the \href{http://www.aicml.ca/}{Alberta Innovates Centre for Mathine Learning}\\ }\par
 \vspace*{\baselineskip}
 {\textcolor{Blue}{
     \small\sffamily University of Alberta\\
@@ -149,7 +136,7 @@
 \endgroup}
 
 %----------------------------------------------------------------------------------------
-% Table of contents
+% Table of contents formats
 %----------------------------------------------------------------------------------------
 
 \usepackage[textsize=small, backgroundcolor=Orange, bordercolor=Orange, shadow]{todonotes}
@@ -164,6 +151,25 @@
 \maxtocdepth{subsection}
 
 \AtBeginDocument{\renewcommand\contentsname{Table of Contents}}
+
+%----------------------------------------------------------------------------------------
+% Chapter and section formating - using 'ell' chapter style with customizations
+%----------------------------------------------------------------------------------------
+
+\chapterstyle{ell}
+\renewcommand*{\chapnumfont}{\normalfont\Huge\bfseries\sffamily\color{Blue}}
+\renewcommand*{\chaptitlefont}{\normalfont\Huge\bfseries\sffamily\color{Blue}}
+\renewcommand*{\secheadstyle}{\normalfont\Large\bfseries\sffamily\color{Blue}}
+\renewcommand*{\subsecheadstyle}{\normalfont\normalsize\bfseries\sffamily\color{LightBlue}}
+
+\setcounter{secnumdepth}{3}
+\setsecnumdepth{subsection}
+
+%----------------------------------------------------------------------------------------
+% description list formats
+%----------------------------------------------------------------------------------------
+
+\renewcommand{\descriptionlabel}[1]{\hspace{\labelsep}{\small\bfseries\sffamily\color{LightBlue}#1}}
 
 %----------------------------------------------------------------------------------------
 % hyperlinks to entities and value objects
@@ -225,11 +231,11 @@
 \include{study-management}
 \include{specimen-collection}
 \include{specimen-processing}
-\include{study-annotations}
 \include{centre-management}
 \include{centre-shipment}
 \include{centre-storage-management}
 \include{specimen-request}
+\include{study-annotations}
 
 %----------------------------------------------------------------------------------------
 % Bibliography
