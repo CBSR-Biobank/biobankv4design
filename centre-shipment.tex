@@ -41,7 +41,7 @@ shows the remainder of the model for shipments.
 
 \begin{figure}[H]
   \centering
-  \includegraphics[trim={10mm 50mm 48mm 18mm}, clip,
+  \includegraphics[trim={10mm 46mm 50mm 18mm}, clip,
     width=0.9\textwidth]{images/shipment}
   \caption{Shipment model}
   \label{fig:shipment}
@@ -69,7 +69,9 @@ state and is one of the following:
 \subsection*{ShipmentSpecimen}
 \entitytarget{ShipmentSpecimen} is used to add a specimen at any center to a
 shipment.  A shipment specimen has a state and is the same as the ones for a
-\entitylink{ShipmentContainer} as described above.
+\entitylink{ShipmentContainer} as described above. Also, specimens can be sent
+without a container. In this case the association to shipment container is
+\compfont{null}.
 
 \subsection*{ShipmentData}
 The \valobjtarget{ShipmentData} value object records the courier company's name
