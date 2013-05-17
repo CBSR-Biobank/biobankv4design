@@ -52,7 +52,7 @@ described below.
 
 \begin{figure}[H]
   \centering
-  \includegraphics[trim={10mm 52mm 14mm 18mm}, clip,
+  \includegraphics[trim={10mm 68mm 14mm 18mm}, clip,
     width=1\textwidth]{images/centre-container}
   \caption{Container model}
   \label{fig:centre-container}
@@ -71,11 +71,48 @@ type; the ID of it's parent container; the label which has the parent's label
 as a prefix; the label within it's \entitylink{ContainerSchemaPosition}; and
 the ID of the \entitylink{ContainerTree} it belongs to.
 
+A \entitylink{ShipmentContainer} may reference a container using the
+\valobjlink{ContainerId}. Comments can be attached to a container using
+\entitytarget{ContainerComment}.
+
 \subsection*{StorageContainer}
 A \entitylink{StorageContainer} is a subclass of \entitylink{Container} and is
-used to represent a physical container. A storage container may have an
-optional \entitylink{ContainerConstraints}.
+used to represent a physical container that holds sub-containers or specimen
+containers. A storage container may have an optional
+\entitylink{ContainerConstraints} to limit the types of specimens that it and
+it's chil containers may hold.
 
+\subsection*{SpecimenContainer}
+A \entitylink{SpecimenContainer} holds specimen tubes or other receptacles that
+hold biological specimens.
+
+\subsection*{ContainerTree}
+A \entitylink{ContainerTree} holds attributes common to a whole container
+hierarchy. It's attributes are: the center ID of the center it belongs to; and
+the center's location (in the case a center has multiple locations).
+
+\subsection*{ContainerSchemaPosition}
+\entitytarget{ContainerSchemaPosition} tracks the label position within the
+parent that this container holds. Only one container can be linked with a
+schema position.
+
+\subsection*{ContainerConstraints}
+As shown in Figure \ref{fig:container-constraint}, an optional
+\entitylink{ContainerConstraint} can be used with a storage container to limit
+the specimens that it and it's child containers can hold. A container
+constraint has the following attributes: a short identifying name; an optional
+description; the allowed anatomical sources; the allowed specimen types; and
+the allowed preservation types. A container constraint entity is assigned to a
+centre and a centre location, and then containers of that center can use the
+constraint.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[trim={10mm 54mm 212mm 18mm}, clip,
+    width=0.25\textwidth]{images/centre-container-constraint}
+  \caption{Container constraints}
+  \label{fig:container-constraint}
+\end{figure}
 
 % Local Variables:
 % compile-command: "/usr/bin/rubber --pdf main"
