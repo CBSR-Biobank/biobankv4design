@@ -1,21 +1,81 @@
 \chapter{Centre Storage Management}
 \label{chap:centre-storage-management}
+Storage containers share common attributes, these attributes are grouped into
+and defined in a \entitytarget{ContainerType}. Some storage containers hold
+sub-containers, while others hold specimens.
+
+A \entitylink{ContainerType} has the following attributes: a short name used
+for quick identification; an optional drescription that gives more details for
+the name; the \compfont{shared} flag used to share this container type with
+other centres when assigned a \compfont{true} value; the \compfont{enabled}
+flag used to allow containers of this type to be created when assigned a
+\compfont{true} value.
+
+A \entitytarget{StorageContainerType} is used to define the attributes for
+containers that hold sub-containers. E.g. a freezer of certain dimensions holds
+a number of racks, where each rack may hold many microwell plates. Figure
+\ref{fig:centre-container-type} shows that a \entitylink{StorageContainerType}
+is derived from \entitylink{ContainerType} and points to one or more child
+container types. A storage container also has the attribute named
+\compfont{topLevel} which is used to identify containers types that represent
+the top of the hierarchy (e.g. a freezer).
+
+A \entitytarget{SpecimenContainerType} is used to define the attribues for
+containers that only hold specimens. E.g. a 96 well microwell plate is a type
+of specimen container that holds 96 tubes where each tube contains a specimen.
+\entitylink{StorageContainerType} is also a subclass of
+\entitylink{ContainerType}.
 
 \begin{figure}[H]
   \centering
-  \includegraphics[trim={10mm 75mm 92mm 18mm}, clip,
-    width=0.7\textwidth]{images/centre-container-type}
+  \includegraphics[trim={10mm 73mm 92mm 18mm}, clip,
+    width=0.75\textwidth]{images/centre-container-type}
   \caption{Container Type model}
   \label{fig:centre-container-type}
 \end{figure}
 
+Each container type has a \entitytarget{ContainerSchema} that defines how the
+sub-containers are \emph{labeled}. A label is a physical label that is stuck
+onto a sub-container and is used to quickly identify it\footnote{This label
+  identifies the position within the parent and does not include the parent's
+  label. It is different than the label used by a container which includes the
+  parent's label as a prefix.}. A container schema has multiple
+\entitytarget{ContainerSchemaPosition}s which define the valid labels for the
+container type (see Appendix \ref{appx:container-labeling} for more information
+on how containers can be labelled). A single container schema may be used by
+one more container types. Each container schema has a name for quick
+identification and a description. The \compfont{shared} flag is used to share
+the schema across different centres.
+
+Figure \ref{fig:centre-container} shows the model used for containers. It is
+described below.
+
 \begin{figure}[H]
   \centering
-  \includegraphics[trim={10mm 60mm 22mm 18mm}, clip,
+  \includegraphics[trim={10mm 52mm 14mm 18mm}, clip,
     width=1\textwidth]{images/centre-container}
   \caption{Container model}
   \label{fig:centre-container}
 \end{figure}
+
+\subsection*{Container}
+A \entitytarget{Container} is used to model physical containers used for
+storage. The \entitylink{Container} class is a generic class with a type that
+is either a \entitylink{StorageContainerType} or
+\entitylink{SpecimenContainerType}. Two derived classes are available: either
+\entitytarget{StorageContainer} or \entitytarget{SpecimenContainer}.
+
+A \entitylink{Container} has the following attributes: an
+\compfont{inventoryId} that is a unique identifier; the ID of it's container
+type; the ID of it's parent container; the label which has the parent's label
+as a prefix; the label within it's \entitylink{ContainerSchemaPosition}; and
+the ID of the \entitylink{ContainerTree} it belongs to.
+
+\subsection*{StorageContainer}
+A \entitylink{StorageContainer} is a subclass of \entitylink{Container} and is
+used to represent a physical container. A storage container may have an
+optional \entitylink{ContainerConstraints}.
+
 
 % Local Variables:
 % compile-command: "/usr/bin/rubber --pdf main"

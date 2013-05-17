@@ -87,6 +87,17 @@ Contain a textual message and the user that added the comment. The date and
 time the comment is made is recorded as meta data. A shipment can have one or
 more comments.
 
+\section{Shipment Invariants}
+The following must hold for a shipment:
+\begin{itemize}
+\item If a container has a \entitylink{ShipmentContainer} that is already part
+  of a shipment and it is not in \compfont{RECEIVED} state, then it cannot be
+  added to a shipment.
+\item If a specimen has a \entitylink{ShipmentSpecimen} that is already part of
+  a a shipment and it is not in \compfont{RECEIVED} state then it cannot be
+  added to a shipment.
+\end{itemize}
+
 % Local Variables:
 % compile-command: "/usr/bin/rubber --pdf main"
 % End:
