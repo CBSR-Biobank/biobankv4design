@@ -77,6 +77,13 @@
 }
 
 %----------------------------------------------------------------------------------------
+% fix for appendix names since the Memoir document class
+%----------------------------------------------------------------------------------------
+
+%\renewcommand*\cftappendixname{Appendix\space}
+\renewcommand\chapternumberline[1]{\numberline{#1}}
+
+%----------------------------------------------------------------------------------------
 % Bibliography settings
 %----------------------------------------------------------------------------------------
 
@@ -257,6 +264,7 @@
 \include{study-annotations}
 
 \appendix
+\renewcommand\thechapter{Appendix \Alph{chapter}}
 \include{container-labeling}
 
 %----------------------------------------------------------------------------------------
