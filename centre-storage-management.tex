@@ -5,7 +5,7 @@ and defined in a \entitytarget{ContainerType}. Some storage containers hold
 sub-containers, while others hold specimens.
 
 A \entitylink{ContainerType} has the following attributes: a short name used
-for quick identification; an optional drescription that gives more details for
+for quick identification; an optional description that gives more details for
 the name; the \compfont{shared} flag used to share this container type with
 other centres when assigned a \compfont{true} value; the \compfont{enabled}
 flag used to allow containers of this type to be created when assigned a
@@ -20,7 +20,7 @@ container types. A storage container also has the attribute named
 \compfont{topLevel} which is used to identify containers types that represent
 the top of the hierarchy (e.g. a freezer).
 
-A \entitytarget{SpecimenContainerType} is used to define the attribues for
+A \entitytarget{SpecimenContainerType} is used to define the attributes for
 containers that only hold specimens. E.g. a 96 well microwell plate is a type
 of specimen container that holds 96 tubes where each tube contains a specimen.
 \entitylink{StorageContainerType} is also a subclass of
@@ -79,8 +79,8 @@ A \entitylink{ShipmentContainer} may reference a container using the
 A \entitylink{StorageContainer} is a subclass of \entitylink{Container} and is
 used to represent a physical container that holds sub-containers or specimen
 containers. A storage container may have an optional
-\entitylink{ContainerConstraints} to limit the types of specimens that it and
-it's chil containers may hold.
+\entitylink{ContainerConstraint} to limit the types of specimens that it and
+it's child containers may hold.
 
 \subsection*{SpecimenContainer}
 A \entitylink{SpecimenContainer} holds specimen tubes or other receptacles that
@@ -96,7 +96,7 @@ the center's location (in the case a center has multiple locations).
 parent that this container holds. Only one container can be linked with a
 schema position.
 
-\subsection*{ContainerConstraints}
+\subsection*{ContainerConstraint}
 As shown in Figure \ref{fig:container-constraint}, an optional
 \entitylink{ContainerConstraint} can be used with a storage container to limit
 the specimens that it and it's child containers can hold. A container
