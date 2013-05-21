@@ -23,13 +23,13 @@ below.
 
 A \entitylink{Study} represents a collection of participants and specimens
 collected for a particular research study. Each study has a unique identifier,
-\compfont{StudyId}, that is used to reference it. The \compfont{name} is a short
-descriptive name, unique within the application, that is usually an acronym
-used for quick identification.  The \compfont{description} give more details on
-the name and is usually the words that make up the acronym.
+\compfont{StudyId}. The \compfont{name} is a short descriptive name, unique
+within the application, that is usually an acronym used for quick
+identification.  The \compfont{description} give more details on the name and
+is usually the words that make up the acronym.
 
 A study can be enabled or disabled. When disabled, changes to its configuration
-are possible but patients and specimens cannot be added. When enabled, no
+are possible but patients and specimens cannot be recorded. When enabled, no
 further configuration changes are allowed, and participants and specimens can
 be added.
 
@@ -41,7 +41,7 @@ other entities and value objects which are described below.
 A \entitytarget{SpecimenGroup} is used to configure a specimen type used by the
 study.  It records ownership, summary, storage, and classification information
 that applies to an entire group or collection of \entitylink{Specimen}s. A
-specimen group is defined either for specimens types collected from
+specimen group is defined either for specimen types collected from
 participants, or for specimen types that are processed. More details for this
 entity are given in Section \ref{sec:specimen-group}.
 

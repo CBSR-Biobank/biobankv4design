@@ -9,9 +9,9 @@ architecture (Command Query Responsibility Segregation)
 In addition, version 4 includes enhancements to the domain model which provides
 better work flow and an improved user experience.
 
-Flatbed scanning is supported by having a separate dedicated client, but this
-client's functionality is focused only on scanning and decoding tubes etched
-with 2D barcodes.
+Flatbed scanning is supported by having a separate dedicated desktop client,
+but this client's functionality is focused only on scanning and decoding tubes
+etched with 2D barcodes.
 
 \section{Dependencies}
 
@@ -53,8 +53,7 @@ This version of Biobank uses the following open source tools / software packages
 \section{Use of Domain Driven Design}
 
 This document assumes the reader is familiar with Domain Driven Design. The
-document uses many of it's terminology to describe the design of this
-application.
+document uses it's terminology to describe the design of this application.
 
 \section{CQRS Overview}
 
@@ -62,13 +61,13 @@ There are a number of reasons for choosing the CQRS architecture for
 Biobank. Among these are:
 
 \begin{itemize}
-\item Employs a message-based system that allows for decoupling and is more
+\item CQRS employs a message-based system that allows for decoupling and is more
   reliable against transient failures.
-\item \textbf{Commands} (that change data) are separated from \textbf{queries}
+\item \emph{Commands} (that change data) are separated from \emph{queries}
   (that read data).
 \item Enables domain driven design by capturing the intent in the form of
   commands.
-\item \textbf{Event Sourcing} allows persisting of application entities as a
+\item \emph{Event Sourcing} allows persisting of application entities as a
   sequence of events that created them. Thus, captures all business changes in a
   loss less manner.
 \item Events are used to populate views also known as the reporting side. Thus,
