@@ -1,5 +1,5 @@
 \subsection{Specimen Group Commands}
-\subsection*{CreateSpecimenGroupCommand}
+\subsection*{AddSpecimenGroupCommand}
 
 Creates a specimen group on a study. If the study is not disabled the command
 fails and throws a checked exception. If a specimen group already exists with
@@ -33,6 +33,8 @@ the new name the command fails and throws a checked exception.
 
   studyId & String & The study's unique identifier.\\
 
+  specimenGroupId & String & The specimen group's unique identifier.\\
+
   name & String & The new name, or the original name if it's not being modified.\\
 
   description & String & The new description, or the original description if
@@ -47,7 +49,7 @@ the new name the command fails and throws a checked exception.
 
 \end{commandparmtable}
 
-\subsection*{DeleteSpecimenGroupCommand}
+\subsection*{RemoveSpecimenGroupCommand}
 
 Deletes a specimen group from the study. If the study is not disabled the
 command fails and throws a checked exception.
