@@ -26,9 +26,8 @@ The client ports shown in Figure \ref{fig:hex-architecture} are managed by
 client adapters. These client adapters then interface to the rest of the system
 via the \emph{Command Bus} and the \emph{Query Interface} provided by the
 \emph{Thin Data Layer}. Figure \ref{fig:cqrs-architecture} shows a more detailed
-view of the application. It is the architecture recommended by the Axon
-Framework\footnote{The figure and the material that follows is borrowed from
-  the Axon Framework Reference Guide \cite{AxonOnline}}.
+view of the application. It is the architecture recommended by the Eventsourced
+Framework.
 
 \begin{figure}[H]
   \centering
@@ -44,7 +43,7 @@ Framework\footnote{The figure and the material that follows is borrowed from
 
 Commands are typically represented by simple and straightforward objects that
 contain all data necessary for a command handler to execute it. A command
-expresses its intent by its name. In Java terms, that means the class name is
+expresses its intent by its name. In Scala terms, that means the class name is
 used to figure out what needs to be done, and the fields of the command provide
 the information required to do it.
 
@@ -97,13 +96,6 @@ used. This data layer typically returns read-only Data Transfer Objects (DTOs)
 containing query results. The contents of these DTOs are typically driven by
 the needs of the client adapters. In most cases, they map directly to a
 specific view in the UI (also referred to as table-per-view).
-
-\subsection{Axon Framework Modules}
-
-The Axon Framework provides a number of different modules that target specific
-problem areas of CQRS. This section describes which modules were chosen.
-
-\todo[inline]{This section is incomplete.}
 
 % Local Variables:
 % compile-command: "/usr/bin/rubber --pdf main"

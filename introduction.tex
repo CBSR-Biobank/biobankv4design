@@ -20,8 +20,11 @@ This version of Biobank uses the following open source tools / software packages
 % table with no indentation
 \begin{description}
 
-  \item[Jetty Http Server] \hfill \\ The Embedded Jetty Server provides web
-    browser with access to the application.
+  \item[Play Framework] \hfill \\ Play is an open source web application
+    framework, written in Scala and Java, which follows the
+    model–view–controller (MVC) architectural pattern. It aims to optimize
+    developer productivity by using convention over configuration, hot code
+    reloading and display of errors in the browser.
 
   \item[MongoDB ] \hfill \\ A document based NoSQL database and provides an
     event store implementation that stores event streams in a MongoDB database.
@@ -29,19 +32,10 @@ This version of Biobank uses the following open source tools / software packages
   \item[MySQL database ] \hfill \\ A SQL relational database management system
     used to store the query model.
 
-  \item[Axon Framework ] \hfill \\ Provides the building blocks used in
-    applying the CQRS architectural pattern.
-
   \item[Spring Framework ] \hfill \\ Provides a comprehensive programming and
     configuration model for modern Java-based enterprise applications.
 
-  \item[Spring MVC ] \hfill \\ Model-view-controller framework for web
-    applications.
-
-  \item[Spring Security ] \hfill \\ A customizable authentication and
-    access-control framework for securing web applications.
-
-  \item[Hibernate ] \hfill \\ An object-relational mapping library that
+  \item[Hibernate] \hfill \\ An object-relational mapping library that
     provides a framework to map a data model to a relational database.
 
   \item[Twitter Bootstrap ] \hfill \\ Bootstrap is a sleek, intuitive, and
@@ -75,6 +69,58 @@ Biobank. Among these are:
 \item Allows for definitions of new reports that provide new insight to the
   data that has already been captured.
 \end{itemize}
+
+\section{Using Scala versus Java}
+
+The current version of Biobank, version 3, can be broken down into the
+following layers:
+
+\begin{enumerate}
+\item User interface code on client side. This code uses the Eclipse RCP
+  framework.
+\item Client side code that communicates with the server. This code uses caCORE
+  SDK as the underlying framework.
+\item Server side code that communicates with the clients. This code also uses
+  uses caCORE SDK as the underlying framework.
+\item Server code that manages the domain model. This code uses Hibernate as
+  the framework with a MySQL database.
+\end{enumerate}
+
+Another important item to note is that caCORE SDK only works with Java SDK
+version 6 and older.
+
+In Biobank version 4 the following changes are required:
+
+\begin{itemize}
+\item The user interface code must be rewritten to use a web based
+  framework. Therefore, almost none of the version 3 code can be re-used for
+  this layer.
+\item For server and client communication, we no longer want to use caCORE SDK
+  due to it being outdated, and would rather use more up to date
+  technologies. By using more recent technologies, it will be easier to add
+  more functionality (such as interworking with other applications). Also, we
+  would like to incorporate Domain Driven Design principles. So, most of
+  the code for layers 2 and 3 listed above must be refactored or completely
+  rewritten.
+\item In version 4, we would like to use CQRS(Command Query Responsibility
+  Segregation) because it is a better DDD approach and to also meet regulatory
+  requirements for audit logging.
+\end{itemize}
+
+At the time of writing this document, the work to update the domain model and
+incorporate additional feature requirements has already been completed for
+version 4. Due to the number of changes, it means that a small percentage of
+the code for layer 4 above can be reused.
+
+Given the requirements for version 4 a versy small amount of the current code
+can be reused.  Due to this, re-writing the code in Scala is a sensible
+approach and allows the use the latest available technologies in Web
+development. Also, using Scala leads to, in most cases, less code. A module
+that has 100 or more lines in Java can be rewritten in Scala with 20
+lines. With less code to manage, the easier it is to maintain it. Scala has
+gained much traction in web development in the last 2 years. Many big internet
+sites such as Twitter, LinkedIn, etc., have already switched to Scala and use
+the new tools provided that come with it.
 
 % Local Variables:
 % compile-command: "/usr/bin/rubber --pdf main"
