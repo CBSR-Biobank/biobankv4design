@@ -1,13 +1,13 @@
 \section{Commands}
 
-The commands for adding a \entitylink{CollectionEventTypeAnnotationType} are shown
+The commands for adding a \entitylink{CollectionEventAnnotationType} are shown
 here. The commands to add annotations to \entitylink{SpecimenLink} and
 \entitylink{Participants} as similar to these commands but are not listed here.
 
 See the \entitylink{AddCollectionEventTypeAnnotationOptions} command below for
 adding annotation options to \compfont{SELECT} annotation types.
 
-\subsection*{AddCollectionEventTypeAnnotationType}
+\subsection*{AddCollectionEventAnnotationType}
 
 \begin{commandparmtable}
   studyId & String & The study's unique identifier.\\
@@ -23,7 +23,7 @@ adding annotation options to \compfont{SELECT} annotation types.
   maximum number of selections that can be made. Use zero for unlimited.\\
 \end{commandparmtable}
 
-\subsection*{UpdateCollectionEventTypeAnnotationType}
+\subsection*{UpdateCollectionEventAnnotationType}
 
 \begin{commandparmtable}
   studyId & String & The study's unique identifier.\\
@@ -39,7 +39,7 @@ adding annotation options to \compfont{SELECT} annotation types.
   maxValueCount & Integer & The updated or original count.\\
 \end{commandparmtable}
 
-\subsection*{RemoveCollectionEventTypeAnnotationType}
+\subsection*{RemoveCollectionEventAnnotationType}
 
 \begin{commandparmtable}
   studyId & String & The study's unique identifier.\\
@@ -47,8 +47,8 @@ adding annotation options to \compfont{SELECT} annotation types.
   collectionEventAnnotationTypeId & String & The annotation type's unique identifier.\\
 \end{commandparmtable}
 
-\subsection*{AddCollectionEventTypeAnnotationOptions}
-\hypertarget{AddCollectionEventTypeAnnotationOptions}{}
+\subsection*{AddCollectionEventAnnotationOptions}
+\hypertarget{AddCollectionEventAnnotationOptions}{}
 
 Adds annotation options for a \compfont{SELECT} annotation type.  The command
 fails if the annotation value type is not \compfont{SELECT}.
@@ -62,19 +62,32 @@ fails if the annotation value type is not \compfont{SELECT}.
   options & Set[String] & The options to add for this annotation.\\
 \end{commandparmtable}
 
-\subsection*{RemoveCollectionEventTypeAnnotationOptions}
+\subsection*{UpdateCollectionEventAnnotationOptions}
+\hypertarget{UpdateCollectionEventAnnotationOptions}{}
 
-Removes annotation options for a \compfont{SELECT} annotation type.  The command
-fails if the annotation value type is not \compfont{SELECT}.
+Used to update the annotation options for a \compfont{SELECT} annotation type.
+The command fails if the annotation value type is not \compfont{SELECT}, or if
+if the item does not exist.
 
 \begin{commandparmtable}
   studyId & String & The study's unique identifier.\\
 
-  collectionEventAnnotationTypeId & String & The annotation type's unique
+  collectionEventAnnotationOptionId & String & The annotation type's unique
   identifier.\\
 
-  values & Set[String] & A set containing strings for the values that should be
-  removed.\\
+  options & Set[String] & The options to add for this annotation.\\
+\end{commandparmtable}
+
+\subsection*{RemoveCollectionEventAnnotationOptions}
+
+Removes annotation options for a \compfont{SELECT} annotation type.  The command
+fails if the item does not exist.
+
+\begin{commandparmtable}
+  studyId & String & The study's unique identifier.\\
+
+  collectionEventAnnotationOptionId & String & The annotation type's unique
+  identifier.\\
 \end{commandparmtable}
 
 % Local Variables:
