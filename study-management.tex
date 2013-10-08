@@ -91,46 +91,44 @@ allowed on a study, at least one specimen group must be defined.
 
 \begin{figure}[H]
   \centering
-  \includegraphics[trim={9mm 120mm 80mm 18mm}, clip,
+  \includegraphics[trim={9mm 140mm 80mm 18mm}, clip,
     width=1\textwidth]{images/specimen-group}
   \caption{SpecimenGroup entity}
   \label{fig:specimen-group}
 \end{figure}
 
-\subsection*{AnatomicalSourceId}
+Specimen group uses Scala enumerated types for the types:
 
-An \valobjlink{AnatomicalSource} is a standardized set of regions from a
-\entitylink{Participant} \emph{where} a \entitylink{Specimen} is collected
-from. Potential examples include: colon, ear, leg, kidney,
-etc. \valobjlink{AnatomicalSource} is a value object with a unique ID. They are
-defined globally and new ones can be created at any time. They can be accessed
-via look up service described in Section \ref{sec:lookup-service}.
+\begin{itemize}
+\item \valobjlink{AnatomicalSourceType}
+\item \valobjlink{PreservationType}
+\item \valobjlink{PreservationTemperatureType}
+\item \valobjlink{SpecimenTypeType}
+\end{itemize}
 
-A specimen group contains the ID of a single anatomical source.
+These enumerated types are value objects and each item in the enumerated type has a unique ID. New
+items can be added to these types at any time. More details are given below.
 
-\subsection*{PreservationId}
+\begin{description}
 
-\valobjlink{Preservation} is a value object that describes how a
-\entitylink{Specimen} should be preserved/stored by describing temperature
-requirements ($^\circ$C), as well as a preservation method (see
-\valobjlink{PreservationType}). \valobjlink{Preservation} is also a value
-object with a unique ID. They are defined globally and new ones can be created
-at any time. They can be accessed via look up service described in Section
-\ref{sec:lookup-service}.
+\item[\valobjlink{AnatomicalSourceType}] \hfill \\ A standardized set of regions from a \entitylink{Participant}
+\emph{where} a \entitylink{Specimen} is collected from. Potential examples include: colon, ear, leg,
+kidney, etc.
 
-A specimen group contains the ID of a single preservation object.
+\item[\valobjlink{PreservationType}] \hfill \\  Describes how a \entitylink{Specimen} should be preserved/stored by
+describing a preservation method. Potential examples include: frozen specimen, RNA later, fresh
+specimen, slide, etc.
 
-\subsection*{SpecimenTypeId}
+\item[\valobjlink{PreservationTemperatureType}] \hfill \\  Describes how a \entitylink{Specimen} should be
+preserved/stored by describing temperature requirements ($^\circ$C).
 
-\valobjlink{SpecimenType} is standardized set of classifications that describe
-\emph{what} a \entitylink{Specimen} is. Potential examples include: urine,
-whole blood, plasma, nail, protein, etc. \valobjlink{SpecimenType} is also a
-value object with a unique ID. They are defined globally and new ones can be
-created at any time. They can be accessed via look up service described in
-Section \ref{sec:lookup-service}.
+\item[\valobjlink{SpecimenTypeType}] \hfill \\  A standardized set of classifications that describe \emph{what} a
+\entitylink{Specimen} is. Potential examples include: urine, whole blood, plasma, nail, protein,
+etc.
 
-A specimen group contains the ID of a single specimen type.
+\end{description}
 
+\clearpage
 \section{CollectionEventType Details}
 \label{sec:collection-event-type}
 A collection event type has a name and an optional description. The name is a
@@ -151,7 +149,7 @@ defined.
 
 \begin{figure}[H]
   \centering
-  \includegraphics[trim={9mm 56mm 96mm 18mm}, clip,
+  \includegraphics[trim={9mm 80mm 96mm 18mm}, clip,
     width=0.8\textwidth]{images/collection-event-type}
   \caption{Details for the CollectionEventType entity}
   \label{fig:collection-event-type}
