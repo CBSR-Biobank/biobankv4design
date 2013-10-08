@@ -2,14 +2,18 @@
 
 ## PDF
 
-Use the following command to generate the PDF document:
+Use the following commands to generate the PDF document:
 
 ```shell
 /usr/bin/biber main
 /usr/bin/rubber --pdf main
 ```
 
-Requires the `rubber` package which is an automated system for building LaTeX documents.
+Requires the `biber` and `rubber` Ubuntu packages. [Biber](http://biblatex-biber.sourceforge.net/)
+is a BibTeX replacement for users of BibLaTeX
+[Rubber](http://manpages.ubuntu.com/manpages/hardy/man1/rubber.1.html) is an automated system for
+building LaTeX documents.
+
 
 ## Figures
 
