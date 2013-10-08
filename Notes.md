@@ -4,7 +4,10 @@
 
 Use the following command to generate the PDF document:
 
-    /usr/bin/rubber --pdf main
+```shell
+/usr/bin/biber main
+/usr/bin/rubber --pdf main
+```
 
 Requires the `rubber` package which is an automated system for building LaTeX documents.
 
