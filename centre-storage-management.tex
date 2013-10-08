@@ -20,10 +20,11 @@ container types. A storage container also has the attribute named
 \compfont{topLevel} which is used to identify containers types that represent
 the top of the hierarchy (e.g. a freezer).
 
-A \entitytarget{SpecimenContainerType} is used to define the attributes for
-containers that only hold specimens. E.g. a 96 well microwell plate is a type
-of specimen container that holds 96 tubes where each tube contains a specimen.
-\entitylink{StorageContainerType} is also a subclass of
+A \entitytarget{SpecimenContainerType} is used to define the attributes for containers that only
+hold specimens. E.g. a 96 well microwell plate is a type of specimen container that holds 96 tubes
+where each tube contains a specimen. Microplates, where specimens are stored on the plate itself and
+not in tubes held by the microwell, can also be managed by setting \compfont{isMicroplate} to
+\compfont{true}. \entitylink{StorageContainerType} is also a subclass of
 \entitylink{ContainerType}.
 
 \begin{figure}[H]
